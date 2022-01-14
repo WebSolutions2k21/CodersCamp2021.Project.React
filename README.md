@@ -37,5 +37,3 @@ Przyjmujemy poniższy format commit message
 ### Pull Request
 
 Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzyć małe PR. W opisie PR powinno być dokładnie opisane co on zmienia. Każdy PR musi być zaakceptowany przez przynajmniej jedną inną osobę.
-
-
