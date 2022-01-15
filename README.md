@@ -1,3 +1,45 @@
+## Praca z projektem
+
+### Branch Name
+
+Używamy kebab-case do nazywania branchy
+
+```sh
+more-gray-shades
+support-dark-theme
+button-component
+itp.
+```
+
+### Commit Message
+
+Przyjmujemy poniższy format commit message
+
+```sh
+<type>: <commit_message>
+```
+
+#### Commit Message Type
+
+- **build**: Zmiana która afektuje budowanie projektu lub zależności zewnętrzne
+- **docs**: Zmiana w dokumentacji bądź dodatkowych materiałach
+- **feature**: Wprowadzenie nowej funkcjonalności
+- **bugfix**: Naprawienie błędu
+- **refactor**: Zmiana w projekcie, która nic nie naprawia, ani nie dodaje
+
+#### Zasady Commit Message
+
+- używaj imperatywnej formy czasu teraźniejszego: "change", nie "changed" lub "changes"
+- nie zaczynaj wielką literą
+- nie dodawaj kropki na końcu zdania
+- używaj języka angielskiego
+
+### Pull Request
+
+Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzyć małe PR. W opisie PR powinno być dokładnie opisane co on zmienia. Każdy PR musi być zaakceptowany przez przynajmniej jedną inną osobę.
+
+
+
 # CodersCamp2021 - Projekt React
 
 ## Zespół projektowy:
@@ -56,10 +98,9 @@ Nasz zespół zrealizował także responsywność stron.
 
 ## Kod startowy projektu
 1. Nasza aplikacja została wdrożona na Netlify.
-2. Aplikacja jest budowana przy pomocy narzędzia Parcel.
-3. Biorąc pod uwagę fakt, iż nasza aplikacja jest implementowana przez kilku deweloperów, zdecydowaliśmy się na użycie biblioteki Prettier, służącej do formatowania kodu. Niniejsza biblioteka jest świetnym narzędziem, który wyłapuje błędy składni, automatycznie poprawia linie kodu według zdefiniowanej konfiguracji.
-4. Zdecydowaliśmy się również na użycie narzędzia statycznej analizy kodu ESLint, który identyfikuje problematyczne fragmenty kodu JS. Obejmuje jakość kodu oraz problemy ze stylem kodowania.
-5. Nasz projekt wykorzystuje także transpilator kodu JS Babel, który przekształca kod JS do takiej postaci, aby był kompatybilny ze wszystkimi przeglądarkami, a także zadziałał na starszych wersjach przeglądarek.
+2. Biorąc pod uwagę fakt, iż nasza aplikacja jest implementowana przez kilku deweloperów, zdecydowaliśmy się na użycie biblioteki Prettier, służącej do formatowania kodu. Niniejsza biblioteka jest świetnym narzędziem, który wyłapuje błędy składni, automatycznie poprawia linie kodu według zdefiniowanej konfiguracji.
+3. Zdecydowaliśmy się również na użycie narzędzia statycznej analizy kodu ESLint, który identyfikuje problematyczne fragmenty kodu JS. Obejmuje jakość kodu oraz problemy ze stylem kodowania.
+4. Nasz projekt wykorzystuje także transpilator kodu JS Babel, który przekształca kod JS do takiej postaci, aby był kompatybilny ze wszystkimi przeglądarkami, a także zadziałał na starszych wersjach przeglądarek.
 
 ## Technologie użyte w projekcie:
 
