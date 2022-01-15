@@ -1,18 +1,18 @@
-import { auth } from '../config/firebase'
+import { auth } from '../config/firebase';
 
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react';
 
 export default function Signup() {
-  const emailRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const createAccount = async () => {
     try {
-      await auth.createUserWithEmailAndPassword(emailRef.current!.value, passwordRef.current!.value)
+      await auth.createUserWithEmailAndPassword(emailRef.current!.value, passwordRef.current!.value);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   //login user
   // const signIn = async () => {
@@ -37,5 +37,5 @@ export default function Signup() {
         </button>
       </form>
     </div>
-  )
+  );
 }
