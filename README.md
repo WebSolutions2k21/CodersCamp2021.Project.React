@@ -99,12 +99,10 @@ Nasz zespół zrealizował także responsywność stron.
 ## Kod startowy projektu
 1. Nasza aplikacja została wdrożona na Netlify.
 2. Biorąc pod uwagę fakt, iż nasza aplikacja jest implementowana przez kilku deweloperów, zdecydowaliśmy się na użycie biblioteki Prettier, służącej do formatowania kodu. Niniejsza biblioteka jest świetnym narzędziem, który wyłapuje błędy składni, automatycznie poprawia linie kodu według zdefiniowanej konfiguracji.
-3. Zdecydowaliśmy się również na użycie narzędzia statycznej analizy kodu ESLint, który identyfikuje problematyczne fragmenty kodu JS. Obejmuje jakość kodu oraz problemy ze stylem kodowania.
-4. Nasz projekt wykorzystuje także transpilator kodu JS Babel, który przekształca kod JS do takiej postaci, aby był kompatybilny ze wszystkimi przeglądarkami, a także zadziałał na starszych wersjach przeglądarek.
 
 ## Technologie użyte w projekcie:
 
-1. JSX
+1. JSX / TSX
 2. React
 3. TypeScript
 4. Node.js
@@ -126,6 +124,6 @@ Aby uruchomić aplikację na lokalnej maszynie, wykonaj następujące kroki:
 1. Sklonuj sobie repozytorium.
 2. Otwórz repozytorium w ulubionym edytorze.
 3. Zainstaluj zależności za pomocą komendy: yarn.
-4. Wystartuj serwer za pomocą komendy: yarn run start
+4. Wystartuj serwer za pomocą komendy: yarn start.
 
 Aplikacja będzie dostępna pod adresem: …
