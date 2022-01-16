@@ -1,9 +1,9 @@
 /// <reference types="react-scripts" />
-declare module "*.png";
-declare module "*.scss";
-declare module "*.svg";
-declare module "@rebass/preset";
-declare module "@rebass/forms";
+declare module '*.png';
+declare module '*.scss';
+declare module '*.svg';
+declare module '@rebass/preset';
+declare module '@rebass/forms';
 
 // declare namespace NodeJS {
 //   interface ProcessEnv {
