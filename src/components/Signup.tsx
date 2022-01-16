@@ -1,8 +1,8 @@
 import { auth } from 'config/firebase';
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
-export default function Signup() {
+const Signup = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -38,4 +38,6 @@ export default function Signup() {
       </form>
     </div>
   );
-}
+};
+
+export default Signup;
