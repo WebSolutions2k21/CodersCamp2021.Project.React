@@ -1,6 +1,6 @@
 import './App.scss';
 
-import SignUp from './components/Signup';
+import SignUp from 'components/Signup';
 
 function App() {
   return (

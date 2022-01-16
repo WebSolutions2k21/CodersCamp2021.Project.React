@@ -1,4 +1,4 @@
-import { auth } from '../config/firebase';
+import { auth } from 'config/firebase';
 
 import React, { useRef } from 'react';
 
