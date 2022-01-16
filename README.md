@@ -40,18 +40,7 @@ Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzy
 
 ### .env
 
-- stwórz plik .env i wklej do niego:
-
-```sh
-REACT_APP_FIREBASE_API_KEY = AIzaSyBbBjtlQStDl5AZLkw-D6LIWWzP34R9tQk
-REACT_APP_FIREBASE_AUTH_DOMAIN = puppylog-5103b.firebaseapp.com
-REACT_APP_FIREBASE_DATABASE_URL = https://puppylog-5103b-default-rtdb.firebaseio.com/
-REACT_APP_FIREBASE_PROJECT_ID = puppylog-5103b
-REACT_APP_FIREBASE_STORAGE_BUCKET = puppylog-5103b.appspot.com
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID = 1028974743015
-REACT_APP_FIREBASE_APP_ID = 1:1028974743015:web:96a766f3c0f9174cec0142
-REACT_APP_FIREBASE_MEASUREMENT_ID = G-MV3WGJZBCL
-```
+Stwórz plik .env i wklej do niego dane z Trello.
 
 
 # CodersCamp2021 - Projekt React
