@@ -18,4 +18,8 @@
     "jsx": "react-jsx"
   },
   "include": ["src"]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4e3292d2ea67f0614381b0b6e80f124e009fcac0
