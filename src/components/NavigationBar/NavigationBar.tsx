@@ -1,5 +1,5 @@
 import imgLogo from 'assets/logo.png';
-
+import { ReactComponent as Paw } from 'assets/paw-solid.svg';
 export const NavigationBar = () => {
   return (
     <header className="header">
@@ -9,17 +9,29 @@ export const NavigationBar = () => {
       </div>
       <nav>
         <ul>
-          <li className="header__icon">
-            <div className="header__link">About Us</div>
+          <li className="header__link">
+            <div>
+              <Paw className="header__icon" />
+              About Us
+            </div>
           </li>
-          <li className="header__icon">
-            <div className="header__link">Contact</div>
+          <li className="header__link">
+            <div>
+              <Paw className="header__icon" />
+              Contact
+            </div>
           </li>
-          <li className="header__icon">
-            <div className="header__link">Sign Up</div>
+          <li className="header__link">
+            <div>
+              <Paw className="header__icon" />
+              Sign Up
+            </div>
           </li>
-          <li className="header__icon">
-            <div className="header__link">Log In</div>
+          <li className="header__link">
+            <div>
+              <Paw className="header__icon" />
+              Log In
+            </div>
           </li>
         </ul>
       </nav>

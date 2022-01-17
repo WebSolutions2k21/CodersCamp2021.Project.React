@@ -29,31 +29,38 @@
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: baseline;
+    align-items: center;
   }
 
   li {
     margin: 0 1rem;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $c-lightBlue;
+    }
   }
 
   &__icon {
-    fill: red;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $c-greyLight;
     padding-left: 20px;
-    background-repeat: no-repeat;
-    background-image: url('/assets/paw-solid.svg');
-  }
 
-  &__icon:hover {
-    fill: $c-lightBlue;
+    &:hover,
+    &:focus {
+      color: $c-lightBlue;
+    }
   }
 
   &__link {
     text-decoration: none;
     color: $c-mainText;
-    cursor: pointer;
-  }
-
-  &__link:hover {
-    color: $c-lightBlue;
+    align-items: center;
+    &:hover,
+    &:focus {
+      color: $c-lightBlue;
+    }
   }
 }
