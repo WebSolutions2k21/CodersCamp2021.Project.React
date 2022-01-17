@@ -1,4 +1,3 @@
-import { AppBar } from '@mui/material';
 import imgLogo from 'assets/logo.png';
 
 export const NavigationBar = () => {
