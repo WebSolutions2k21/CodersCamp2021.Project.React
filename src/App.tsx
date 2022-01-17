@@ -1,11 +1,13 @@
 import './App.scss';
 
 import SignUp from 'components/Signup';
+import { NavigationBar } from 'components/NavigationBar';
 
 function App() {
   return (
     <>
-      <p>Test tworzenia konta (podaj poprawny email i hasło - w bazie powinien być widoczny user)</p>
+      <NavigationBar />
+      <p>Test tworzenia konta (podaj poprawny email i hasło - w bazie powinien być widoczny</p>
       <SignUp />
     </>
   );
