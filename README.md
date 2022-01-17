@@ -131,3 +131,4 @@ Aby uruchomić aplikację na lokalnej maszynie, wykonaj następujące kroki:
 4. Wystartuj serwer za pomocą komendy: yarn start.
 
 Aplikacja będzie dostępna pod adresem: …
+
