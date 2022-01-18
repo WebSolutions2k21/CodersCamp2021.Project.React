@@ -5,16 +5,18 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
+
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import { ReactComponent as Paw } from 'assets/paw-solid.svg';
 import { makeStyles } from '@mui/styles';
 import imgLogo from 'assets/logo.png';
 import 'styles/fonts.scss';
 
- const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
+const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
 
 const theme = createTheme({
   components: {
@@ -27,11 +29,11 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
+        root: {        
           fontFamily: '"Ubuntu", sans-serif',
           textTransform: 'capitalize',
           color: '#112025',
-          fontSize: '1rem',
+          fontSize: '1rem'
         },
       },
     },
@@ -120,8 +122,7 @@ export const NavigationBar = () => {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                
+                    <Typography textAlign="center">{page}
                     </Typography>
                   </MenuItem>
                 ))}
