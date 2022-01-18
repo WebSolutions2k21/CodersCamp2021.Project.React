@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import '@material-ui/styles';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import TextField from '@mui/material/TextField';
 
@@ -9,10 +8,17 @@ const useStyles = makeStyles({
         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
         width: '250px',
         borderRadius: '8px',
+    },
+    lbl: {
+        fontSize: '16px',
+        lineHeight: '18px',
+        color: '#959CA0',
+        marginLeft: '17px',
+        marginRight: '17px'
     }
 });
 
-const Input = () => {
+export const Input = () => {
     const classes = useStyles();
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
@@ -21,15 +27,10 @@ const Input = () => {
         e.preventDefault();
         setDataError(false);
 
-        if (data == '') {
+        if (data === '') {
             setDataError(true);
         }
-
-        if (data) {
-            console.log(data);
-        }
     }
-
 
     return(
         <form noValidate onSubmit={handleSubmit}>
@@ -38,22 +39,15 @@ const Input = () => {
                 className={classes.int}
                 variant="standard"
                 InputProps={{
-                    disableUnderline: true,
+                    className: classes.lbl,
+                    disableUnderline: true
                   }}
                 InputLabelProps={{
-                    style: { 
-                        paddingLeft: '17px',
-                        fontSize: '16px',
-                        fontWeight: '400',
-                        lineHeight: '18px',
-                        color: '#959CA0',
-                    }
-                 }}
+                    className: classes.lbl
+                }}
                 label="email"
                 error={dataError}
             />  
         </form>
     )
 }
-
-export default Input;

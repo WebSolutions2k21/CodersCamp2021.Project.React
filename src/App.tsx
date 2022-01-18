@@ -2,7 +2,7 @@ import './App.scss';
 
 import SignUp from 'components/Signup';
 
-import Input from './components/inputs/Input'
+import { Input } from './components/inputs/Input'
 
 function App() {
   return (
