@@ -18,7 +18,8 @@ const useStyles = makeStyles({
     }
 });
 
-export const Input = () => {
+export const Input = (props:any) => {
+    const {label, type} = props;
     const classes = useStyles();
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
@@ -33,8 +34,8 @@ export const Input = () => {
     }
 
     return(
-        <form noValidate onSubmit={handleSubmit}>
             <TextField 
+                onSubmit={handleSubmit}
                 onChange={(e) => setData(e.target.value)}
                 className={classes.int}
                 variant="standard"
@@ -45,9 +46,9 @@ export const Input = () => {
                 InputLabelProps={{
                     className: classes.lbl
                 }}
-                label="email"
+                label={label}
                 error={dataError}
+                type={type}
             />  
-        </form>
     )
 }

@@ -12,7 +12,8 @@ function App() {
 
       {/* just for test */}
       <p></p>
-      <Input />
+      <Input label='email'/>
+      <Input label='password' type="password"/>
     </>
   );
 }
