@@ -1,14 +1,15 @@
 import './App.scss';
 
-import SignUp from 'components/Signup';
-import { NavigationBar } from 'components/NavigationBar';
+import { NavigationBar, Signup} from 'components';
 
-function App() {
+
+const App = ()=> {
   return (
     <>
       <NavigationBar />
+    
       <p>Test tworzenia konta (podaj poprawny email i hasło - w bazie powinien być widoczny</p>
-      <SignUp />
+      <Signup />
     </>
   );
 }
