@@ -2,7 +2,7 @@ import { auth } from 'config/firebase';
 
 import { useRef } from 'react';
 
-const Signup = () => {
+export const Signup = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -40,4 +40,3 @@ const Signup = () => {
   );
 };
 
-export default Signup;
