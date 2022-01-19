@@ -18,8 +18,12 @@ const useStyles = makeStyles({
     }
 });
 
-export const Input = (props:any) => {
-    const {label, type} = props;
+interface Props {
+    label: string;
+    type?: string; 
+  }
+
+export const Input = ({label, type='text'}:Props) => {
     const classes = useStyles();
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
