@@ -13,7 +13,8 @@ const App = () => {
 
       {/* just for test */}
       <p></p>
-      <Input />
+      <Input label='email' type='email'/>
+      <Input label='password' type='password'/>
     </>
   );
 };

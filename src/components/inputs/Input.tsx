@@ -1,24 +1,14 @@
 import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
+import { useStyles } from './InputStyle';
 
 
-const useStyles = makeStyles({
-    int: {
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-        width: '250px',
-        borderRadius: '8px',
-    },
-    lbl: {
-        fontSize: '16px',
-        lineHeight: '18px',
-        color: '#959CA0',
-        marginLeft: '17px',
-        marginRight: '17px'
-    }
-});
+interface Props {
+    label: string;
+    type?: string; 
+  }
 
-export const Input = () => {
+export const Input = ({label, type='text'}:Props) => {
     const classes = useStyles();
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
@@ -33,8 +23,8 @@ export const Input = () => {
     }
 
     return(
-        <form noValidate onSubmit={handleSubmit}>
             <TextField 
+                onSubmit={handleSubmit}
                 onChange={(e) => setData(e.target.value)}
                 className={classes.int}
                 variant="standard"
@@ -45,9 +35,9 @@ export const Input = () => {
                 InputLabelProps={{
                     className: classes.lbl
                 }}
-                label="email"
+                label={label}
                 error={dataError}
+                type={type}
             />  
-        </form>
     )
 }
