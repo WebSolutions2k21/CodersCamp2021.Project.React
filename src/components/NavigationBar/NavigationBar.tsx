@@ -5,7 +5,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -31,6 +30,7 @@ const useStyles = makeStyles({
   imgIcon: {
     width: '15px',
     paddingLeft: '20px',
+    opacity: '0.3'
   },
 
   icon: {
