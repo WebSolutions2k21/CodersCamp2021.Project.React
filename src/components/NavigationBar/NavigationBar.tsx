@@ -1,4 +1,4 @@
-import React, {MouseEvent, useState} from 'react';
+import React, { MouseEvent, useState } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,9 +25,7 @@ export const NavigationBar = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const handleCloseNavMenu = () => setAnchorElNav(null);
   
   const classes = useStyles();
 
