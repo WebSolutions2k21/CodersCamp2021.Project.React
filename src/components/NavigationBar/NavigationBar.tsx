@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {MouseEvent, useState} from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,54 +9,30 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import PawIcon from '@mui/icons-material/Pets';
+
 import Theme from 'styles/themes/Theme';
-import { ReactComponent as Paw } from 'assets/paw-solid.svg';
-import { makeStyles } from '@mui/styles';
 import imgLogo from 'assets/logo.png';
-import 'styles/fonts.scss';
+import { useStyles } from './NavigationBarStyle';
 
 const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
 
-const useStyles = makeStyles({
-  root: {
-    background: '#ffffff',
-    border: 0,
-    borderRadius: 3,
-    color: '#16bac6',
-  },
-  img: {
-    width: '50px',
-  },
-
-  imgIcon: {
-    width: '15px',
-    paddingLeft: '20px',
-    opacity: '0.3'
-  },
-
-  icon: {
-    width: '2rem',
-    height: '2rem',
-    '&:hover': {
-      color: '#16bac6 ',
-    },
-  },
-});
-
 export const NavigationBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  
   const classes = useStyles();
 
   return (
-    <Theme >
+    <Theme>
       <AppBar position="static">
         <Container maxWidth="xl" className={classes.root}>
           <Toolbar disableGutters>
@@ -66,10 +43,33 @@ export const NavigationBar = () => {
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
             >
               <img className={classes.img} src={imgLogo} alt="logo" />
-              PUPPYLOG
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <img className={classes.img} src={imgLogo} alt="logo" />
+            </Typography>
+            <Box
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', alignSelf: 'center' }}
+            >
+              {pages.map((page) => (
+                <Button
+                  size="large"
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {page}
+                </Button>
+              ))}
+            </Box>
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -77,7 +77,7 @@ export const NavigationBar = () => {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
               >
-                <Paw className={classes.icon} />
+                <MenuIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -103,26 +103,6 @@ export const NavigationBar = () => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
-            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              PUPPYLOG
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              {pages.map((page) => (
-                <Button
-                  startIcon={<Paw className={classes.imgIcon} />}
-                  size="small"
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    display: 'flex',
-                    '&:hover': { color: '#16bac6' },
-                  }}
-                >
-                  {page}
-                </Button>
-              ))}
             </Box>
           </Toolbar>
         </Container>
