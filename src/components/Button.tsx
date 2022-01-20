@@ -1,11 +1,14 @@
+import { ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
-const BasicButtons = ({text}:any) => {
+import { ButtonTheme } from 'styles/themes/CustomButtonTheme'
+
+export const BasicButtons = ({text, color}: any) => {
   return (
-    <Button variant="contained">
-      {text}
-    </Button>
+    <ThemeProvider theme={ ButtonTheme }>
+        <Button variant="contained" color={color}>
+          {text}
+        </Button>
+    </ThemeProvider>
   );
 }
-
-export default BasicButtons;

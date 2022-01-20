@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-const  ButtonTheme = createTheme({
+export const ButtonTheme = createTheme({
     palette: {
       primary: {
         main: '#fdc161',
@@ -12,5 +12,3 @@ const  ButtonTheme = createTheme({
       },
     },
 });
-  
-export { ButtonTheme };

@@ -1,10 +1,7 @@
 import './App.scss';
-
-import { NavigationBar, Signup } from 'components';
+import { NavigationBar, Signup} from 'components';
 import { Input } from './components/inputs/Input';
-import { default as Button } from 'components/Button';
-import { ButtonTheme } from 'components/Themes/CustomButtonTheme'
-import { ThemeProvider } from '@mui/material/styles';
+import { BasicButtons } from 'components/Button';
 
 const App = () => {
   return (
@@ -16,12 +13,10 @@ const App = () => {
 
       {/* just for test */}
       <p></p>
-      <ThemeProvider theme={ButtonTheme}>
-        <Button
-          color="secondary"
-          text="JESTĘ BUTTONEM"
-        />
-      </ThemeProvider>
+      <BasicButtons
+        color="secondary"
+        text="JESTĘ BUTTONEM"
+      />
       <Input label='email' type='email'/>
       <Input label='password' type='password'/>
     </>
