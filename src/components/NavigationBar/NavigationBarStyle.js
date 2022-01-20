@@ -3,13 +3,10 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
   root: {
     background: '#ffffff',
-    border: 0,
-    borderRadius: 3,
-    color: '#16bac6',
-    minHeight: '10vh',
+    color: '#16bac6'   
   },
   img: {
-    maxHeight: '10vh',
+    maxHeight: '4rem',
   },
 
   imgIcon: {
