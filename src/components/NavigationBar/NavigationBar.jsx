@@ -38,7 +38,7 @@ export const NavigationBar = () => {
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
               <img className={classes.img} src={imgLogo} alt="logo" />
             </Typography>
@@ -47,7 +47,7 @@ export const NavigationBar = () => {
               <img className={classes.img} src={imgLogo} alt="logo" />
             </Typography>
             <Box
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', alignSelf: 'center' }}
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}
             >
               {pages.map((page) => (
                 <Button
