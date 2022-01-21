@@ -1,11 +1,9 @@
 import { HomePage } from './pages';
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <HomePage />
     </>
   );
 };
-
-export default App;
