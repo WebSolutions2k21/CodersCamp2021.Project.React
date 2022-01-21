@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
     color: '#16bac6'   
   },
   img: {
-    maxHeight: '4rem',
+    width: '4rem',
   },
 
   imgIcon: {
