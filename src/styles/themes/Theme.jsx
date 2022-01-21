@@ -1,9 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import 'styles/fonts.scss';
-
-interface Props {
-  children: React.ReactNode;
-}
+import '../fonts.scss';
 
 const theme = createTheme({
   components: {
@@ -27,6 +23,6 @@ const theme = createTheme({
   },
 });
 
-const Theme = ({ children }: Props) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const Theme = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 
 export default Theme;

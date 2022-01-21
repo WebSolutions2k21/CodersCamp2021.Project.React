@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,16 +12,16 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import PawIcon from '@mui/icons-material/Pets';
 
-import Theme from 'styles/themes/Theme';
-import imgLogo from 'assets/logo.png';
+import Theme from '../../styles/themes/Theme';
+import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 
 const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
 
 export const NavigationBar = () => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState();
 
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
