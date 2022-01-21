@@ -1,14 +1,15 @@
-import { auth } from 'config/firebase';
-
+// TODO - do usunięcia
 import { useRef } from 'react';
 
+import { auth } from '../config/firebase';
+
 export const Signup = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const createAccount = async () => {
     try {
-      await auth.createUserWithEmailAndPassword(emailRef.current!.value, passwordRef.current!.value);
+      await auth.createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
     } catch (error) {
       console.error(error);
     }

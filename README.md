@@ -38,6 +38,7 @@ Przyjmujemy poniższy format commit message
 
 Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzyć małe PR. W opisie PR powinno być dokładnie opisane co on zmienia. Każdy PR musi być zaakceptowany przez przynajmniej jedną inną osobę.
 
+
 ### .env
 
 Stwórz plik .env i wklej do niego dane z Trello.
@@ -131,3 +132,6 @@ Aby uruchomić aplikację na lokalnej maszynie, wykonaj następujące kroki:
 4. Wystartuj serwer za pomocą komendy: yarn start.
 
 Aplikacja będzie dostępna pod adresem: …
+=======
+
+https://puppylog.netlify.app/
