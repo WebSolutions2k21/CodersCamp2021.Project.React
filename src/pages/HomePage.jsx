@@ -1,15 +1,38 @@
-import {Input, Signup, Layout} from "../components";
+import { Layout, CustomButton } from "../components";
+import { Link } from 'react-router-dom';
+
+import { Typography, Grid } from '@mui/material';
+
 
 export const HomePage = () => {
   return (
     <Layout>
-      <p>Test tworzenia konta (podaj poprawny email i hasło - w bazie powinien być widoczny</p>
-      <Signup />
-
-      {/* just for test */}
-      <p></p>
-      <Input label="email" type="email" />
-      <Input label="password" type="password" />
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        style={{height: "70vh"}}
+        >
+        
+        <Typography 
+          variant="h1"
+          fontSize="60px"
+          fontFamily="Ubuntu, sans-serif"
+          paddingBottom="40px"
+          color="#16BAC6"
+          letterSpacing="1px">
+              We love Pets!
+        </Typography>
+          
+        <Link to="/Login" style={{ textDecoration: 'none' }}>
+        <CustomButton
+          color="primary" 
+          size="large" 
+          text="GET STARTED"
+        />
+        </Link>
+      </Grid>
     </Layout>
   );
 };
