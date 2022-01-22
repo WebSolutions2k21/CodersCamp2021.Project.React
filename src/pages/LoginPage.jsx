@@ -109,6 +109,3 @@ export const LoginPage = () => {
         </Typography>
         <CustomButton text="Sign out" clickAction={() => signOut()} />
       </Grid>
-    </Layout>
-  );
-};
