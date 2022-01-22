@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +17,12 @@ import Theme from '../../styles/themes/Theme';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 
-const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
+const pages = [
+  { title: 'About Us', pathname: 'AboutUs' },
+  { title: 'Contact', pathname: 'Contact' },
+  { title: 'Sign Up', pathname: 'SignUp' },
+  { title: 'Log In', pathname: 'Login' },
+];
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
@@ -34,37 +40,37 @@ export const NavigationBar = () => {
       <AppBar position="static">
         <Container maxWidth="xl" className={classes.root}>
           <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            >
-              <img className={classes.img} src={imgLogo} alt="logo" />
+            <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+              <Link href="/">
+                <img className={classes.img} src={imgLogo} alt="logo" />
+              </Link>
             </Typography>
 
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <img className={classes.img} src={imgLogo} alt="logo" />
+            <Link href="/">
+                <img className={classes.img} src={imgLogo} alt="logo" />
+              </Link>
             </Typography>
-            <Box
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}
-            >
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               {pages.map((page) => (
-                <Button
-                  size="large"
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    p: 1,
-                    display: 'flex',
-                    alignContent: 'center',
-                    '&:hover': { color: '#16bac6' },
-                  }}
-                >
-                  <PawIcon className={classes.imgIcon} />
-                  {page}
-                </Button>
+                <Link href={`/${page.pathname}`} underline="none" key={page.title}>
+                  <Button
+                    size="large"
+                    key={page.title}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      p: 1,
+                      display: 'flex',
+                      alignContent: 'center',
+                      textDecoration: 'none',
+                      '&:hover': { color: '#16bac6' },
+                    }}
+                  >
+                    <PawIcon className={classes.imgIcon} />
+                    {page.title}
+                  </Button>
+                </Link>
               ))}
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
@@ -96,9 +102,11 @@ export const NavigationBar = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                  <Link href={`/${page.pathname}`} underline="none" key={page.title} color='secondary.dark'>
+                    <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page.title}</Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
