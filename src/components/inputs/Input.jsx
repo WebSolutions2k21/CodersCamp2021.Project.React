@@ -1,19 +1,15 @@
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
+
 import { useStyles } from './InputStyle';
 
 
-interface Props {
-    label: string;
-    type?: string; 
-  }
-
-export const Input = ({label, type='text'}:Props) => {
+export const Input = ({label, type='text'}) => {
     const classes = useStyles();
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setDataError(false);
 
