@@ -1,58 +1,69 @@
-import Drawer from '@mui/material/Drawer';
-// import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Box, Toolbar, Container, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+
+import React from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
-import { Box, Toolbar, Container } from '@mui/material';
 import Theme from '../../styles/themes/Theme';
 
 export const Sidebar = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
   const location = useLocation();
 
+  function ListItemLink(props) {
+    const { icon, primary, to } = props;
+
+    const renderLink = React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />);
+
+    return (
+      <li className={location.pathname === to ? classes.activetext : null}>
+        <ListItem button component={renderLink}>
+          {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+          <ListItemText primary={primary} />
+        </ListItem>
+        <Divider variant="inset" />
+      </li>
+    );
+  }
+
   const userMenuItems = [
-    {
-      text: 'My Pets',
-      icon: iconCat(),
-      path: '/mypets',
-    },
     {
       text: 'My Visits',
       icon: iconCalender(),
       path: '/myvisits',
     },
     {
+      text: 'My Pets',
+      icon: iconCat(),
+      path: '/mypets',
+    },
+    {
       text: 'Edit Profile',
       icon: iconPen(),
       path: '/edit-profile',
+    },
+    {
+      text: 'Sign Out',
+      icon: '.',
+      path: '/',
     },
   ];
 
   return (
     <Theme>
-      <Drawer className={classes.drawer} variant="permanent" anchor="left" classes={{ paper: classes.drawerPaper }}>
-        <Container maxWidth="xl">
+      <Container maxWidth="xl">
+        <Drawer className={classes.drawer} variant="permanent" anchor="left" classes={{ paper: classes.drawerPaper }}>
           <Toolbar />
           <Box>
             <List>
               {userMenuItems.map((item) => (
-                <ListItem button key={item.text} onClick={() => navigate(item.path)}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText
-                    className={location.pathname === item.path ? classes.activetext : ''}
-                    primary={item.text}
-                  />
-                </ListItem>
+                <ListItemLink to={item.path} primary={item.text} icon={item.icon} />
               ))}
             </List>
           </Box>
-        </Container>
-      </Drawer>
+        </Drawer>
+      </Container>
     </Theme>
   );
 };

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 import { ButtonTheme } from '../../styles/themes/CustomButtonTheme';
 
-export const CustomButton = ({ text = 'ADD PET', color, size, clickAction }) => {
+export const CustomButton = ({ text, color, size, clickAction }) => {
   let handleClick = () => {
     clickAction();
   };
@@ -16,15 +16,3 @@ export const CustomButton = ({ text = 'ADD PET', color, size, clickAction }) => 
     </ThemeProvider>
   );
 };
-
-// HOW TO USE THIS BUTTON:
-//
-// import {CustomButton} from 'enter correct path'
-
-// <CustomButton
-//        color="primary/secondary" - pick one of the themes
-//        size="small/medium/large" - pick one of the sizes
-//        clickAction={() => {
-//          insert your function eg. alert('Klikam się!');
-//        }}
-// />

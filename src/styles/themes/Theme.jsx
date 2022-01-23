@@ -7,7 +7,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#ffffff;',
-          boxShadow: 'none'
+          boxShadow: 'none',
         },
       },
     },
