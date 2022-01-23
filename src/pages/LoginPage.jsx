@@ -13,7 +13,7 @@ export const LoginPage = () => {
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '20vmin' }} gap="2rem">
-        <Typography theme={LoginPageTheme} variant="h1" component="h1" color="#16BAC6" fontSize="60px">
+        <Typography theme={LoginPageTheme} variant="h1" component="h1" color="#16BAC6" fontSize="3.8rem">
           Log In
         </Typography>
         <Input label="email" />
