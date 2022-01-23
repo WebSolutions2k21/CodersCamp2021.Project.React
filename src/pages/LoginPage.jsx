@@ -32,8 +32,6 @@ auth.onAuthStateChanged((user) => {
     // User is signed out
     // ...
   }
-});
-
 function Router(props) {
   const { children } = props;
   if (typeof window === 'undefined') {
