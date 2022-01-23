@@ -1,4 +1,4 @@
-import { Input, Signup, Layout, CustomButton } from '../components';
+import { Input, Signup, Layout } from '../components';
 
 export const HomePage = () => {
   return (
@@ -10,7 +10,6 @@ export const HomePage = () => {
       <p></p>
       <Input label="email" type="email" />
       <Input label="password" type="password" />
-      <CustomButton color="primary/secondary" size="large" />
     </Layout>
   );
 };
