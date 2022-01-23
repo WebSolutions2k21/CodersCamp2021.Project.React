@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
-import { StaticRouter } from 'react-router-dom/server';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,18 +16,6 @@ const pages = [
   { title: 'Sign Up', pathname: paths.signUp },
   { title: 'Log In', pathname: paths.login },
 ];
-function Router(props) {
-  const { children } = props;
-  if (typeof window === 'undefined') {
-    return <StaticRouter location="/">{children}</StaticRouter>;
-  }
-
-  return <MemoryRouter>{children}</MemoryRouter>;
-}
-
-Router.propTypes = {
-  children: PropTypes.node,
-};
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
