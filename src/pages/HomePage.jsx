@@ -1,4 +1,5 @@
-import { Input, Signup, Layout } from '../components';
+import { Input, Signup, Layout, InputSelect } from '../components';
+
 
 export const HomePage = () => {
   return (
@@ -10,6 +11,8 @@ export const HomePage = () => {
       <p></p>
       <Input label="email" type="email" />
       <Input label="password" type="password" />
+
+      <InputSelect label="type"/>
     </Layout>
   );
 };
