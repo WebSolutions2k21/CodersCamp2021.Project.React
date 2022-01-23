@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
-import { useLocation } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
