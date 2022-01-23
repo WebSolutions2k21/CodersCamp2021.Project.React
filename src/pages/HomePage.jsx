@@ -1,8 +1,7 @@
-import { Layout, CustomButton } from "../components";
 import { Link } from "react-router-dom";
-
-import imgLogo from "../assets/logo.png";
 import { Typography, Grid } from "@mui/material";
+import imgLogo from "../assets/logo.png";
+import { Layout, CustomButton } from "../components";
 
 
 export const HomePage = () => {
