@@ -1,4 +1,4 @@
-import {Input, Signup, Layout} from "../components";
+import { Input, Signup, Layout } from '../components';
 
 export const HomePage = () => {
   return (
