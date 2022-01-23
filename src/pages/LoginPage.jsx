@@ -45,6 +45,23 @@ Router.propTypes = {
   children: PropTypes.node,
 };
 
+import PropTypes from 'prop-types';
+import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
+
+function Router(props) {
+  const { children } = props;
+  if (typeof window === 'undefined') {
+    return <StaticRouter location="/">{children}</StaticRouter>;
+  }
+
+  return <MemoryRouter>{children}</MemoryRouter>;
+}
+
+Router.propTypes = {
+  children: PropTypes.node,
+};
+
 export const LoginPage = () => {
   let navigate = useNavigate();
   const loginSucces = () => {
