@@ -16,6 +16,7 @@ export const ButtonTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          fontFamily: '"Ubuntu", sans-serif',
           boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
           fontWeight: '400',
         },
