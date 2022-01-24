@@ -36,19 +36,5 @@ export const ButtonTheme = createTheme({
         },
       ],
     },
-    variants: [
-      {
-        props: { size: 'small' },
-        style: {
-          fontSize: '16px',
-        },
-      },
-      {
-        props: { size: 'large' },
-        style: {
-          fontSize: '24px',
-        },
-      },
-    ],
   },
 });
