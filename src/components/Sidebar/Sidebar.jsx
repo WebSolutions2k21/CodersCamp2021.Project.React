@@ -5,6 +5,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
+import { paths } from '../../config/paths';
 
 export const Sidebar = () => {
   const classes = useStyles();
@@ -30,22 +31,22 @@ export const Sidebar = () => {
     {
       text: 'My Visits',
       icon: iconCalender(),
-      path: '/myvisits',
+      path: paths.myVisits,
     },
     {
       text: 'My Pets',
       icon: iconCat(),
-      path: '/mypets',
+      path: paths.myPets,
     },
     {
       text: 'Edit Profile',
       icon: iconPen(),
-      path: '/edit-profile',
+      path: paths.editProfile,
     },
     {
       text: 'Sign Out',
       icon: '.',
-      path: '/',
+      path: paths.home,
     },
   ];
 
