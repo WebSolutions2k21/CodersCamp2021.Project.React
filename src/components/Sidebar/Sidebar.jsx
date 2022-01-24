@@ -1,11 +1,10 @@
-import { Box, Toolbar, Container, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { Box, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
 
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
-import Theme from '../../styles/themes/Theme';
 
 export const Sidebar = () => {
   const classes = useStyles();
@@ -19,7 +18,7 @@ export const Sidebar = () => {
     return (
       <li className={location.pathname === to ? classes.activetext : null}>
         <ListItem button component={renderLink}>
-          {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+          {icon ? <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon> : null}
           <ListItemText primary={primary} />
         </ListItem>
         <Divider variant="inset" />
@@ -51,19 +50,14 @@ export const Sidebar = () => {
   ];
 
   return (
-    <Theme>
-      <Container maxWidth="xl">
-        <Drawer className={classes.drawer} variant="permanent" anchor="left" classes={{ paper: classes.drawerPaper }}>
-          <Toolbar />
-          <Box>
-            <List>
-              {userMenuItems.map((item) => (
-                <ListItemLink to={item.path} primary={item.text} icon={item.icon} />
-              ))}
-            </List>
-          </Box>
-        </Drawer>
-      </Container>
-    </Theme>
+    <>
+      <Box component="aside" className={classes.drawer}>
+        <List className={classes.list}>
+          {userMenuItems.map((item) => (
+            <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
+          ))}
+        </List>
+      </Box>
+    </>
   );
 };

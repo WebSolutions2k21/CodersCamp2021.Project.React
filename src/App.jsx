@@ -13,10 +13,11 @@ import {
   DoctorCalender,
   DoctorVisit,
 } from './pages';
+import Theme from './styles/themes/Theme';
 
 export const App = () => {
   return (
-    <>
+    <Theme>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Login" element={<LoginPage />} />
@@ -33,6 +34,6 @@ export const App = () => {
         <Route path="/doctor-calender" element={<DoctorCalender />} />
         <Route path="/doctor-visit" element={<DoctorVisit />} />
       </Routes>
-    </>
+    </Theme>
   );
 };

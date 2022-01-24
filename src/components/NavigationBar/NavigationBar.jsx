@@ -5,7 +5,6 @@ import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Bu
 import MenuIcon from '@mui/icons-material/Menu';
 import PawIcon from '@mui/icons-material/Pets';
 
-import Theme from '../../styles/themes/Theme';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
@@ -29,8 +28,8 @@ export const NavigationBar = () => {
   const classes = useStyles();
 
   return (
-    <Theme>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <>
+      <AppBar position="static">
         <Container maxWidth="xl" className={classes.root}>
           <Toolbar disableGutters>
             <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
@@ -109,6 +108,6 @@ export const NavigationBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </Theme>
+    </>
   );
 };

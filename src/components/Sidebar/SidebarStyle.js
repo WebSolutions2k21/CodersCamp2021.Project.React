@@ -5,24 +5,19 @@ const drawerWidth = 240;
 export const useStyles = makeStyles({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    borderRight: '2px solid #EFF0F4 ',
+    minHeight: '82vh',
   },
-  drawerPaper: {
-    width: drawerWidth,
-    boxSizing: 'border-box',
-    marginLeft: 40,
-  },
-  root: {
-    fontFamily: '"Ubuntu", sans-serif',
-    textTransform: 'capitalize',
-    color: '#112025',
-    fontSize: '1rem',
-  },
+
   activetext: {
     color: '#16bac6',
   },
 
+  list: {
+    color: '#112025',
+    fontFamily: 'Ubuntu, sans-serif',
+  },
   icon: {
-    color: '#16bac6',
+    color: 'red',
   },
 });

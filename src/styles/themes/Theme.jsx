@@ -2,6 +2,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../fonts.scss';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: '"Ubuntu", sans-serif',
+  },
   palette: {
     secondary: {
       main: '#eff0f4',
@@ -20,7 +23,6 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontFamily: '"Ubuntu", sans-serif',
           textTransform: 'capitalize',
           color: '#112025',
           fontSize: '1rem',
