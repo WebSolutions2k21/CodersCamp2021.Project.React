@@ -20,7 +20,7 @@ export const InputSelect = ({ label }) => {
     const handleChange = (event) => {
         setData(event.target.value);
     };
-  
+
     return (
         <FormControl
             variant="standard" 
