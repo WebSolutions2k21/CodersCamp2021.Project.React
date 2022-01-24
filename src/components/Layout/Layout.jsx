@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
 
 import { NavigationBar } from '../NavigationBar';
-import { Sidebar } from '..';
+import { Sidebar } from '../Sidebar';
 import { Banner } from '../Banner';
 
 export const Layout = ({ children, showSideBar }) => {
