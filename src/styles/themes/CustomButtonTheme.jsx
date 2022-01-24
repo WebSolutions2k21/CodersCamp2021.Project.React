@@ -20,20 +20,20 @@ export const ButtonTheme = createTheme({
           fontWeight: '400',
         },
       },
+      variants: [
+        {
+          props: { size: 'small' },
+          style: {
+            fontSize: '16px',
+          },
+        },
+        {
+          props: { size: 'large' },
+          style: {
+            fontSize: '24px',
+          },
+        },
+      ],
     },
-    variants: [
-      {
-        props: { size: 'small' },
-        style: {
-          fontSize: '16px',
-        },
-      },
-      {
-        props: { size: 'large' },
-        style: {
-          fontSize: '24px',
-        },
-      },
-    ],
   },
 });
