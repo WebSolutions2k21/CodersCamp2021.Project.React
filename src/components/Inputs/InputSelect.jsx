@@ -1,22 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 
 import { useStyles } from './InputStyle';
 
-const names = [
-    'Dog',
-    'Cat',
-    'Rabbit',
-    'Bird',
-    'Hamster',
-    'Rat',
-    'Chinchilla',
-  ];
 
-export const InputSelect = ({ label }) => {
+export const InputSelect = ({ label, myNames=[] }) => {
     const classes = useStyles();
     const [data, setData] = useState('');
-  
+
+    const [params, setParams] = useState([]);
+
+    useEffect(()=>{
+        setParams(myNames);
+    }, [myNames]);
+
     const handleChange = (event) => {
         setData(event.target.value);
     };
@@ -39,7 +36,7 @@ export const InputSelect = ({ label }) => {
                     <em>{label}</em>
                 </MenuItem>
 
-                {names.map((name) => (
+                {params.map(name => (
                 <MenuItem
                 key={name}
                 value={name}>
@@ -51,3 +48,5 @@ export const InputSelect = ({ label }) => {
         </FormControl>
     )
 }
+
+// Use import and <InputSelect label="type" myNames={["dog", "cat"]}/>
