@@ -1,21 +1,37 @@
+import React from 'react';
 import { Layout } from '../components';
-// import { Signup } from '../components';
-import { useStyles } from '../components/buttons/buttonsStyle';
-import { Input } from '../components/inputs/Input';
-
+import { Grid } from '@mui/material';
+import { Input } from '../components/Inputs';
+import { CustomButton } from '../components/Button/CustomButton';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
 
 export const SignupPage = () => {
-  const signup = useStyles();
   return (
     <Layout>
-      <p className= {signup.topText}>Create your account</p>
-      <Input label="first name" type="fname"/>
-      <Input label="last name" type="lname"/>
-      <Input label="email" type="email" />
-      <Input label="phone number" type="phone" />
-      <Input label="password" type="password" />
-      <p className= {signup.downText}>Already have an account?<a className= {signup.logIn}>Log In!</a></p>
-      <button className= {signup.btn} >sign up !</button>
+      <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
+        <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
+          Create your account
+        </Typography>
+        <Grid container justifyContent="center" gap="3rem">
+          <Input label="firs name" />
+          <Input label="last name" />
+        </Grid>
+        <Input label="email" />
+        <Input label="phone number" />
+        <Input label="password" />
+        <Typography theme={SignUpTheme}>
+          Already have an account?
+          <Link underline="none" color="#16BAC6">
+            {' '}
+            Log In!
+          </Link>
+        </Typography>
+        <Link to="/AboutUsPage" style={{ textDecoration: 'none' }}>
+          <CustomButton color="primary" size="large" text="Sign Up !" />
+        </Link>
+      </Grid>
     </Layout>
   );
 };

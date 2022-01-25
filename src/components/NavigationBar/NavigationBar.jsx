@@ -1,22 +1,20 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
+import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PawIcon from '@mui/icons-material/Pets';
 
-import Theme from '../../styles/themes/Theme';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
+import { paths } from '../../config/paths';
 
-const pages = ['About Us', 'Contact', 'Sign Up', 'Log In'];
+const pages = [
+  { title: 'About Us', pathname: paths.aboutUs },
+  { title: 'Contact', pathname: paths.contact },
+  { title: 'Sign Up', pathname: paths.signUp },
+  { title: 'Log In', pathname: paths.login },
+];
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
@@ -30,40 +28,40 @@ export const NavigationBar = () => {
   const classes = useStyles();
 
   return (
-    <Theme>
+    <>
       <AppBar position="static">
         <Container maxWidth="xl" className={classes.root}>
           <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            >
-              <img className={classes.img} src={imgLogo} alt="logo" />
+            <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+              <Link component={RouterLink} to={paths.home}>
+                <img className={classes.img} src={imgLogo} alt="logo" />
+              </Link>
             </Typography>
 
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <img className={classes.img} src={imgLogo} alt="logo" />
+              <Link component={RouterLink} to={paths.home}>
+                <img className={classes.img} src={imgLogo} alt="logo" />
+              </Link>
             </Typography>
-            <Box
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}
-            >
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               {pages.map((page) => (
                 <Button
+                  component={RouterLink}
+                  to={page.pathname}
                   size="large"
-                  key={page}
+                  key={page.title}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
                     p: 1,
                     display: 'flex',
                     alignContent: 'center',
+                    textDecoration: 'none',
                     '&:hover': { color: '#16bac6' },
                   }}
                 >
                   <PawIcon className={classes.imgIcon} />
-                  {page}
+                  {page.title}
                 </Button>
               ))}
             </Box>
@@ -96,8 +94,13 @@ export const NavigationBar = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                  <MenuItem
+                    key={page.title}
+                    onClick={handleCloseNavMenu}
+                    component={RouterLink}
+                    to={`${page.pathname}`}
+                  >
+                    <Typography textAlign="center">{page.title}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -105,6 +108,6 @@ export const NavigationBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </Theme>
+    </>
   );
 };
