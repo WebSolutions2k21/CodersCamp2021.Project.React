@@ -6,7 +6,6 @@ export const useStyles = makeStyles({
   drawer: {
     width: drawerWidth,
     borderRight: '2px solid #EFF0F4 ',
-    minHeight: '82vh',
   },
 
   activetext: {
