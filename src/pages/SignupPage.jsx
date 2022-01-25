@@ -6,6 +6,7 @@ import { CustomButton } from '../components/Button/CustomButton';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
+import { width } from '@mui/system';
 
 export const SignupPage = () => {
   return (
