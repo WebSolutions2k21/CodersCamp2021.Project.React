@@ -1,14 +1,18 @@
 import React from 'react';
+
 import { Layout } from '../components';
-import { Grid } from '@mui/material';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
+
+import { Grid } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import {useStyles} from './SingUpPageCustomInput';
 import { width } from '@mui/system';
 
 export const SignupPage = () => {
+  const classes = useStyles();
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
@@ -19,7 +23,7 @@ export const SignupPage = () => {
           <Input label="firs name" />
           <Input label="last name" />
         </Grid>
-        <Input label="email" />
+        <Input label="email" className = {classes.szerokosc}/>
         <Input label="phone number" />
         <Input label="password" />
         <Typography theme={SignUpTheme}>
