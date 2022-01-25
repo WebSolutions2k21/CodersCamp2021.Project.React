@@ -23,7 +23,7 @@ export const SignupPage = () => {
           <Input label="first name" type='text' />
           <Input label="last name" type='text' />
         </Grid>
-        <Input label="email" className = {classes.szerokosc}/>
+        <Input label="email" />
         <Input label="phone number" />
         <Input label="password" type='password' />
         <Typography theme={SignUpTheme}>
