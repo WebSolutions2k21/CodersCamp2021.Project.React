@@ -23,8 +23,8 @@ export const SignupPage = () => {
           <Input label="first name" type='text' />
           <Input label="last name" type='text' />
         </Grid>
-        <Input label="email" />
-        <Input label="phone number" />
+        <Input label="email" type='email' />
+        <Input label="phone number" type='tel' />
         <Input label="password" type='password' />
         <Typography theme={SignUpTheme}>
           Already have an account?
