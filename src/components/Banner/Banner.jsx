@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { useStyles } from './BannerStyle';
 
 export const Banner = () => {
@@ -8,9 +8,11 @@ export const Banner = () => {
 
   return (
     <Box className={classes.box}>
-      <Typography variant="h4" color={'#FDC161'}>
-        Welcome Bartek !
-      </Typography>
+      <Container maxWidth="xl">
+        <Typography variant="h4" color={'#FDC161'}>
+          Welcome Bartek !
+        </Typography>
+      </Container>
     </Box>
   );
 };
