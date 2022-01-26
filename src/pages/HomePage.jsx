@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Typography, Grid } from '@mui/material';
 import imgLogo from '../assets/logo.png';
-import { Layout, CustomButton, InputMonthAndYear } from '../components';
+import { Layout, CustomButton } from '../components';
 
 export const HomePage = () => {
   return (
     <Layout>
-
-      <InputMonthAndYear label="type"/>
-
       <Grid
         container
         direction="column"

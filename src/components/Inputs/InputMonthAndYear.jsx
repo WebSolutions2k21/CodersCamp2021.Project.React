@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import { LocalizationProvider, DatePicker } from '@mui/lab/';
+import { TextField } from '@mui/material/';
 
 import { useStyles } from './InputStyle';
 
