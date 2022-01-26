@@ -4,9 +4,8 @@ import TextField from '@mui/material/TextField';
 import { useStyles } from './InputStyle';
 
 
-export const Input = ({ label, type='text' }) => {
+export const Input = ({ label, type='text', value, setValue }) => {
     const classes = useStyles();
-    const [value, setValue] = useState('');
     const [dataError, setDataError] = useState(false);
 
     const handleSubmit = (e) => {

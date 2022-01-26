@@ -4,10 +4,8 @@ import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useStyles } from './InputStyle';
 
 
-export const InputSelect = ({ label, myNames=[] }) => {
+export const InputSelect = ({ label, myNames=[], value, setValue }) => {
     const classes = useStyles();
-    const [value, setValue] = useState('');
-
     const [params, setParams] = useState([]);
 
     useEffect(()=>{

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/lab/';
 import { TextField } from '@mui/material/';
@@ -6,9 +5,8 @@ import { TextField } from '@mui/material/';
 import { useStyles } from './InputStyle';
 
 
-export const InputMonthAndYear = ({ label }) => {
+export const InputMonthAndYear = ({ label, value, setValue }) => {
     const classes = useStyles();
-    const [value, setValue] = useState(new Date());
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
