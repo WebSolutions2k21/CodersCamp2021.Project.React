@@ -14,8 +14,8 @@ export const InputSelect = ({ label, myNames=[] }) => {
         setParams(myNames);
     }, [myNames]);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const handleChange = (e) => {
+        setValue(e.target.value);
     };
 
     return (
