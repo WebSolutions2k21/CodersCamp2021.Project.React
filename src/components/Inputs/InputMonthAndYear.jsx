@@ -8,6 +8,10 @@ import { useStyles } from './InputStyle';
 export const InputMonthAndYear = ({ label, value, setValue }) => {
     const classes = useStyles();
 
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    }
+
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -16,9 +20,7 @@ export const InputMonthAndYear = ({ label, value, setValue }) => {
                 minDate={new Date('1990-01-01')}
                 maxDate={Date.now()}
                 value={value}
-                onChange={(newValue) => {
-                    setValue(newValue);
-                }}
+                onChange={handleChange}
                 renderInput={(params) => <TextField 
                     className={classes.int} 
                     variant="standard" 
