@@ -12,9 +12,7 @@ export const InputTime = ({ label, value, setValue }) => {
     const classes = useStyles();
     //const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
 
-    const handleChange = (e) => {
-        setValue(e.target.value);
-    }
+    const handleChange = ({target: {value}}) => setValue && setValue(value);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -22,10 +20,6 @@ export const InputTime = ({ label, value, setValue }) => {
             label={<div className={classes.lbl2}>{label}</div>}
             value={value}
             onChange={handleChange}
-            // value={value}
-            // onChange={(newValue) => {
-            //     setValue(newValue);
-            // }}
             renderInput={(params) => <TextField 
                 className={classes.int} 
                 variant="standard" 

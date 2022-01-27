@@ -12,9 +12,7 @@ export const InputFullDate = ({ label, value, setValue }) => {
     const classes = useStyles();
     // const [date, setDate] = useState(new Date());
     
-    const handleChange = (e) => {
-        setValue(e.target.value);
-    }
+    const handleChange = ({target: {value}}) => setValue && setValue(value);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -38,8 +36,7 @@ export const InputFullDate = ({ label, value, setValue }) => {
                             color:"#16BAC6", 
                             mb:"7px", 
                             mr:"3px"},
-                        
-                      }}/>}
+                        }}/>}
                     InputProps={{
                         className: classes.lbl,
                         disableUnderline: true,
