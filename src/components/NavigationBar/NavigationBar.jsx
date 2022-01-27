@@ -5,7 +5,6 @@ import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Bu
 import MenuIcon from '@mui/icons-material/Menu';
 import PawIcon from '@mui/icons-material/Pets';
 
-import Theme from '../../styles/themes/Theme';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
@@ -29,7 +28,7 @@ export const NavigationBar = () => {
   const classes = useStyles();
 
   return (
-    <Theme>
+    <>
       <AppBar position="static">
         <Container maxWidth="xl" className={classes.root}>
           <Toolbar disableGutters>
@@ -109,6 +108,6 @@ export const NavigationBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </Theme>
+    </>
   );
 };
