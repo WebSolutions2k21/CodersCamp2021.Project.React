@@ -4,18 +4,16 @@ import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useStyles } from './InputStyle';
 
 
-export const InputSelect = ({ label, myNames=[] }) => {
+export const InputSelect = ({ label, myNames=[], value, setValue }) => {
     const classes = useStyles();
-    const [data, setData] = useState('');
-
     const [params, setParams] = useState([]);
 
     useEffect(()=>{
         setParams(myNames);
     }, [myNames]);
 
-    const handleChange = (event) => {
-        setData(event.target.value);
+    const handleChange = (e) => {
+        setValue(e.target.value);
     };
 
     return (
@@ -27,11 +25,13 @@ export const InputSelect = ({ label, myNames=[] }) => {
 
             <Select
                 disableUnderline
-                value={data}
+                value={value}
                 onChange={handleChange}
                 label={label}
-                sx={{ml:"17px", mr:"17px"}}>
-                
+                sx={{
+                    ml:"17px", 
+                    mr:"17px", 
+                    svg: {color:"#16BAC6"}}}>
                 <MenuItem disabled value="">
                     <em>{label}</em>
                 </MenuItem>
