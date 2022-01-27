@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { useStyles } from './InputStyle';
 
 
-export const Input = ({ label, type='text', value, setValue }) => {
+export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
     const classes = useStyles();
     const [dataError, setDataError] = useState(false);
 
@@ -23,6 +23,7 @@ export const Input = ({ label, type='text', value, setValue }) => {
 
     return(
             <TextField 
+                fullWidth 
                 onSubmit={handleSubmit}
                 onChange={handleChange}
                 value={value}
@@ -38,6 +39,7 @@ export const Input = ({ label, type='text', value, setValue }) => {
                 label={label}
                 error={dataError}
                 type={type}
+                sx={{ width: { xs: '250px', md: `${fullWidth&&"100%"}` } }}
             />  
     )
 }

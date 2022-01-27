@@ -5,7 +5,7 @@ import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
 import { LoginPageTheme } from '../styles/themes/CostomLogInPage';
 
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 // import {useStyles} from './SingUpPageCustomInput';
@@ -23,9 +23,9 @@ export const SignupPage = () => {
           <Input label="first name" type="text" />
           <Input label="last name" type="text" />
         </Grid>
-        <Input label="email" type="email" />
-        <Input label="phone number" type="tel" />
-        <Input label="password" type="password" />
+        <Input label="email" type="email" fullWidth />
+        <Input label="phone number" type="tel" fullWidth />
+        <Input label="password" type="password" fullWidth />
         <Typography theme={LoginPageTheme}>
           Already have an account?
           <Link underline="none" color="#16BAC6">
