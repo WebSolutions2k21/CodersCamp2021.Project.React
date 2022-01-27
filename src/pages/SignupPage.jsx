@@ -20,12 +20,12 @@ export const SignupPage = () => {
           Create your account
         </Typography>
         <Grid container justifyContent="center" gap="3rem">
-          <Input label="first name" type='text' />
-          <Input label="last name" type='text' />
+          <Input label="first name" type="text" />
+          <Input label="last name" type="text" />
         </Grid>
-        <Input label="email" type='email' />
-        <Input label="phone number" type='tel' />
-        <Input label="password" type='password' />
+        <Input label="email" type="email" />
+        <Input label="phone number" type="tel" />
+        <Input label="password" type="password" />
         <Typography theme={SignUpTheme}>
           Already have an account?
           <Link underline="none" color="#16BAC6">
