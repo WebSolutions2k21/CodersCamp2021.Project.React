@@ -1,6 +1,7 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { SignupPage } from '.';
+
+import { auth } from '../config/firebase';
 
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
@@ -29,16 +30,28 @@ Router.propTypes = {
 };
 
 export const LoginPage = () => {
+  const signIn = async () => {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      console.log('po sign in');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '20vmin' }} gap="2rem">
         <Typography theme={LoginPageTheme} variant="h1" component="h1" color="#16BAC6" fontSize="3.8rem">
           Log In
         </Typography>
-        <Input label="email" type="email" />
-        <Input label="password" type="password" />
+        <Input label="email" type="email" setValue={setEmail} />
+        <Input label="password" type="password" setValue={setPassword} />
         <Grid container justifyContent="center" gap="2rem">
-          <CustomButton text="I'm a Petlover" size="large" />
+          <CustomButton text="I'm a Petlover" size="large" clickAction={() => signIn()} />
           <CustomButton text="I'm a Doctor" size="large" />
         </Grid>
         <Typography theme={LoginPageTheme}>

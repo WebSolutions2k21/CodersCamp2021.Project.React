@@ -8,11 +8,10 @@ import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-// import {useStyles} from './SingUpPageCustomInput';
+
 import { width } from '@mui/system';
 
 export const SignupPage = () => {
-  // const classes = useStyles();
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
