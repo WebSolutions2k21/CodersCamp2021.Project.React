@@ -5,7 +5,7 @@ import { ButtonTheme } from '../../styles/themes/CustomButtonTheme';
 
 export const CustomButton = ({ text, color, size, clickAction }) => {
   let handleClick = () => {
-    clickAction();
+    clickAction && clickAction();
   };
 
   return (

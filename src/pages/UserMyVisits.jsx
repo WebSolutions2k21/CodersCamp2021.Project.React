@@ -5,30 +5,50 @@ import { Layout, DatePicker, CustomButton } from '../components';
 
 export const UserMyVisits = () => {
   return (
-    <Layout>
+    <Layout showSideBar>
       <Grid
         container
-        spacing={12}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifyContent="center"
-        alignItems="center"
-        style={{ height: '100vh' }}
+        direction="row"
+        justifyContent="space-around"
+        alignItems="space-around"
+        style={{ width: '100%', marginTop: '5%' }}
       >
-        <Grid item spacing={2}>
+        <Grid item>
           <DatePicker />
         </Grid>
-        <Grid item spacing={2}>
-          <Grid container spacing={2} justifyContent="flex-start" alignItems="center">
-            <EventAvailableIcon sx={{ color: ['#eff0f4'] }} />
-            {/* TODO: Pobierać datę z API */}
-            <p>9 February 2022</p>
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            style={{ minHeight: '300px', width: '80%' }}
+            justifyContent="space-between"
+          >
+            <Grid container>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item>
+                  <EventAvailableIcon sx={{ color: ['#eff0f4'] }} />
+                </Grid>
+                {/* TODO: Pobierać datę z API */}
+                <Grid item>
+                  <p>9 February 2022</p>
+                </Grid>
+              </Grid>
+              <Grid container direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                <Grid item>
+                  <p>8:00 am</p>
+                </Grid>
+                <Grid item>
+                  <p>KAPSEL | dr. Emilia Pączkowska</p>
+                </Grid>
+                <Grid item>
+                  <CustomButton text="CANCEL" color="secondary" />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid container justifyContent="center">
+              <CustomButton text="ADD NEW VISIT" />
+            </Grid>
           </Grid>
-          <Grid container spacing={2}>
-            <p>8:00 am</p>
-            <p>KAPSEL | dr. Emilia Pączkowska</p>
-            <CustomButton text="CANCEL" color="secondary" />
-          </Grid>
-          <CustomButton text="ADD NEW VISIT" />
         </Grid>
       </Grid>
     </Layout>
