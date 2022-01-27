@@ -8,7 +8,6 @@ import { db } from '../config/firebase';
 import { paths } from '../config/paths';
 
 export const UserMyPets = () => {
-
   const [loading, setLoading] = useState(true);
   const [pets, setPets] = useState([]);
 
@@ -34,10 +33,10 @@ export const UserMyPets = () => {
 
   return (
     <Layout showSideBar>
-      <Typography paragraph marginLeft="20px" marginTop="20px">
+      <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color='#16bac6'>
         My Pets
       </Typography>
-      <Grid container spacing={4} paddingLeft='40px' paddingRight='40px' justifyContent="space-between">
+      <Grid container spacing={4} paddingLeft="40px" paddingRight="40px" justifyContent="space-between">
         {pets.length > 0 ? (
           pets.map((pet) => (
             <Grid item xs={12} sm={6} md={4} key={pet.key}>

@@ -6,14 +6,13 @@ export const useStyles = makeStyles({
   },
 
   title: {
-    fontSize: 14,
     textAlign: 'center',
     textTransform: 'uppercase',
   },
 
   ico: {
-    width: '1.5rem',
-    height: '1.5rem',
+    width: '1.25rem',
+    height: '1.25rem',
     padding: '0 10px'
   },
 
