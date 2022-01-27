@@ -13,26 +13,28 @@ import {
   DoctorCalender,
   DoctorVisit,
 } from './pages';
+import Theme from './styles/themes/Theme';
+import { paths } from './config/paths';
 
 export const App = () => {
   return (
-    <>
+    <Theme>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/Login" element={<LoginPage />} />
-        <Route path="/SignUp" element={<SignupPage />} />
-        <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/Contact" element={<ContactPage />} />
+        <Route path={paths.home} element={<HomePage />} />
+        <Route path={paths.login} element={<LoginPage />} />
+        <Route path={paths.signUp} element={<SignupPage />} />
+        <Route path={paths.aboutUs} element={<AboutUsPage />} />
+        <Route path={paths.contact} element={<ContactPage />} />
 
-        <Route path="/add-pet" element={<UserAddPet />} />
-        <Route path="/add-visit" element={<UserAddVisit />} />
-        <Route path="/edit-profile" element={<UserEditProfile />} />
-        <Route path="/mypets" element={<UserMyPets />} />
-        <Route path="/myvisits" element={<UserMyVisits />} />
+        <Route path={paths.addPet} element={<UserAddPet />} />
+        <Route path={paths.addVisit} element={<UserAddVisit />} />
+        <Route path={paths.editProfile} element={<UserEditProfile />} />
+        <Route path={paths.myPets} element={<UserMyPets />} />
+        <Route path={paths.myVisits} element={<UserMyVisits />} />
 
-        <Route path="/doctor-calender" element={<DoctorCalender />} />
-        <Route path="/doctor-visit" element={<DoctorVisit />} />
+        <Route path={paths.doctorCalender} element={<DoctorCalender />} />
+        <Route path={paths.doctorVisit} element={<DoctorVisit />} />
       </Routes>
-    </>
+    </Theme>
   );
 };
