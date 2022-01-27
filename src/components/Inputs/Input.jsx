@@ -13,7 +13,7 @@ export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
           setDataError(!value);
       } 
 
-    const handleChange = ({target: {value}}) => setValue && setValue(value);
+    const handleChange = ({ target: { value }}) => setValue && setValue(value);
 
     return(
           <TextField  
@@ -32,6 +32,7 @@ export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
               }}                
               label={label}
               error={dataError}
+              helperText="Incorrect entry"
               type={type}
               sx={{ width: { xs: '250px', md: `${fullWidth&&"100%"}` }}}
           />  

@@ -1,6 +1,3 @@
-// All comments are for testing what this input looks like
-
-// import { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/lab/';
 import { TextField } from '@mui/material/';
@@ -10,9 +7,8 @@ import { useStyles } from './InputStyle';
 
 export const InputFullDate = ({ label, value, setValue }) => {
     const classes = useStyles();
-    // const [date, setDate] = useState(new Date());
     
-    const handleChange = ({target: {value}}) => setValue && setValue(value);
+    const handleChange = ({ target: { value }}) => setValue && setValue(value);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -23,10 +19,6 @@ export const InputFullDate = ({ label, value, setValue }) => {
                 minDate={Date.now()}
                 value={value}
                 onChange={handleChange}
-                // value={date}
-                // onChange={(newDate) => {
-                //   setDate(newDate);
-                // }}
                 renderInput={(params) => <TextField 
                     className={classes.int} 
                     variant="standard"
@@ -36,7 +28,8 @@ export const InputFullDate = ({ label, value, setValue }) => {
                             color:"#16BAC6", 
                             mb:"7px", 
                             mr:"3px"},
-                        }}/>}
+                        }}
+                />}
                     InputProps={{
                         className: classes.lbl,
                         disableUnderline: true,

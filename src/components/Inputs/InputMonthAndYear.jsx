@@ -8,7 +8,7 @@ import { useStyles } from './InputStyle';
 export const InputMonthAndYear = ({ label, value, setValue }) => {
     const classes = useStyles();
 
-    const handleChange = ({target: {value}}) => setValue && setValue(value);
+    const handleChange = ({ target: { value }}) => setValue && setValue(value);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -28,11 +28,12 @@ export const InputMonthAndYear = ({ label, value, setValue }) => {
                             color:"#16BAC6", 
                             mb:"7px", 
                             mr:"3px"}
-                      }}/>}
+                    }}
+                />}
                 InputProps={{
                     className: classes.lbl,
                     disableUnderline: true,
-                    }}
+                }}
             />
         </LocalizationProvider>
   );

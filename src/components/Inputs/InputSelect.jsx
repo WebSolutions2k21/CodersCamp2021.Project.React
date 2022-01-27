@@ -12,7 +12,7 @@ export const InputSelect = ({ label, myNames=[], value, setValue }) => {
         setParams(myNames);
     }, [myNames]);
 
-    const handleChange = ({target: {value}}) => setValue && setValue(value);
+    const handleChange = ({ target: { value }}) => setValue && setValue(value);
 
     return (
         <FormControl
