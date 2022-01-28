@@ -3,16 +3,13 @@ import React from 'react';
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
-import { LoginPageTheme } from '../styles/themes/CostomLogInPage';
+import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
 
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-// import {useStyles} from './SingUpPageCustomInput';
-// import { width } from '@mui/system';
 
 export const SignupPage = () => {
-  // const classes = useStyles();
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
@@ -26,7 +23,7 @@ export const SignupPage = () => {
         <Input label="email" type="email" />
         <Input label="phone number" type="tel" />
         <Input label="password" type="password" />
-        <Typography theme={LoginPageTheme}>
+        <Typography>
           Already have an account?
           <Link underline="none" color="#16BAC6">
             {' '}

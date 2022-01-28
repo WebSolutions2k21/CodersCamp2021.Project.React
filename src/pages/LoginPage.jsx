@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
-import { LoginPageTheme } from '../styles/themes/CostomLogInPage';
+import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
 
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
