@@ -4,36 +4,37 @@ import TextField from '@mui/material/TextField';
 import { useStyles } from './InputStyle';
 
 
-export const Input = ({label, type='text'}) => {
+export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
     const classes = useStyles();
-    const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setDataError(false);
+          e.preventDefault();
+          setDataError(!value);
+      } 
 
-        if (data === '') {
-            setDataError(true);
-        }
-    }
+    const handleChange = ({ target: { value }}) => setValue && setValue(value);
 
     return(
-            <TextField 
-                onSubmit={handleSubmit}
-                onChange={(e) => setData(e.target.value)}
-                className={classes.int}
-                variant="standard"
-                InputProps={{
-                    className: classes.lbl,
-                    disableUnderline: true
-                  }}
-                InputLabelProps={{
-                    className: classes.lbl
+          <TextField  
+              fullWidth
+              onSubmit={handleSubmit}
+              onChange={handleChange}
+              value={value}
+              className={classes.int}                
+              variant="standard"
+              InputProps={{
+                  className: classes.lbl,
+                  disableUnderline: true
                 }}
-                label={label}
-                error={dataError}
-                type={type}
-            />  
-    )
+              InputLabelProps={{
+                  className: classes.lbl
+              }}                
+              label={label}
+              error={dataError}
+              helperText="Incorrect entry"
+              type={type}
+              sx={{ width: { xs: '250px', md: `${fullWidth&&"100%"}` }}}
+          />  
+        )
 }

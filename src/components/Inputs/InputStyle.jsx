@@ -12,5 +12,9 @@ export const useStyles = makeStyles({
         color: '#959CA0',
         marginLeft: '17px',
         marginRight: '17px'
-    }
+    },
+    lbl2: {
+        marginLeft: '22px',
+        marginTop: "1px"
+    },
 });
