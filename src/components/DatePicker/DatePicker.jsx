@@ -13,7 +13,12 @@ export const DatePicker = () => {
   return (
     <ThemeProvider theme={DatePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <CalendarPicker date={date} onChange={(newDate) => setDate(newDate)} />
+        <CalendarPicker
+          date={date}
+          onChange={(newDate) => setDate(newDate)}
+          wrapperClassName="date-picker"
+          sx={{ backgroundColor: '#fdc161' }}
+        />
       </LocalizationProvider>
     </ThemeProvider>
   );

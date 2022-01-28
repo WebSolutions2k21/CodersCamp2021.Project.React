@@ -6,8 +6,33 @@ export const DatePickerTheme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: '"Ubuntu", sans-serif',
-          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-          fontWeight: '400',
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: '#16bac6',
+        },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        today: {
+          color: '#fdc161',
+          fontWeight: '800',
+        },
+        root: {
+          Mui: {
+            selected: {
+              backgroundColor: '#16bac6',
+            },
+          },
+          '&:not(.Mui-selected)': {
+            border: 'none',
+            backgroundColor: '#fff',
+          },
         },
       },
     },

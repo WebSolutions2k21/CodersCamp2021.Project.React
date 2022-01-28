@@ -8,11 +8,11 @@ import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import {useStyles} from './SingUpPageCustomInput';
+// import {useStyles} from './SingUpPageCustomInput';
 import { width } from '@mui/system';
 
 export const SignupPage = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
@@ -20,12 +20,12 @@ export const SignupPage = () => {
           Create your account
         </Typography>
         <Grid container justifyContent="center" gap="3rem">
-          <Input label="first name" type='text' />
-          <Input label="last name" type='text' />
+          <Input label="first name" type="text" />
+          <Input label="last name" type="text" />
         </Grid>
-        <Input label="email" type='email' />
-        <Input label="phone number" type='tel' />
-        <Input label="password" type='password' />
+        <Input label="email" type="email" />
+        <Input label="phone number" type="tel" />
+        <Input label="password" type="password" />
         <Typography theme={SignUpTheme}>
           Already have an account?
           <Link underline="none" color="#16BAC6">
