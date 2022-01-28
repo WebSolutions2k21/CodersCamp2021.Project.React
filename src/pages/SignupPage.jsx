@@ -10,7 +10,6 @@ import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 // import { useStyles } from './SingUpPageCustomInput';
-import { width } from '@mui/system';
 
 export const SignupPage = () => {
   // const classes = useStyles();

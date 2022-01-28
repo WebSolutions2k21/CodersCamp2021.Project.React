@@ -27,11 +27,46 @@ export const App = () => {
         <Route path={paths.aboutUs} element={<AboutUsPage />} />
         <Route path={paths.contact} element={<ContactPage />} />
 
-        <PrivateRoute path={paths.addPet} element={<UserAddPet />} />
-        <PrivateRoute path={paths.addVisit} element={<UserAddVisit />} />
-        <PrivateRoute path={paths.editProfile} element={<UserEditProfile />} />
-        <PrivateRoute path={paths.myPets} element={<UserMyPets />} />
-        <PrivateRoute path={paths.myVisits} element={<UserMyVisits />} />
+        <Route
+          path={paths.addPet}
+          element={
+            <PrivateRoute>
+              <UserAddPet />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.addVisit}
+          element={
+            <PrivateRoute>
+              <UserAddVisit />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.editProfile}
+          element={
+            <PrivateRoute>
+              <UserEditProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.myPets}
+          element={
+            <PrivateRoute>
+              <UserMyPets />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.myVisits}
+          element={
+            <PrivateRoute>
+              <UserMyVisits />
+            </PrivateRoute>
+          }
+        />
 
         <Route path={paths.doctorCalender} element={<DoctorCalender />} />
         <Route path={paths.doctorVisit} element={<DoctorVisit />} />
