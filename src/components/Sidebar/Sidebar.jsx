@@ -1,7 +1,16 @@
-import { Box, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@mui/material';
 
 import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
@@ -10,6 +19,7 @@ import { paths } from '../../config/paths';
 export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
+  const [value, setValue] = React.useState(0);
 
   function ListItemLink(props) {
     const { icon, primary, to } = props;
@@ -26,6 +36,21 @@ export const Sidebar = () => {
       </li>
     );
   }
+  // function BottomNavigationItemLink(props) {
+  //   const { icon, primary, to } = props;
+
+  //   const renderLink = React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />);
+
+  //   return (
+  //     <BottomNavigation className={location.pathname === to ? classes.activetext : null}>
+  //       <ListItem button component={renderLink}>
+  //         {icon ? <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon> : null}
+  //         <ListItemText primary={primary} />
+  //       </ListItem>
+  //       <Divider variant="inset" />
+  //     </Bo>
+  //   );
+  // }
 
   const userMenuItems = [
     {
@@ -43,21 +68,43 @@ export const Sidebar = () => {
       icon: iconPen(),
       path: paths.editProfile,
     },
-    {
-      text: 'Sign Out',
-      icon: '.',
-      path: paths.home,
-    },
+    // {
+    //   text: 'Sign Out',
+    //   icon: '.',
+    //   path: paths.home,
+    // },
   ];
 
   return (
     <>
-      <Box component="aside" className={classes.drawer}>
+      <Box component="aside" className={classes.drawer} sx={{ display: { xs: 'none', md: 'block' } }}>
         <List className={classes.list}>
           {userMenuItems.map((item) => (
             <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
           ))}
         </List>
+      </Box>
+      <Box
+        component="aside"
+        sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      >
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          {userMenuItems.map((item) => (
+            <BottomNavigationAction
+              component={Link}
+              key={item.text}
+              to={item.path}
+              label={item.text}
+              icon={item.icon}
+            />
+          ))}
+        </BottomNavigation>
       </Box>
     </>
   );
