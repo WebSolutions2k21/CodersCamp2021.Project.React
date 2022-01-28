@@ -1,5 +1,5 @@
 export default function useAuth() {
-  const auth = false;
+  const auth = true;
 
   return auth;
 }

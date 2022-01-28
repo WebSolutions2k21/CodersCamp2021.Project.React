@@ -68,8 +68,22 @@ export const App = () => {
           }
         />
 
-        <Route path={paths.doctorCalender} element={<DoctorCalender />} />
-        <Route path={paths.doctorVisit} element={<DoctorVisit />} />
+        <Route
+          path={paths.doctorCalender}
+          element={
+            <PrivateRoute>
+              <DoctorCalender />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.doctorVisit}
+          element={
+            <PrivateRoute>
+              <DoctorVisit />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Theme>
   );
