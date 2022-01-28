@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
+import { useNavigate } from 'react-router-dom';
 
 // const auth = getAuth();
 auth.onAuthStateChanged((user) => {
@@ -47,16 +48,17 @@ Router.propTypes = {
 };
 
 export const LoginPage = () => {
+  let navigate = useNavigate();
   const loginSucces = () => {
     toast.success('Successful Login!', {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: '4000',
+      autoClose: '1500',
     });
   };
   const loginError = () => {
     toast.error('Login failed! Check login or password!', {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: '4000',
+      autoClose: '1500',
     });
   };
 
@@ -65,6 +67,9 @@ export const LoginPage = () => {
       await auth.signInWithEmailAndPassword(email, password);
       console.log('po sign in');
       loginSucces();
+      setTimeout(() => {
+        navigate('../myVisits', { replace: true });
+      }, 3000);
     } catch (error) {
       loginError();
       console.error(error);
