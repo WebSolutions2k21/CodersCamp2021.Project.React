@@ -76,6 +76,14 @@ export const LoginPage = () => {
       console.error(error);
     }
   };
+  const signOut = async () => {
+    try {
+      await auth.signOut();
+      console.log('po log out');
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disable, setDisable] = useState(false);
@@ -99,6 +107,7 @@ export const LoginPage = () => {
             Sign Up!
           </Link>
         </Typography>
+        <CustomButton text="Sign out" clickAction={() => signOut()} />
       </Grid>
     </Layout>
   );
