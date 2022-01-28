@@ -67,6 +67,7 @@ export const LoginPage = () => {
       await auth.signInWithEmailAndPassword(email, password);
       console.log('po sign in');
       loginSucces();
+      setDisable(true);
       setTimeout(() => {
         navigate('../myVisits', { replace: true });
       }, 3000);
@@ -75,10 +76,9 @@ export const LoginPage = () => {
       console.error(error);
     }
   };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [disable, setDisable] = useState(false);
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '20vmin' }} gap="2rem">
@@ -88,7 +88,7 @@ export const LoginPage = () => {
         <Input label="email" type="email" setValue={setEmail} />
         <Input label="password" type="password" setValue={setPassword} />
         <Grid container justifyContent="center" gap="2rem">
-          <CustomButton text="I'm a Petlover" size="large" clickAction={() => signIn()} />
+          <CustomButton text="I'm a Petlover" size="large" disabled={disable} clickAction={() => signIn()} />
           <CustomButton text="I'm a Doctor" size="large" />
         </Grid>
         <ToastContainer />
