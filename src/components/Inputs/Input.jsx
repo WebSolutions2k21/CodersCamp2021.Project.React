@@ -3,20 +3,20 @@ import TextField from '@mui/material/TextField';
 
 import { useStyles } from './InputStyle';
 
-export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
+export const Input = ({ label, type = 'text', value, setValue, fullWidth }) => {
   const classes = useStyles();
   const [dataError, setDataError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setDataError(!value);
-      } 
+  };
 
-    const handleChange = ({ target: { value }}) => setValue && setValue(value);
+  const handleChange = ({ target: { value } }) => setValue && setValue(value);
 
   return (
     <TextField
-              fullWidth
+      fullWidth
       onSubmit={handleSubmit}
       onChange={handleChange}
       value={value}
@@ -31,9 +31,9 @@ export const Input = ({ label, type='text', value, setValue, fullWidth }) => {
       }}
       label={label}
       error={dataError}
-              helperText="Incorrect entry"
+      helperText="Incorrect entry"
       type={type}
-              sx={{ width: { xs: '250px', md: `${fullWidth&&"100%"}` }}}
+      sx={{ width: { xs: '250px', md: `${fullWidth && '100%'}` } }}
     />
   );
 };
