@@ -50,7 +50,7 @@ export const UserMyVisits = () => {
               </Grid>
             </Grid>
             <Grid container justifyContent="center">
-              <Link to={paths.addVisit} style={{ textDecoration: 'none', justifyContent: 'center' }}>
+              <Link to={paths.addVisit} style={{ textDecoration: 'none' }}>
                 <CustomButton text="ADD NEW VISIT" />
               </Link>
             </Grid>
