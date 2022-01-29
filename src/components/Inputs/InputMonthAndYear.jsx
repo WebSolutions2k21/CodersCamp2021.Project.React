@@ -7,6 +7,8 @@ import { useStyles } from './InputStyle';
 export const InputMonthAndYear = ({ label, value, setValue }) => {
   const classes = useStyles();
 
+//   const handleChange = ({ target: { value }}) => setValue && setValue(value);
+
   const formats = {
     monthAndYear: "MM/yyyy",
   };
@@ -21,6 +23,7 @@ export const InputMonthAndYear = ({ label, value, setValue }) => {
         maxDate={Date.now()}
         value={value}
         onChange={(value)=> setValue && setValue(value)}
+//           onChange={handleChange}
         renderInput={(params) => (
           <TextField
             className={classes.int}
