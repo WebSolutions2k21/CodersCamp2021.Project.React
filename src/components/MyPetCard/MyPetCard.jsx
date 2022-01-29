@@ -1,26 +1,41 @@
-import { Typography, CardContent, Card } from '@mui/material';
+import { Typography, CardContent, Card, Grid} from '@mui/material';
 import { useStyles } from './MyPetCardStyle';
 import { ReactComponent as Dog } from '../../assets/dog.svg';
 
-export const MyPetCard = ({ name, type, breed, age }) => {
+export const MyPetCard = ({ name, type, breed, age}) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardContent>
-        <Typography className={classes.title} alignItems='center' color='#16bac6' variant='h5'>
+        <Typography className={classes.title} alignItems="center" color="#16bac6" variant="h5">
           <Dog className={classes.ico} />
           {name}
         </Typography>
-        <Typography  color="textSecondary" >
-        <div className={classes.pos}>Type:</div>  {type}
-        </Typography>
-        <Typography color="textSecondary" >
-        <div className={classes.pos}>Breed:</div> {breed}
-        </Typography>
-        <Typography component="p" color="textSecondary" >
-         <div className={classes.pos}>Birth Data:</div>  {age}
-        </Typography>
+        <Grid>
+          <Typography className={classes.pos} display="inline">
+            Type:{' '}
+          </Typography>
+          <Typography color="textSecondary" className={classes.small} display="inline">
+            {type}
+          </Typography>
+        </Grid>
+        <Grid>
+          <Typography className={classes.pos} display="inline">
+            Breed:{' '}
+          </Typography>
+          <Typography display="inline" color="textSecondary" className={classes.small}>
+            {breed}
+          </Typography>
+        </Grid>
+        <Grid>
+          <Typography className={classes.pos} display="inline">
+            Birth Data:{' '}
+          </Typography>
+          <Typography color="textSecondary" className={classes.small} display="inline">
+            {age.toString()}
+          </Typography>
+        </Grid>
       </CardContent>
     </Card>
   );
