@@ -24,14 +24,19 @@ export const DatePickerTheme = createTheme({
           fontWeight: '800',
         },
         root: {
-          Mui: {
-            selected: {
-              backgroundColor: '#16bac6',
+          '&.Mui-selected': {
+            '&.Mui-selected': {
+              background: '#16bac6',
+              fontWeight: '800',
             },
           },
           '&:not(.Mui-selected)': {
             border: 'none',
             backgroundColor: '#fff',
+            '&:hover': {
+              backgroundColor: '#eff0f4',
+              fontWeight: '800',
+            },
           },
         },
       },

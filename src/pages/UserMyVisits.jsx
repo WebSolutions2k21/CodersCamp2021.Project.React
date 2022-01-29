@@ -8,10 +8,11 @@ export const UserMyVisits = () => {
     <Layout showSideBar>
       <Grid
         container
+        spacing={6}
         direction="row"
         justifyContent="space-around"
         alignItems="space-around"
-        style={{ width: '100%', marginTop: '5%' }}
+        style={{ margin: '1%' }}
       >
         <Grid item>
           <DatePicker />
