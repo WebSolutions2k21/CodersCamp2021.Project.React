@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+
 import Grid from '@mui/material/Grid';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 import { Layout, DatePicker, CustomButton } from '../components';
+import { paths } from '../config/paths';
 
 export const UserMyVisits = () => {
   return (
@@ -47,7 +50,9 @@ export const UserMyVisits = () => {
               </Grid>
             </Grid>
             <Grid container justifyContent="center">
-              <CustomButton text="ADD NEW VISIT" />
+              <Link to={paths.addVisit} style={{ textDecoration: 'none', justifyContent: 'center' }}>
+                <CustomButton text="ADD NEW VISIT" />
+              </Link>
             </Grid>
           </Grid>
         </Grid>
