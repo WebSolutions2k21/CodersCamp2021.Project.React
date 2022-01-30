@@ -15,6 +15,7 @@ import {
 } from './pages';
 import Theme from './styles/themes/Theme';
 import { paths } from './config/paths';
+import { PrivateRoute } from './config/PrivateRoute';
 
 export const App = () => {
   return (
@@ -26,14 +27,63 @@ export const App = () => {
         <Route path={paths.aboutUs} element={<AboutUsPage />} />
         <Route path={paths.contact} element={<ContactPage />} />
 
-        <Route path={paths.addPet} element={<UserAddPet />} />
-        <Route path={paths.addVisit} element={<UserAddVisit />} />
-        <Route path={paths.editProfile} element={<UserEditProfile />} />
-        <Route path={paths.myPets} element={<UserMyPets />} />
-        <Route path={paths.myVisits} element={<UserMyVisits />} />
+        <Route
+          path={paths.addPet}
+          element={
+            <PrivateRoute>
+              <UserAddPet />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.addVisit}
+          element={
+            <PrivateRoute>
+              <UserAddVisit />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.editProfile}
+          element={
+            <PrivateRoute>
+              <UserEditProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.myPets}
+          element={
+            <PrivateRoute>
+              <UserMyPets />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.myVisits}
+          element={
+            <PrivateRoute>
+              <UserMyVisits />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path={paths.doctorCalender} element={<DoctorCalender />} />
-        <Route path={paths.doctorVisit} element={<DoctorVisit />} />
+        <Route
+          path={paths.doctorCalender}
+          element={
+            <PrivateRoute>
+              <DoctorCalender />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={paths.doctorVisit}
+          element={
+            <PrivateRoute>
+              <DoctorVisit />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Theme>
   );
