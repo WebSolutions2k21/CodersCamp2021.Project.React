@@ -6,10 +6,10 @@ import { Box } from '@mui/system';
 export const UserAddPet = () => {
   return (
     <Layout showSideBar>
-      <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">
+      <Typography paragraph marginLeft="5vw" marginTop="5vh" variant="h4" color="#16bac6">
         Add new Pet
       </Typography>
-      <Box  alignContent="center" width="100%">
+      <Box alignContent="center" marginLeft="5vw">
         <MyPetForm></MyPetForm>
       </Box>
     </Layout>

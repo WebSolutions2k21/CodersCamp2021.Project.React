@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { CustomButton, Layout, MyPetCard } from '../components';
 import { Typography, Grid, Link, Box } from '@mui/material';
 
-import { db } from '../config/firebase';
+import { db, auth } from '../config/firebase';
 import { paths } from '../config/paths';
 
 export const UserMyPets = () => {
@@ -13,27 +13,25 @@ export const UserMyPets = () => {
   const [loading, setLoading] = useState(true);
   const [pets, setPets] = useState([]);
 
+  var user = auth.currentUser;
+
   useEffect(() => {
     const getPetsFromFirebase = [];
-    const subscriber = db.collection('pets').onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
+
+   const deb = db.collection('users').doc(user.uid);
+     deb.collection('pets').onSnapshot(q =>{
+      q.forEach(doc =>{
         getPetsFromFirebase.push({
           ...doc.data(),
-
-          key: doc.id,
-        });
-      });
+          key: doc.id
+        })
+      })
       setPets(getPetsFromFirebase);
       setLoading(false);
-    });
-
-    return () => subscriber();
+    });    
   }, [loading]);
 
-  if (loading) {
-    return <h1>loading data...</h1>;
-  }
-
+  
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">
