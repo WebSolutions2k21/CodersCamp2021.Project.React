@@ -14,8 +14,8 @@ export const MyPetForm = () => {
   const [breed, setBreed] = useState('');
   const [petAge, setPetAge] = useState(new Date());
 
-  let navigate = useNavigate();
-  var user = auth.currentUser;
+const navigate = useNavigate();
+  const user = auth.currentUser;
   
   const handleSubmit = (e) => {
     e.preventDefault();
