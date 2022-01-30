@@ -12,7 +12,7 @@ import { auth } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
-  var user = auth.currentUser != null;
+  const user = auth.currentUser;
   const isAuth = user;
 
   const handleOpenNavMenu = (event) => {
