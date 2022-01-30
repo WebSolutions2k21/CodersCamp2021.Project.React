@@ -8,22 +8,22 @@ import PawIcon from '@mui/icons-material/Pets';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
-
-const pages = [
-  { title: 'About Us', pathname: paths.aboutUs },
-  { title: 'Contact', pathname: paths.contact },
-  { title: 'Sign Up', pathname: paths.signUp },
-  { title: 'Log In', pathname: paths.login },
-];
+import { auth } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
+  const user = auth.currentUser;
+  const isAuth = user;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  const logoutHandler = () => {
+    auth.signOut().reload();
+  };
 
   const classes = useStyles();
 
@@ -44,12 +44,45 @@ export const NavigationBar = () => {
               </Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              {pages.map((page) => (
+              <Button
+                component={RouterLink}
+                to={paths.aboutUs}
+                size="large"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  p: 1,
+                  display: 'flex',
+                  alignContent: 'center',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#16bac6' },
+                }}
+              >
+                <PawIcon className={classes.imgIcon} />
+                {'About'}
+              </Button>
+              <Button
+                component={RouterLink}
+                to={paths.contact}
+                size="large"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  p: 1,
+                  display: 'flex',
+                  alignContent: 'center',
+                  textDecoration: 'none',
+                  '&:hover': { color: '#16bac6' },
+                }}
+              >
+                <PawIcon className={classes.imgIcon} />
+                {'Contacts'}
+              </Button>
+              {!isAuth && (
                 <Button
                   component={RouterLink}
-                  to={page.pathname}
+                  to={paths.signUp}
                   size="large"
-                  key={page.title}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
@@ -61,9 +94,47 @@ export const NavigationBar = () => {
                   }}
                 >
                   <PawIcon className={classes.imgIcon} />
-                  {page.title}
+                  {'Sign Up'}
                 </Button>
-              ))}
+              )}
+              {!isAuth && (
+                <Button
+                  component={RouterLink}
+                  to={paths.login}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'Login'}
+                </Button>
+              )}
+              {isAuth && (
+                <Button
+                  component={RouterLink}
+                  to={paths.home}
+                  size="large"
+                  onClick={logoutHandler}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'Log Out'}
+                </Button>
+              )}
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -93,16 +164,27 @@ export const NavigationBar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem
-                    key={page.title}
-                    onClick={handleCloseNavMenu}
-                    component={RouterLink}
-                    to={`${page.pathname}`}
-                  >
-                    <Typography textAlign="center">{page.title}</Typography>
+                <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.aboutUs}>
+                  <Typography textAlign="center">{'About Us'}</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.contact}>
+                  <Typography textAlign="center">{'Contact'}</Typography>
+                </MenuItem>
+                {!isAuth && (
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.signUp}>
+                    <Typography textAlign="center">{'Sign in'}</Typography>
                   </MenuItem>
-                ))}
+                )}
+                {!isAuth && (
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.login}>
+                    <Typography textAlign="center">{'Log in'}</Typography>
+                  </MenuItem>
+                )}
+                {isAuth && (
+                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.login}>
+                    <Typography textAlign="center">{'Log out'}</Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
           </Toolbar>
