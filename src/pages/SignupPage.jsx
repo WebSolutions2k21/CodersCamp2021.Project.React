@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
-// import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
-import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
+import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
 
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { auth } from '../config/firebase';
-// import { width } from '@mui/system';
+import { width } from '@mui/system';
 
 export const SignupPage = () => {
   const signUp = async () => {
@@ -32,7 +31,7 @@ export const SignupPage = () => {
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
-        <Typography theme={LoginPageTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
+        <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
           Create your account
         </Typography>
         <Grid container justifyContent="center" gap="3rem">
@@ -43,7 +42,7 @@ export const SignupPage = () => {
         <Input label="phone number" type="tel" />
         <Input label="password" type="password" setValue={setPassword} />
         <Input label="confirm password" type="password" setValue={setPasswordConfirm} />
-        <Typography theme={LoginPageTheme}>
+        <Typography theme={SignUpTheme}>
           Already have an account?
           <Link underline="none" color="#16BAC6">
             {' '}
