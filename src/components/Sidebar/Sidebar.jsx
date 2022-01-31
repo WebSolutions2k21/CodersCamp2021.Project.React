@@ -22,6 +22,10 @@ export const Sidebar = () => {
   const location = useLocation();
   const [value, setValue] = React.useState(0);
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   function ListItemLink(props) {
     const { icon, primary, to } = props;
 
@@ -69,11 +73,6 @@ export const Sidebar = () => {
       icon: iconPen(),
       path: paths.editProfile,
     },
-    // {
-    //   text: 'Sign Out',
-    //   icon: '.',
-    //   path: paths.home,
-    // },
   ];
 
   return (
@@ -89,13 +88,7 @@ export const Sidebar = () => {
         component="aside"
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
+        <BottomNavigation showLabels value={value} onChange={handleChange}>
           {userMenuItems.map((item) => (
             <BottomNavigationAction
               component={Link}

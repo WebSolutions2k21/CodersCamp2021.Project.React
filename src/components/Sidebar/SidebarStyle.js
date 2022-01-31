@@ -1,10 +1,8 @@
 import { makeStyles } from '@mui/styles';
 
-const drawerWidth = 240;
-
 export const useStyles = makeStyles({
   drawer: {
-    width: drawerWidth,
+    width: '300px',
     borderRight: '2px solid #EFF0F4 ',
   },
 
