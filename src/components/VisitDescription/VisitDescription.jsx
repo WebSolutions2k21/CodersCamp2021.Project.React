@@ -1,7 +1,9 @@
+//import {useState} from 'react';
 import { Box, Grid } from '@mui/material/';
 
 import { CustomButton } from '../Button/CustomButton';
 import { useStyles } from './Style';
+import { DescriptionModal } from "./DescriptionModal";
 
 export const VisitDescription = ({ time, owner, type, breed, description }) => {
   const classes = useStyles();
@@ -32,7 +34,6 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
             </Grid>
             <Grid item alignItems="flex-start" nowrap mb={2}>
               <span className={classes.bold}>DESCRIPTION: </span>
-              {description}
             </Grid>
           </Grid>
         </Grid>
@@ -40,7 +41,8 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
         <Grid item md={4} xs={12}>
           <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
             <Grid item p={2}>
-              <CustomButton color="primary" size="small" text="DESCRIPTION" />
+            <DescriptionModal />
+              {/* <CustomButton color="primary" size="small" text="DESCRIPTION" /> */}
             </Grid>
             <Grid item p={2}>
               <CustomButton color="primary" size="small" text="CLOSE VISIT" />
