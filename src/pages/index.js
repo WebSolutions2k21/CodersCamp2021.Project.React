@@ -10,3 +10,4 @@ export * from './UserAddPet';
 export * from './UserAddVisit';
 export * from './DoctorCalender';
 export * from './DoctorVisit';
+export * from './NotFound';

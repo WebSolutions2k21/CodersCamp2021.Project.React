@@ -5,6 +5,7 @@ export const useStyles = makeStyles({
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
     width: '250px',
     borderRadius: '8px',
+    backgroundColor: 'white',
   },
   lbl: {
     fontSize: '16px',

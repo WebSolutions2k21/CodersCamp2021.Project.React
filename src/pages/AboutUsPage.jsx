@@ -1,6 +1,13 @@
 import React from 'react';
-import { Layout } from '../components';
+import { Layout, VisitDescription } from '../components';
 
 export const AboutUsPage = () => {
-  return <Layout>About Us</Layout>;
+  return (
+  <Layout>
+
+    {/* just for test. to delete! */}
+    <VisitDescription />
+    
+  </Layout>
+  );
 };
