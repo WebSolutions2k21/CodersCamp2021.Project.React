@@ -8,7 +8,7 @@ import { useStyles } from './InputStyle';
 const theme = createTheme({
   palette: {
     primary: {
-      main: 'red',
+      main: '#16BAC6',
     },
   },
 });

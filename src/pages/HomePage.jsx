@@ -1,19 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Typography, Grid } from '@mui/material';
 import imgLogo from '../assets/logo.png';
-import { Layout, CustomButton, InputTime } from '../components';
+import { Layout, CustomButton } from '../components';
 
 export const HomePage = () => {
   return (
     <Layout>
-      <InputTime />
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        style={{height: "80vh"}}>
-
+      <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: '80vh' }}>
         <Typography
           component="span"
           sx={{
