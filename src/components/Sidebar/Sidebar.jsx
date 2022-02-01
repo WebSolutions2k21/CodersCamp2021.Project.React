@@ -10,20 +10,21 @@ import {
   Paper,
 } from '@mui/material';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
 import { paths } from '../../config/paths';
+import { BottomNavContext } from '../../context/AuthContext';
 
 export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
-  const [value, setValue] = React.useState(0);
+  const { bottomNavValue, setBottomNavValue } = useContext(BottomNavContext);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setBottomNavValue(newValue);
   };
 
   function ListItemLink(props) {
@@ -88,7 +89,7 @@ export const Sidebar = () => {
         component="aside"
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
-        <BottomNavigation showLabels value={value} onChange={handleChange}>
+        <BottomNavigation showLabels value={bottomNavValue} onChange={handleChange}>
           {userMenuItems.map((item) => (
             <BottomNavigationAction
               component={Link}
