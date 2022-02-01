@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Input, InputMonthAndYear, InputSelect } from '../Inputs';
 import { CustomButton } from '../Button/CustomButton';
-
 import { Grid } from '@mui/material';
+
 import { paths } from '../../config/paths';
 import { db, auth } from '../../config/firebase';
 import { collection, addDoc } from 'firebase/firestore';
@@ -21,7 +21,7 @@ export const MyPetForm = () => {
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
   const enteredNameIsValid = name.trim() !== '' || name.length >= 30;
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-  const dataPickerIsInvalid = petAge === null;
+
   const nameInputBlurHandler = (event) => {
     setEnteredNameTouched(true);
   };
@@ -34,10 +34,6 @@ export const MyPetForm = () => {
       return;
     }
 
-    if (dataPickerIsInvalid) {
-      alert('Date should be empty');
-      return;
-    }
     setEnteredNameTouched(false);
 
     await addDoc(collection(db, 'users', user.uid, 'pets'), {
@@ -53,6 +49,7 @@ export const MyPetForm = () => {
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
         <Input
+          required={true}
           label="Name"
           type="text"
           value={name}
@@ -63,15 +60,7 @@ export const MyPetForm = () => {
         />
         <InputSelect label="Type" myNames={['dog', 'cat']} value={species} setValue={setSpecies} />
         <Input label="Breed" type="text" value={breed} setValue={setBreed} />
-        <InputMonthAndYear
-          label="Date of Birth"
-          value={petAge}
-          setValue={setPetAge}
-          error={dataPickerIsInvalid}
-          // helperText={dataPickerIsInvalid ? "Date shouldn't be empty" : ''}
-          invalidDateMessage="Computer says no"
-          renderInput="Computer says no"
-        />
+        <InputMonthAndYear label="Date of Birth" value={petAge} setValue={setPetAge} />
         <CustomButton type="submit" text="Save" />
       </Grid>
     </form>

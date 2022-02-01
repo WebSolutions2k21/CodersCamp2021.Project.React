@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 import { useStyles } from './InputStyle';
 
-export const Input = ({ label, type = 'text', value, setValue, fullWidth, helperText, error }) => {
+export const Input = ({ label, type = 'text', value, setValue, fullWidth, helperText, error, required = false }) => {
   const classes = useStyles();
   const [dataError, setDataError] = useState(false);
 
@@ -16,6 +16,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth, helper
 
   return (
     <TextField
+      required={required}
       onSubmit={handleSubmit}
       onChange={handleChange}
       value={value}
