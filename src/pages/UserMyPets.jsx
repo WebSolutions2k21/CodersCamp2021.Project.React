@@ -16,22 +16,25 @@ export const UserMyPets = () => {
   var user = auth.currentUser;
 
   useEffect(() => {
-    const getPetsFromFirebase = [];
-
-   const deb = db.collection('users').doc(user.uid);
-     deb.collection('pets').onSnapshot(q =>{
-      q.forEach(doc =>{
-        getPetsFromFirebase.push({
-          ...doc.data(),
-          key: doc.id
-        })
-      })
-      setPets(getPetsFromFirebase);
-      setLoading(false);
-    });    
+    getPetsDataBase();
+    return ()=> getPetsDataBase();
   }, [loading]);
 
-  
+  const getPetsDataBase = async () => {
+    const getPetsFromFirebase = [];
+    const deb = await db.collection('users').doc('pets');
+    deb.collection(user.uid).onSnapshot((q) => {
+      q.forEach((doc) => {
+        getPetsFromFirebase.push({
+          ...doc.data(),
+          key: doc.id,
+        });
+      });
+      setPets(getPetsFromFirebase);
+      setLoading(false);
+    });
+  };
+
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">
