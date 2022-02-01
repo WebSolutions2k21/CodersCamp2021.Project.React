@@ -19,34 +19,28 @@ export const MyPetForm = () => {
   const user = auth.currentUser;
 
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
-  const [dateTouched, setDateTouched] = useState(false);
-
   const enteredNameIsValid = name.trim() !== '' || name.length >= 30;
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
-  const dateInputIsValid = petAge == null || petAge!== '';
-  const dateInputIsInvalid = !dateInputIsValid && dateTouched;
-  console.log('petAge', petAge, dateInputIsValid);
-  console.log('name', name, enteredNameIsValid);
+  const dataPickerIsInvalid = petAge === null;
   const nameInputBlurHandler = (event) => {
     setEnteredNameTouched(true);
-  };
-
-  const dateInputBlurHandler = (event) => {
-    setDateTouched(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEnteredNameTouched(true);
-    setDateTouched(true);
-    if (!enteredNameIsValid || !dateInputIsValid) {
+
+    if (!enteredNameIsValid) {
       return;
     }
 
+    if (dataPickerIsInvalid) {
+      alert('Date should be empty');
+      return;
+    }
     setEnteredNameTouched(false);
-    setDateTouched(false);
-    await addDoc(collection(db, 'users/pets', user.uid), {
+
+    await addDoc(collection(db, 'users', user.uid, 'pets'), {
       name: name,
       species: species,
       breed: breed,
@@ -63,7 +57,6 @@ export const MyPetForm = () => {
           type="text"
           value={name}
           setValue={setName}
-          fullWidth="70px"
           onBlur={nameInputBlurHandler}
           error={nameInputIsInvalid}
           helperText={nameInputIsInvalid ? 'Name is required' : ''}
@@ -74,9 +67,10 @@ export const MyPetForm = () => {
           label="Date of Birth"
           value={petAge}
           setValue={setPetAge}
-          error={dateInputIsInvalid}
-          onBlur={dateInputBlurHandler}
-          helperText={dateInputIsInvalid ? "Date shouldn't be empty" : ''}
+          error={dataPickerIsInvalid}
+          // helperText={dataPickerIsInvalid ? "Date shouldn't be empty" : ''}
+          invalidDateMessage="Computer says no"
+          renderInput="Computer says no"
         />
         <CustomButton type="submit" text="Save" />
       </Grid>

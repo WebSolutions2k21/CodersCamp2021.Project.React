@@ -4,7 +4,7 @@ import { TextField } from '@mui/material/';
 
 import { useStyles } from './InputStyle';
 
-export const InputMonthAndYear = ({ label, value, setValue, helperText, error }) => {
+export const InputMonthAndYear = ({ label, value, setValue, error }) => {
   const classes = useStyles();
 
   //   const handleChange = ({ target: { value }}) => setValue && setValue(value);
@@ -23,10 +23,10 @@ export const InputMonthAndYear = ({ label, value, setValue, helperText, error })
         value={value}
         onChange={(value) => setValue && setValue(value)}
         //           onChange={handleChange}
-        error={error}
-        helperText={helperText}
         renderInput={(params) => (
           <TextField
+            error={!!error}
+            helperText={error ? error.message : null}
             className={classes.int}
             variant="standard"
             {...params}
@@ -39,7 +39,7 @@ export const InputMonthAndYear = ({ label, value, setValue, helperText, error })
             }}
           />
         )}
-          InputProps={{
+        InputProps={{
           className: classes.lbl,
           disableUnderline: true,
         }}

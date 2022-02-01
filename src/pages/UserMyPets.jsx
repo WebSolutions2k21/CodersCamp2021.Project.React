@@ -17,13 +17,13 @@ export const UserMyPets = () => {
 
   useEffect(() => {
     getPetsDataBase();
-    return ()=> getPetsDataBase();
+    return () => getPetsDataBase();
   }, [loading]);
 
-  const getPetsDataBase = async () => {
+  const getPetsDataBase =async () => {
     const getPetsFromFirebase = [];
-    const deb = await db.collection('users').doc('pets');
-    deb.collection(user.uid).onSnapshot((q) => {
+    const deb = await db.collection('users').doc(user.uid);
+    deb.collection('pets').onSnapshot((q) => {
       q.forEach((doc) => {
         getPetsFromFirebase.push({
           ...doc.data(),
