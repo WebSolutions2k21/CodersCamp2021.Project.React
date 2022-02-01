@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Typography, Modal, TextField } from '@mui/material/';
 
-import { useStyles } from './Style';
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -14,13 +12,12 @@ const style = {
   p: 4,
 };
 
-export const DescriptionModal = ({value, setValue}) => {
-  const classes = useStyles();
+export const DescriptionModal = ({ value, setValue }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
-  console.log(value)
+
+  console.log(value);
 
   return (
     <div>
@@ -47,9 +44,13 @@ export const DescriptionModal = ({value, setValue}) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             The vistit description:
           </Typography>
-          <TextField style={{ width: '100%' }} id="modal-modal-description" sx={{ mt: 2, mb: 3 }} multiline
-          value={value} 
-          onChange={(e) => setValue(e.target.value)}
+          <TextField
+            style={{ width: '100%' }}
+            id="modal-modal-description"
+            sx={{ mt: 2, mb: 3 }}
+            multiline
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           ></TextField>
 
           <Button
