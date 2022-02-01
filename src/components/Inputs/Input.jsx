@@ -31,6 +31,8 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth, helper
       label={label}
       error={error}
       helperText={helperText}
+      // error={dataError}
+
       type={type}
       sx={{ width: { xs: '250px', md: `${fullWidth && '100%'}` } }}
     />
