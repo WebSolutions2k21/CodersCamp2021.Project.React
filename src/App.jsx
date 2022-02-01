@@ -12,6 +12,7 @@ import {
   UserMyVisits,
   DoctorCalender,
   DoctorVisit,
+  NotFound,
 } from './pages';
 import Theme from './styles/themes/Theme';
 import { paths } from './config/paths';
@@ -84,6 +85,8 @@ export const App = () => {
             </PrivateRoute>
           }
         />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Theme>
   );
