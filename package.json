@@ -55,6 +55,10 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.4.7"
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-jest": "^27.4.6",
+    "jest": "^27.4.7",
+    "react-test-renderer": "^17.0.2"
   }
 }
