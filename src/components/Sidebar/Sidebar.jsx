@@ -10,7 +10,7 @@ import {
   Paper,
 } from '@mui/material';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
@@ -21,18 +21,17 @@ export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
   const [value, setValue] = React.useState(0);
+  const [path, setPath] = useState('');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  function ListItemLink(props) {
-    const { icon, primary, to } = props;
-
+  function ListItemLink(icon, primary, to) {
     const renderLink = React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />);
 
     return (
-      <li className={location.pathname === to ? classes.activetext : null}>
+      <li className={location.pathname.toLowerCase() === to.toLowerCase() ? classes.activetext : null}>
         <ListItem button component={renderLink}>
           {icon ? <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon> : null}
           <ListItemText primary={primary} />
