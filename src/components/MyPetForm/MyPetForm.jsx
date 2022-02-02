@@ -27,15 +27,8 @@ export const MyPetForm = () => {
     setEnteredNameTouched(true);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setEnteredNameTouched(true);
-
-    if (!enteredNameIsValid) {
-      return;
-    }
-
     setEnteredNameTouched(false);
+    
     const handleSubmit = async (e) => {
       e.preventDefault();
       await db.collection('pets', user.uid)
