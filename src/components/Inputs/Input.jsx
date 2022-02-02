@@ -16,6 +16,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth, helper
 
   return (
     <TextField
+      fullWidth
       required={required}
       onSubmit={handleSubmit}
       onChange={handleChange}
