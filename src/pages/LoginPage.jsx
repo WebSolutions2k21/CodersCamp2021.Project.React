@@ -1,19 +1,13 @@
 import { React, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
 
 import { auth, db } from '../config/firebase';
-import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
-import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
 
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
 import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
 
-import { Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Grid, Typography, Link   } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,7 +46,6 @@ Router.propTypes = {
 
 export const LoginPage = () => {
   let navigate = useNavigate();
-  const [admin, setAdmin] = useState(false);
 
   const loginSucces = () => {
     toast.success('Successful Login!', {
@@ -80,7 +73,6 @@ export const LoginPage = () => {
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               const isAdmin = doc.data().isAdmin;
-              setAdmin(isAdmin);
 
               if (isAdmin) {
                 setTimeout(() => {
