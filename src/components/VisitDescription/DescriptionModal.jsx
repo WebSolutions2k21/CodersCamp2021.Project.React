@@ -1,5 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Modal, TextField } from '@mui/material/';
+
+import { paths } from '../../config/paths';
+import { db, auth } from '../../config/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+
 
 const style = {
   position: 'absolute',
@@ -12,12 +18,31 @@ const style = {
   p: 4,
 };
 
-export const DescriptionModal = ({ value, setValue }) => {
+export const DescriptionModal = () => {
+  const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(value);
+  console.log(description);
+
+  const navigate = useNavigate();
+  const user = auth.currentUser;
+
+  const handleSubmit = async (e) => {
+    await setDoc(doc(db, 'visits', user.uid), {
+      description: description,
+    })
+      .then(() => {
+        navigate(paths.aboutUs, { replace: true });
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    const descriptionRef = doc(db, 'visits', user.uid);
+    setDoc(descriptionRef, { description: true }, { merge: true });
+  };
+
 
   return (
     <div>
@@ -49,11 +74,12 @@ export const DescriptionModal = ({ value, setValue }) => {
             id="modal-modal-description"
             sx={{ mt: 2, mb: 3 }}
             multiline
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.description)}
           ></TextField>
 
           <Button
+          onSubmit={handleSubmit}
             style={{
               float: 'right',
               color: '#ffffff',
