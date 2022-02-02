@@ -10,28 +10,29 @@ import {
   Paper,
 } from '@mui/material';
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
 import { paths } from '../../config/paths';
+import { BottomNavigationContext } from '../../context/BottomNavigationContext';
 
 export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
-  const [value, setValue] = React.useState(0);
-  const [path, setPath] = useState('');
+
+  const { iconColor, setIconColor } = useContext(BottomNavigationContext);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setIconColor(newValue);
   };
 
-  function ListItemLink(icon, primary, to) {
+  function ListItemLink({ icon, primary, to }) {
     const renderLink = React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />);
 
     return (
-      <li className={location.pathname.toLowerCase() === to.toLowerCase() ? classes.activetext : null}>
+      <li className={location.pathname === to ? classes.activetext : classes.notactivetext}>
         <ListItem button component={renderLink}>
           {icon ? <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon> : null}
           <ListItemText primary={primary} />
@@ -40,21 +41,6 @@ export const Sidebar = () => {
       </li>
     );
   }
-  // function BottomNavigationItemLink(props) {
-  //   const { icon, primary, to } = props;
-
-  //   const renderLink = React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />);
-
-  //   return (
-  //     <BottomNavigation className={location.pathname === to ? classes.activetext : null}>
-  //       <ListItem button component={renderLink}>
-  //         {icon ? <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon> : null}
-  //         <ListItemText primary={primary} />
-  //       </ListItem>
-  //       <Divider variant="inset" />
-  //     </Bo>
-  //   );
-  // }
 
   const userMenuItems = [
     {
@@ -87,7 +73,7 @@ export const Sidebar = () => {
         component="aside"
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
-        <BottomNavigation showLabels value={value} onChange={handleChange}>
+        <BottomNavigation showLabels value={iconColor} onChange={handleChange}>
           {userMenuItems.map((item) => (
             <BottomNavigationAction
               component={Link}
