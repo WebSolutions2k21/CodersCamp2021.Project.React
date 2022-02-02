@@ -23,14 +23,16 @@ export const MyPetForm = () => {
   const enteredNameIsValid = name.trim() !== '' || name.length >= 30;
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
-  const nameInputBlurHandler = (event) => {
-    setEnteredNameTouched(true);
-  };
-
-    setEnteredNameTouched(false);
-    
     const handleSubmit = async (e) => {
       e.preventDefault();
+      setEnteredNameTouched(true);
+  
+      if (!enteredNameIsValid) {
+        return;
+      }
+  
+      setEnteredNameTouched(false);
+  
       await db.collection('pets', user.uid)
         .add({
           user_id: user.uid,
@@ -45,14 +47,6 @@ export const MyPetForm = () => {
         .catch((error) => {
           alert(error.message);
         });
-    // await addDoc(collection(db, 'users', user.uid, 'pets'), {
-    //   name: name,
-    //   species: species,
-    //   breed: breed,
-    //   petAge: petAge,
-    // });
-    // navigate(paths.myPets, { replace: true });
-
   };
 
   return (
@@ -64,7 +58,6 @@ export const MyPetForm = () => {
           type="text"
           value={name}
           setValue={setName}
-          onBlur={nameInputBlurHandler}
           error={nameInputIsInvalid}
           helperText={nameInputIsInvalid ? 'Name is required' : ''}
         />
