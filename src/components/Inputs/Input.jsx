@@ -25,6 +25,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth }) => {
       InputProps={{
         className: classes.lbl,
         disableUnderline: true,
+        'data-testid':"nameInput"
       }}
       InputLabelProps={{
         className: classes.lbl,
