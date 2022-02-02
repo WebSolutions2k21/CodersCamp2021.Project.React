@@ -9,6 +9,7 @@ import { paths } from '../../config/paths';
 import { db, auth } from '../../config/firebase';
 
 export const MyPetForm = () => {
+
   const [name, setName] = useState('');
   const [species, setSpecies] = useState('');
   const [breed, setBreed] = useState('');
@@ -17,10 +18,11 @@ export const MyPetForm = () => {
 const navigate = useNavigate();
   const user = auth.currentUser;
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    db.collection('users').doc(user.uid).collection('pets')
+    await db.collection('pets', user.uid)
       .add({
+        user_id: user.uid,
         name: name,
         species: species,
         breed: breed,
@@ -32,10 +34,6 @@ const navigate = useNavigate();
       .catch((error) => {
         alert(error.message);
       });
-    setName('');
-    setSpecies('');
-    setBreed('');
-    setPetAge(new Date());
   };
 
   return (
