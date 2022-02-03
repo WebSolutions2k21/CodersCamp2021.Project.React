@@ -53,7 +53,6 @@ export const MyPetForm = () => {
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
         <Input
-          required={true}
           label="Name"
           type="text"
           value={name}
@@ -62,7 +61,7 @@ export const MyPetForm = () => {
           helperText={nameInputIsInvalid ? 'Name is required' : ''}
         />
         <InputSelect label="Type" myNames={['dog', 'cat']} value={species} setValue={setSpecies} />
-        <Input label="Breed" type="text" value={breed} setValue={setBreed} />
+        <Input label="Breed" type="text" value={breed} setValue={setBreed} required={false} />
         <InputMonthAndYear label="Date of Birth" value={petAge} setValue={setPetAge} />
         <CustomButton type="submit" text="Save" />
       </Grid>

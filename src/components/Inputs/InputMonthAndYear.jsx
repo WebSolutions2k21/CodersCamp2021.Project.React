@@ -25,7 +25,7 @@ export const InputMonthAndYear = ({ label, value, setValue }) => {
         //           onChange={handleChange}
         renderInput={(params) => (
           <TextField
-            required={true}
+            required
             className={classes.int}
             variant="standard"
             {...params}
