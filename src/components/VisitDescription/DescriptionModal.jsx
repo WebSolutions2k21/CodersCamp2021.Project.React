@@ -6,7 +6,6 @@ import { paths } from '../../config/paths';
 import { db, auth } from '../../config/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -30,19 +29,25 @@ export const DescriptionModal = () => {
   const user = auth.currentUser;
 
   const handleSubmit = async (e) => {
-    await setDoc(doc(db, 'visits', user.uid), {
-      description: description,
-    })
-      .then(() => {
-        navigate(paths.aboutUs, { replace: true });
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-    const descriptionRef = doc(db, 'visits', user.uid);
-    setDoc(descriptionRef, { description: true }, { merge: true });
+    console.log('desc', description);
+    // await setDoc(doc(db, 'visits').where('uid', '==', user.user.uid).get() {
+    //   description: description,
+    // })
+    const id="1WZ0Banqbl05w0Y8SAt4"
+    db.collection("visits").doc(doc.id).update({foo: "bar"})
+    // .set({ title: "New title", body: "This is the new body" });
+    // .update({
+    //   description: description,
+    // })
+    //   .then(() => {
+    //     navigate(paths.aboutUs, { replace: true });
+    //   })
+    //   .catch((error) => {
+    //     alert(error.message);
+    //   });
+    // const descriptionRef = doc(db, 'visits', user.uid);
+    // setDoc(descriptionRef, { description: true }, { merge: true });
   };
-
 
   return (
     <div>
@@ -69,17 +74,21 @@ export const DescriptionModal = () => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             The vistit description:
           </Typography>
-          <TextField
-            style={{ width: '100%' }}
-            id="modal-modal-description"
-            sx={{ mt: 2, mb: 3 }}
-            multiline
-            value={description}
-            onChange={(e) => setDescription(e.target.description)}
-          ></TextField>
-
+          <form id="myform" onSubmit={handleSubmit}>
+            <TextField
+              style={{ width: '100%' }}
+              id="modal-modal-description"
+              sx={{ mt: 2, mb: 3 }}
+              multiline
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></TextField>
+          </form>
           <Button
-          onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
+            onTouchTap={handleClose}
+            type="submit" //set the buttom type is submit
+            form="myform"
             style={{
               float: 'right',
               color: '#ffffff',

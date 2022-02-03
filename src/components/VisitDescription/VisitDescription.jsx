@@ -1,15 +1,45 @@
-//import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Grid } from '@mui/material/';
 
 import { CustomButton } from '../Button/CustomButton';
 import { useStyles } from './Style';
-import { DescriptionModal } from "./DescriptionModal";
+import { DescriptionModal } from './DescriptionModal';
+import { db, auth } from '../../config/firebase';
 
 export const VisitDescription = ({ time, owner, type, breed, description }) => {
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(true);
+  const [visits, setVisits] = useState([]);
+
+  useEffect(() => {
+    const getVisitsFromFirebase = [];
+
+    const deb = db.collection('visits').onSnapshot((q) => {
+      q.forEach((doc) => {
+        getVisitsFromFirebase.push({
+          ...doc.data(),
+          key: doc.id,
+        });
+      });
+      setVisits(getVisitsFromFirebase);
+      setLoading(false);
+    });
+  }, [loading]);
+
   return (
     <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' } }}>
+    <div>   {visits.length > 0 ? (
+            visits.map((visit) => {
+              return (
+                  console.log('visits', visit)      
+                
+                    )
+                  }
+                    )
+                  
+    ): "nic"}
+                  </div>  
       <Grid container className={classes.all}>
         <Grid item md={8} xs={12}>
           <Grid container direction="column" spacing={2}>
@@ -33,7 +63,8 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
               </Grid>
             </Grid>
             <Grid item alignItems="flex-start" nowrap mb={2}>
-              <span className={classes.bold}>DESCRIPTION: </span>{description}
+              <span className={classes.bold}>DESCRIPTION: </span>
+              {description}
             </Grid>
           </Grid>
         </Grid>
@@ -41,7 +72,7 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
         <Grid item md={4} xs={12}>
           <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
             <Grid item p={2}>
-            <DescriptionModal />
+              <DescriptionModal />
               {/* <CustomButton color="primary" size="small" text="DESCRIPTION" /> */}
             </Grid>
             <Grid item p={2}>
