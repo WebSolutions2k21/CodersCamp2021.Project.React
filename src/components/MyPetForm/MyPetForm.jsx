@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import { Input, InputMonthAndYear, InputSelect } from '../Inputs';
 import { CustomButton } from '../Button/CustomButton';
 
-import { Grid } from '@mui/material';
-
-import { db } from '../../config/firebase';
+import { Grid} from '@mui/material';
+import { paths } from '../../config/paths';
+import { db, auth } from '../../config/firebase';
 
 export const MyPetForm = () => {
   const [name, setName] = useState('');
@@ -12,9 +14,12 @@ export const MyPetForm = () => {
   const [breed, setBreed] = useState('');
   const [petAge, setPetAge] = useState(new Date());
 
+const navigate = useNavigate();
+  const user = auth.currentUser;
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    db.collection('pets')
+    db.collection('users').doc(user.uid).collection('pets')
       .add({
         name: name,
         species: species,
@@ -22,7 +27,7 @@ export const MyPetForm = () => {
         petAge: petAge,
       })
       .then(() => {
-        alert('Messege submitted');
+        navigate(paths.myPets, { replace: true });
       })
       .catch((error) => {
         alert(error.message);
