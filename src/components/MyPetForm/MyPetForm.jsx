@@ -51,7 +51,6 @@ export const MyPetForm = () => {
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
         <Input
-          required={true}
           label="Name"
           type="text"
           value={name}
