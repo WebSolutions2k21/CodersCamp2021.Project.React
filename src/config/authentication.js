@@ -35,14 +35,14 @@ const logInWithEmailAndPassword = async (email, password, onSuccess, onError) =>
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password, onSuccessfulRegistration, onRegistrationError) => {
+const registerWithEmailAndPassword = async (email, password, onSuccessfulRegistration, onRegistrationError) => {
   try {
-    const res = await auth.createUserWithEmailAndPassword(auth, email, password);
+    const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
     await db
       .addDoc({
         uid: user.uid,
-        name,
+        user,
         authProvider: 'local',
         email,
       })
