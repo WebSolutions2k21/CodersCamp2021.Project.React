@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
-import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
+import { SignUpTheme } from '../styles/themes/CustomSingUpPage';
 
-import { Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Grid, Typography, Link } from '@mui/material';
 import { auth } from '../config/firebase';
-import { width } from '@mui/system';
+import { registerWithEmailAndPassword } from '../config/authentication';
 
 export const SignupPage = () => {
-  const signUp = async () => {
-    if (password !== passwordconfirm) {
-      return console.log('Passwords do not match');
-    }
-    try {
-      setError('');
-      await auth.createUserWithEmailAndPassword(email, password);
-    } catch {
-      console.log('Failed to log in');
-    }
-  };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [passwordconfirm, setPasswordConfirm] = useState('');
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [user, loading, error] = useAuthState(auth);
+
+  const navigate = useNavigate();
+  // const history = useHistory();
+
+  useEffect(() => {
+    if (loading) return;
+    // if (user)
+    //   history.replace('/dashboard');
+  }, [user, loading]);
+
+  const onSuccessfulRegistrationHandler = () => {
+    alert('registered!');
+  };
+
+  const onRegistrationErrorHandler = (err) => {
+    console.error(err);
+    alert(err.message);
+  };
+
   return (
     <Layout>
       <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
@@ -35,22 +45,28 @@ export const SignupPage = () => {
           Create your account
         </Typography>
         <Grid container justifyContent="center" gap="3rem">
-          <Input label="first name" type="text" />
-          <Input label="last name" type="text" />
+          <Input label="first name" type="text" value={name} setValue={setName} />
+          <Input label="last name" type="text" value={lastName} setValue={setLastName} />
         </Grid>
-        <Input label="email" type="email" setValue={setEmail} />
-        <Input label="phone number" type="tel" />
-        <Input label="password" type="password" setValue={setPassword} />
-        <Input label="confirm password" type="password" setValue={setPasswordConfirm} />
+        <Input label="email" type="email" value={email} setValue={setEmail} fullWidth />
+        <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} fullWidth />
+        <Input label="password" type="password" value={password} setValue={setPassword} fullWidth />
         <Typography theme={SignUpTheme}>
           Already have an account?
-          <Link underline="none" color="#16BAC6">
+          <Link to="/login" underline="none" color="#16BAC6">
             {' '}
             Log In!
           </Link>
         </Typography>
         <Link to="/AboutUsPage" style={{ textDecoration: 'none' }}>
-          <CustomButton color="primary" size="large" text="Sign Up !" clickAction={() => signUp()} />
+          <CustomButton
+            color="primary"
+            size="large"
+            text="Sign Up!"
+            clickAction={() =>
+              registerWithEmailAndPassword(email, password, onSuccessfulRegistrationHandler, onRegistrationErrorHandler)
+            }
+          />
         </Link>
       </Grid>
     </Layout>

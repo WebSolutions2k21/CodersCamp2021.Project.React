@@ -9,6 +9,7 @@ import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
 import { auth } from '../../config/firebase';
+import { logout } from '../../config/authentication';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
@@ -20,10 +21,6 @@ export const NavigationBar = () => {
   };
 
   const handleCloseNavMenu = () => setAnchorElNav(null);
-
-  const logoutHandler = () => {
-    auth.signOut().reload();
-  };
 
   const classes = useStyles();
 
@@ -121,7 +118,7 @@ export const NavigationBar = () => {
                   component={RouterLink}
                   to={paths.home}
                   size="large"
-                  onClick={logoutHandler}
+                  onClick={logout}
                   sx={{
                     my: 2,
                     p: 1,
@@ -181,7 +178,7 @@ export const NavigationBar = () => {
                   </MenuItem>
                 )}
                 {isAuth && (
-                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.login}>
+                  <MenuItem onClick={logout} component={RouterLink} to={paths.login}>
                     <Typography textAlign="center">{'Log out'}</Typography>
                   </MenuItem>
                 )}
