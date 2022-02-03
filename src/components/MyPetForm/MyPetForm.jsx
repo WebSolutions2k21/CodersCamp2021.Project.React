@@ -10,7 +10,6 @@ import { db, auth } from '../../config/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
 export const MyPetForm = () => {
-
   const [name, setName] = useState('');
   const [species, setSpecies] = useState('');
   const [breed, setBreed] = useState('');
@@ -23,30 +22,29 @@ export const MyPetForm = () => {
   const enteredNameIsValid = name.trim() !== '' || name.length >= 30;
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setEnteredNameTouched(true);
-  
-      if (!enteredNameIsValid) {
-        return;
-      }
-  
-      setEnteredNameTouched(false);
-  
-      await db.collection('pets', user.uid)
-        .add({
-          user_id: user.uid,
-          name: name,
-          species: species,
-          breed: breed,
-          petAge: petAge,
-        })
-        .then(() => {
-          navigate(paths.myPets, { replace: true });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEnteredNameTouched(true);
+
+    if (!enteredNameIsValid) {
+      return;
+    }
+
+    setEnteredNameTouched(false);
+
+    addDoc(collection(db, 'pets'), {
+      user_id: user.uid,
+      name: name,
+      species: species,
+      breed: breed,
+      petAge: petAge,
+    })
+      .then(() => {
+        navigate(paths.myPets, { replace: true });
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -63,7 +61,7 @@ export const MyPetForm = () => {
         />
         <InputSelect label="Type" myNames={['dog', 'cat']} value={species} setValue={setSpecies} />
         <Input label="Breed" type="text" value={breed} setValue={setBreed} />
-        <InputMonthAndYear label="Date of Birth" value={petAge} setValue={setPetAge} />
+        <InputMonthAndYear label="Date of Birth" value={petAge} setValue={setPetAge} required={true} />
         <CustomButton type="submit" text="Save" />
       </Grid>
     </form>

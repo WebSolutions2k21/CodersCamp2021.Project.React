@@ -17,24 +17,20 @@ export const UserMyPets = () => {
   const getPetsFromFirebase = [];
 
   useEffect(() => {
-    getMyPets();
-  }, [user, loading]);
-
-  const getMyPets = async () => {
-    await db
-      .collection('pets')
-      .where('user_id', '==', user.uid)
-      .onSnapshot((q) => {
-        q.forEach((doc) => {
-          getPetsFromFirebase.push({
-            ...doc.data(),
-            key: doc.id,
-          });
+    db
+    .collection('pets')
+    .where('user_id', '==', user.uid)
+    .onSnapshot((q) => {
+      q.forEach((doc) => {
+        getPetsFromFirebase.push({
+          ...doc.data(),
+          key: doc.id,
         });
-        setPets(getPetsFromFirebase);
-        setLoading(false);
       });
-  };
+      setPets(getPetsFromFirebase);
+      setLoading(false);
+    });
+  }, [user, loading, getPetsFromFirebase]);
 
   return (
     <Layout showSideBar>
