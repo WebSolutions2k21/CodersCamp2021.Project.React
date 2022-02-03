@@ -16,6 +16,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth }) => {
 
   return (
     <TextField
+      data-testid="input-1"
       fullWidth
       onSubmit={handleSubmit}
       onChange={handleChange}
@@ -25,7 +26,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth }) => {
       InputProps={{
         className: classes.lbl,
         disableUnderline: true,
-        'data-testid':"nameInput"
+        'data-testid': 'nameInput',
       }}
       InputLabelProps={{
         className: classes.lbl,
