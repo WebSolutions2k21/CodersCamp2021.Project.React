@@ -30,7 +30,12 @@ export const DescriptionModal = () => {
   const user = auth.currentUser;
 
   const handleSubmit = async (e) => {
-    await setDoc(doc(db, 'visits', user.uid), {
+    console.log('desc', description);
+    // await setDoc(doc(db, 'visits').where('uid', '==', user.user.uid).get() {
+    //   description: description,
+    // })
+    db.collection('visits').where('uid', '==', user.uid)
+    .setDoc({
       description: description,
     })
       .then(() => {
@@ -39,8 +44,8 @@ export const DescriptionModal = () => {
       .catch((error) => {
         alert(error.message);
       });
-    const descriptionRef = doc(db, 'visits', user.uid);
-    setDoc(descriptionRef, { description: true }, { merge: true });
+    // const descriptionRef = doc(db, 'visits', user.uid);
+    // setDoc(descriptionRef, { description: true }, { merge: true });
   };
 
 
@@ -80,6 +85,9 @@ export const DescriptionModal = () => {
 
           <Button
           onSubmit={handleSubmit}
+          onTouchTap={handleClose}
+          type="submit" //set the buttom type is submit
+          form="myform"
             style={{
               float: 'right',
               color: '#ffffff',
