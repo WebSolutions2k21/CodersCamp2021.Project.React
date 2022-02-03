@@ -5,7 +5,7 @@ export const AboutUsPage = () => {
   return (
   <Layout>
 
-    {/* just for test. to delete! */}
+    {/* TODO: just for test. to delete! */}
     <VisitDescription />
     
   </Layout>
