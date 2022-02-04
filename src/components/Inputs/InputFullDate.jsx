@@ -16,7 +16,7 @@ export const InputFullDate = ({ label, value, setValue }) => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['day', 'month', 'year']}
-          inputFormat="d MMMM y"
+          mask="__/__/____"
           label={<div className={classes.lbl2}>{label}</div>}
           minDate={Date.now()}
           value={value}

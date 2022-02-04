@@ -16,7 +16,7 @@ const theme = createTheme({
 export const InputTime = ({ label, value, setValue }) => {
   const classes = useStyles();
 
-  const handleChange = ({ target: { value } }) => setValue && setValue(value);
+  //   const handleChange = ({ target: { value } }) => setValue && setValue(value);
 
   return (
     <ThemeProvider theme={theme}>
@@ -24,7 +24,8 @@ export const InputTime = ({ label, value, setValue }) => {
         <DesktopTimePicker
           label={<div className={classes.lbl2}>{label}</div>}
           value={value}
-          onChange={handleChange}
+          mask="__:__ _M"
+          onChange={(value) => setValue && setValue(value)}
           renderInput={(params) => (
             <TextField
               className={classes.int}

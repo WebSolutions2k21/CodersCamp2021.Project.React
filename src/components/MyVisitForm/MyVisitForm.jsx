@@ -1,40 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { InputFullDate, InputTime, InputSelect } from '../Inputs';
 import { CustomButton } from '../Button/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 
-import { db } from '../../config/firebase';
+import { db, auth } from '../../config/firebase';
+import { paths } from '../../config/paths';
 
 export const MyVisitForm = () => {
   const [loading, setLoading] = useState(true);
   const [pets, setPets] = useState([]);
   const [pet, setPet] = useState('');
+  const [doctors, setDoctors] = useState([]);
   const [doctor, setDoctor] = useState('');
   const [date, setDate] = useState(new Date());
   const [hour, setHour] = useState(new Date());
 
+  const user = auth.currentUser;
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getPetsFromFirebase = [];
-    const subscriber = db.collection('pets').onSnapshot((querySnapshot) => {
+    const getDoctorsFromFirebase = [];
+    db.collection('users').onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        getDoctorsFromFirebase.push({
+          ...doc.data(),
+          key: doc.id,
+        });
+      });
+      setDoctors(getDoctorsFromFirebase);
+      setLoading(false);
+    });
+    const petsCollection = db.collection('users').doc(user.uid);
+    petsCollection.collection('pets').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         getPetsFromFirebase.push({
           ...doc.data(),
-
           key: doc.id,
         });
       });
       setPets(getPetsFromFirebase);
       setLoading(false);
     });
-    return () => subscriber();
   }, [loading]);
 
   if (loading) {
     return <h1>loading data...</h1>;
   }
+
   const petsNames = [];
   pets.forEach((pet) => petsNames.push(pet.name));
+
+  const doctorsNames = [];
+  doctors.forEach((doctor) => {
+    if (doctor.isAdmin) {
+      const doctorName = `${doctor.firstName} ${doctor.lastName}`;
+      doctorsNames.push(doctorName);
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,9 +69,10 @@ export const MyVisitForm = () => {
         doctor: doctor,
         date: date,
         hour: hour,
+        uid: user.uid,
       })
       .then(() => {
-        alert('Visit submitted');
+        navigate(paths.myVisits, { replace: true });
       })
       .catch((error) => {
         alert(error.message);
@@ -61,12 +87,7 @@ export const MyVisitForm = () => {
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
         <InputSelect label="Pet" myNames={petsNames} value={pet} setValue={setPet} />
-        <InputSelect
-          label="Doctor"
-          myNames={['dr Jan Kot', 'dr Marzena Borsuk-Łapa', 'dr Kamila Piesecka']}
-          value={doctor}
-          setValue={setDoctor}
-        />
+        <InputSelect label="Doctor" myNames={doctorsNames} value={doctor} setValue={setDoctor} />
         <InputFullDate label="Date" value={date} setValue={setDate} />
         <InputTime label="Hour" value={hour} setValue={setHour} />
         <CustomButton type="submit" text="Save" />

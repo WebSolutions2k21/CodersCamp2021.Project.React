@@ -6,15 +6,16 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 import { Layout, DatePicker, CustomButton } from '../components';
 import { paths } from '../config/paths';
-import { db } from '../config/firebase';
+import { db, auth } from '../config/firebase';
 
 export const UserMyVisits = () => {
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
+  const userId = auth.currentUser.auth.lastNotifiedUid;
 
   useEffect(() => {
     const getVisitsFromFirebase = [];
-    const subscriber = db.collection('visits').onSnapshot((querySnapshot) => {
+    db.collection('visits').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         getVisitsFromFirebase.push({
           ...doc.data(),
@@ -25,10 +26,22 @@ export const UserMyVisits = () => {
       setVisits(getVisitsFromFirebase);
       setLoading(false);
     });
-    return () => subscriber();
   }, [loading]);
 
-  console.log(visits, visits.length);
+  const visitsArray = [];
+
+  visits.forEach((visit) => {
+    if (visit.uid === userId) {
+      visitsArray.push(visit);
+    }
+  });
+
+  const visitsDates = [];
+
+  visitsArray.forEach((visit) => {
+    visitsDates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
+  });
+
   if (loading) {
     return <h1>loading data...</h1>;
   }
@@ -44,7 +57,7 @@ export const UserMyVisits = () => {
         style={{ margin: '1%' }}
       >
         <Grid item>
-          <DatePicker />
+          <DatePicker visits={visitsDates} />
         </Grid>
         <Grid item>
           <Grid
@@ -53,8 +66,8 @@ export const UserMyVisits = () => {
             style={{ minHeight: '300px', width: '80%' }}
             justifyContent="space-between"
           >
-            {visits.length > 0 ? (
-              visits.map((visit) => {
+            {visitsArray.length > 0 ? (
+              visitsArray.map((visit) => {
                 return (
                   <Grid container key={visit.key}>
                     <Grid container spacing={2} alignItems="center">
@@ -70,16 +83,17 @@ export const UserMyVisits = () => {
                       </Grid>
                     </Grid>
                     <Grid container direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-                      {/* <Grid item>
-                        <p>
-                          {new Date(visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000).toLocaleDateString(
-                            undefined,
-                          )}
-                        </p>
-                      </Grid> */}
                       <Grid item>
                         <p>
-                          {visit.pet} | {visit.doctor}
+                          {new Date(visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000).toLocaleTimeString(
+                            'en-US',
+                            { hour: '2-digit', minute: '2-digit' },
+                          )}
+                        </p>
+                      </Grid>
+                      <Grid item>
+                        <p>
+                          {visit.pet} | dr {visit.doctor}
                         </p>
                       </Grid>
                       <Grid item>
