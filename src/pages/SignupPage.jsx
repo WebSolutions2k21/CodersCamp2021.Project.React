@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-// import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Layout } from '../components';
@@ -8,67 +6,78 @@ import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
 import { SignUpTheme } from '../styles/themes/CustomSingUpPage';
 
-import { Grid, Typography, Link } from '@mui/material';
-import { auth } from '../config/firebase';
-import { registerWithEmailAndPassword } from '../config/authentication';
+import { Grid } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+
+import { collection, addDoc } from 'firebase/firestore';
+import { db, auth } from '../config/firebase';
+import { paths } from '../config/paths';
 
 export const SignupPage = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [passwordconfirm, setPasswordConfirm] = useState('');
+
   const [lastName, setLastName] = useState('');
-  const [user, loading, error] = useAuthState(auth);
-
+  const [firstName, setFirstName] = useState('');
   const navigate = useNavigate();
-  // const history = useHistory();
 
-  useEffect(() => {
-    if (loading) return;
-    // if (user)
-    //   history.replace('/dashboard');
-  }, [user, loading]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const onSuccessfulRegistrationHandler = () => {
-    alert('registered!');
-  };
+    if (password !== passwordconfirm) {
+      return console.log('Passwords do not match');
+    }
 
-  const onRegistrationErrorHandler = (err) => {
-    console.error(err);
-    alert(err.message);
+    await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        const user = res.user;
+        addDoc(collection(db, 'users'), {
+          uid: user.uid,
+          lastName: lastName,
+          firstName: firstName,
+          email: user.email,
+          phone: user.phoneNumber,
+          isAdmin: false,
+        });
+
+        navigate(paths.myVisits, { replace: true });
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
     <Layout>
-      <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
-        <Typography variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
-          Create your account
-        </Typography>
-        <Grid container justifyContent="center" gap="3rem">
-          <Input label="first name" type="text" value={name} setValue={setName} />
-          <Input label="last name" type="text" value={lastName} setValue={setLastName} />
-        </Grid>
-        <Input label="email" type="email" value={email} setValue={setEmail} fullWidth />
-        <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} fullWidth />
-        <Input label="password" type="password" value={password} setValue={setPassword} fullWidth />
-        <Typography theme={SignUpTheme}>
-          Already have an account?
-          <Link to="/login" underline="none" color="#16BAC6">
-            {' '}
-            Log In!
-          </Link>
-        </Typography>
-        <Link to="/AboutUsPage" style={{ textDecoration: 'none' }}>
-          <CustomButton
-            color="primary"
-            size="large"
-            text="Sign Up!"
-            clickAction={() =>
-              registerWithEmailAndPassword(email, password, onSuccessfulRegistrationHandler, onRegistrationErrorHandler)
-            }
-          />
-        </Link>
-      </Grid>
+      {' '}
+      <form onSubmit={handleSubmit}>
+        <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
+          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
+            Create your account
+          </Typography>{' '}
+          <Grid container justifyContent="center" gap="3rem">
+            <Input label="first name" type="text" value={firstName} setValue={setFirstName} />
+            <Input label="last name" type="text" value={lastName} setValue={setLastName} />
+          </Grid>
+          <Input label="email" type="email" value={email} setValue={setEmail} />
+          <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} />
+          <Input label="password" type="password" value={password} setValue={setPassword} />
+          <Input label="confirm password" type="password" value={passwordconfirm} setValue={setPasswordConfirm} />
+          <Typography theme={SignUpTheme}>
+            Already have an account?
+            <Link underline="none" color="#16BAC6">
+              {' '}
+              Log In!
+            </Link>
+          </Typography>
+          <CustomButton color="primary" size="large" text="Sign Up !" type="submit" />
+        </Grid>{' '}
+      </form>
     </Layout>
   );
 };

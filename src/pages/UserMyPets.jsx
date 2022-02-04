@@ -14,31 +14,38 @@ export const UserMyPets = () => {
   const [pets, setPets] = useState([]);
 
   var user = auth.currentUser;
+  const getPetsFromFirebase = [];
 
   useEffect(() => {
-    const getPetsFromFirebase = [];
+    db.collection('pets')
+      .where('user_id', '==', user.uid)
+      .onSnapshot((q) => {
+        q.forEach((doc) => {
+          getPetsFromFirebase.push({
+            ...doc.data(),
+            key: doc.id,
+          });
+        });
+        setPets(getPetsFromFirebase);
+        setLoading(false);
+      });
+  }, [user, loading, getPetsFromFirebase]);
 
-   const deb = db.collection('users').doc(user.uid);
-     deb.collection('pets').onSnapshot(q =>{
-      q.forEach(doc =>{
-        getPetsFromFirebase.push({
-          ...doc.data(),
-          key: doc.id
-        })
-      })
-      setPets(getPetsFromFirebase);
-      setLoading(false);
-    });    
-  }, [loading]);
-
-  
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">
         My Pets
       </Typography>
       <Box>
-        <Grid container spacing={4} paddingLeft="40px" paddingRight="40px" gridAutoColumns="2" margin="0">
+        <Grid
+          container
+          spacing={4}
+          paddingLeft="40px"
+          paddingRight="40px"
+          paddingBottom={10}
+          gridAutoColumns="2"
+          margin="0"
+        >
           {pets.length > 0 ? (
             pets.map((pet) => {
               return (
