@@ -6,13 +6,7 @@ import { Layout, CustomButton } from '../components';
 export const HomePage = () => {
   return (
     <Layout>
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        style={{height: "80vh"}}>
-
+      <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: '80vh' }}>
         <Typography
           component="span"
           sx={{

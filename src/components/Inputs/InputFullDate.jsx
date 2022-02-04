@@ -4,26 +4,20 @@ import { TextField } from '@mui/material/';
 
 import { useStyles } from './InputStyle';
 
-export const InputMonthAndYear = ({ label, value, setValue }) => {
+export const InputFullDate = ({ label, value, setValue }) => {
   const classes = useStyles();
 
-//   const handleChange = ({ target: { value }}) => setValue && setValue(value);
-
-  const formats = {
-    monthAndYear: "MM/yyyy",
-  };
+  const handleChange = ({ target: { value } }) => setValue && setValue(value);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} dateFormats={formats}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
-        views={['year', 'month']}
-      
+        views={['day', 'month', 'year']}
+        inputFormat="d MMMM y"
         label={<div className={classes.lbl2}>{label}</div>}
-        minDate={new Date('1990-01-01')}
-        maxDate={Date.now()}
+        minDate={Date.now()}
         value={value}
-        onChange={(value)=> setValue && setValue(value)}
-//           onChange={handleChange}
+        onChange={handleChange}
         renderInput={(params) => (
           <TextField
             className={classes.int}
