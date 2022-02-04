@@ -1,4 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { flexbox } from '@mui/system';
 import '../fonts.scss';
 
 const theme = createTheme({
@@ -29,6 +30,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
+        },
+      },
+    }
   },
 });
 
