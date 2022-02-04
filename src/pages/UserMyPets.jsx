@@ -17,19 +17,18 @@ export const UserMyPets = () => {
   const getPetsFromFirebase = [];
 
   useEffect(() => {
-    db
-    .collection('pets')
-    .where('user_id', '==', user.uid)
-    .onSnapshot((q) => {
-      q.forEach((doc) => {
-        getPetsFromFirebase.push({
-          ...doc.data(),
-          key: doc.id,
+    db.collection('pets')
+      .where('user_id', '==', user.uid)
+      .onSnapshot((q) => {
+        q.forEach((doc) => {
+          getPetsFromFirebase.push({
+            ...doc.data(),
+            key: doc.id,
+          });
         });
+        setPets(getPetsFromFirebase);
+        setLoading(false);
       });
-      setPets(getPetsFromFirebase);
-      setLoading(false);
-    });
   }, [user, loading, getPetsFromFirebase]);
 
   return (
@@ -38,7 +37,15 @@ export const UserMyPets = () => {
         My Pets
       </Typography>
       <Box>
-        <Grid container spacing={4} paddingLeft="40px" paddingRight="40px" gridAutoColumns="2" margin="0">
+        <Grid
+          container
+          spacing={4}
+          paddingLeft="40px"
+          paddingRight="40px"
+          paddingBottom={10}
+          gridAutoColumns="2"
+          margin="0"
+        >
           {pets.length > 0 ? (
             pets.map((pet) => {
               return (
