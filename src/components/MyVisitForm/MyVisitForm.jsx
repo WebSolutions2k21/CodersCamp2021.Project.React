@@ -18,6 +18,7 @@ export const MyVisitForm = () => {
   const [hour, setHour] = useState(new Date());
 
   const user = auth.currentUser;
+  const userId = auth.currentUser.auth.lastNotifiedUid;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +34,8 @@ export const MyVisitForm = () => {
       setDoctors(getDoctorsFromFirebase);
       setLoading(false);
     });
-    const petsCollection = db.collection('users').doc(user.uid);
-    petsCollection.collection('pets').onSnapshot((querySnapshot) => {
+
+    db.collection('pets').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         getPetsFromFirebase.push({
           ...doc.data(),
@@ -51,7 +52,11 @@ export const MyVisitForm = () => {
   }
 
   const petsNames = [];
-  pets.forEach((pet) => petsNames.push(pet.name));
+  pets.forEach((pet) => {
+    if (pet.user_id === userId) {
+      petsNames.push(pet.name);
+    }
+  });
 
   const doctorsNames = [];
   doctors.forEach((doctor) => {
