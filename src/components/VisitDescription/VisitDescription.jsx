@@ -9,7 +9,7 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' } }}>
+    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' } }} data-testid="vd-1">
       <Grid container className={classes.all}>
         <Grid item md={8} xs={12}>
           <Grid container direction="column" spacing={2}>
