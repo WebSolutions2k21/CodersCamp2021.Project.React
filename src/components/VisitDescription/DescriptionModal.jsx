@@ -33,8 +33,7 @@ export const DescriptionModal = () => {
     // await setDoc(doc(db, 'visits').where('uid', '==', user.user.uid).get() {
     //   description: description,
     // })
-    const id="1WZ0Banqbl05w0Y8SAt4"
-    db.collection("visits").doc(doc.id).update({foo: "bar"})
+
     // .set({ title: "New title", body: "This is the new body" });
     // .update({
     //   description: description,

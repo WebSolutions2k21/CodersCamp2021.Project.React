@@ -1,12 +1,10 @@
 import React from 'react';
-import { Layout, VisitDescription } from '../components';
+import { Layout } from '../components';
 
 export const AboutUsPage = () => {
   return (
   <Layout>
 
-    {/* TODO: just for test. to delete! */}
-    <VisitDescription />
     
   </Layout>
   );
