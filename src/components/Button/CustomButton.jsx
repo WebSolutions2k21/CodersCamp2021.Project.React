@@ -11,6 +11,7 @@ export const CustomButton = ({ text, color, size, clickAction, disabled }) => {
   return (
     <ThemeProvider theme={ButtonTheme}>
 
+      <Button variant="contained" color={color} size={size} onClick={handleClick} disabled={disabled}>
       {clickAction ? (
         <Button variant="contained" color={color} size={size} onClick={handleClick} disabled={disabled}>
           {text}
