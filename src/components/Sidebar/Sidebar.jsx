@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import React, { useContext } from 'react';
-import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
@@ -83,7 +83,7 @@ export const Sidebar = () => {
         <BottomNavigation showLabels value={iconColor} onChange={handleChange}>
           {userMenuItems.map((item) => (
             <BottomNavigationAction
-              component={Link}
+              component={RouterLink}
               key={item.text}
               to={item.path}
               label={item.text}
