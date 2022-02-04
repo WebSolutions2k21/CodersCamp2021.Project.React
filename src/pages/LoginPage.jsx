@@ -1,16 +1,13 @@
 import { React, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
 
-import { auth } from '../config/firebase';
+import { auth, db } from '../config/firebase';
 
 import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
 import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
 
-import { Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Grid, Typography, Link   } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +15,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import { useNavigate } from 'react-router-dom';
-
+import { paths } from '../config/paths';
 // const auth = getAuth();
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -49,12 +46,14 @@ Router.propTypes = {
 
 export const LoginPage = () => {
   let navigate = useNavigate();
+
   const loginSucces = () => {
     toast.success('Successful Login!', {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: '1500',
     });
   };
+
   const loginError = () => {
     toast.error('Login failed! Check login or password!', {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -64,13 +63,29 @@ export const LoginPage = () => {
 
   const signIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      console.log('po sign in');
-      loginSucces();
-      setDisable(true);
-      setTimeout(() => {
-        navigate('../myVisits', { replace: true });
-      }, 3000);
+      await auth.signInWithEmailAndPassword(email, password).then((user) => {
+        loginSucces();
+        setDisable(true);
+
+        db.collection('users')
+          .where('uid', '==', user.user.uid)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const isAdmin = doc.data().isAdmin;
+
+              if (isAdmin) {
+                setTimeout(() => {
+                  navigate(paths.doctorVisit, { replace: true });
+                }, 1000);
+              } else {
+                setTimeout(() => {
+                  navigate(paths.myVisits, { replace: true });
+                }, 1000);
+              }
+            });
+          });
+      });
     } catch (error) {
       loginError();
       console.error(error);
@@ -97,7 +112,6 @@ export const LoginPage = () => {
         <Input label="password" type="password" setValue={setPassword} />
         <Grid container justifyContent="center" gap="2rem">
           <CustomButton text="I'm a Petlover" size="large" disabled={disable} clickAction={() => signIn()} />
-          <CustomButton text="I'm a Doctor" size="large" />
         </Grid>
         <ToastContainer />
         <Typography theme={LoginPageTheme}>
