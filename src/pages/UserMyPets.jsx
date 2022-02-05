@@ -14,22 +14,29 @@ export const UserMyPets = () => {
   const [pets, setPets] = useState([]);
 
   var user = auth.currentUser;
-  const getPetsFromFirebase = [];
 
   useEffect(() => {
     db.collection('pets')
       .where('user_id', '==', user.uid)
-      .onSnapshot((q) => {
-        q.forEach((doc) => {
-          getPetsFromFirebase.push({
-            ...doc.data(),
-            key: doc.id,
-          });
-        });
-        setPets(getPetsFromFirebase);
-        setLoading(false);
+      .onSnapshot((snapshot) => {
+        setPets(
+          snapshot.docs.map((doc) => {
+            return {
+              key: doc.id,
+              name: doc.data().name,
+              breed: doc.data().breed,
+              type: doc.data().species,
+              petAge: doc.data().petAge,
+            };
+          }),
+        );
       });
-  }, [user, loading, getPetsFromFirebase]);
+    return ()=>setLoading(false);
+  }, [loading, user.uid]);
+
+  const deletePet = (id) => {
+    db.collection('pets').doc(id).delete();
+  };
 
   return (
     <Layout showSideBar>
@@ -53,11 +60,18 @@ export const UserMyPets = () => {
                   <MyPetCard
                     name={pet.name}
                     breed={pet.breed}
-                    type={pet.species}
+                    type={pet.type}
                     age={new Date(pet.petAge.seconds * 1000 + pet.petAge.nanoseconds / 1000000).toLocaleDateString(
                       undefined,
                       options,
                     )}
+                  />
+                  <CustomButton
+                    edge="end"
+                    aria-label="delete"
+                    color="secondary"
+                    clickAction={() => deletePet(pet.key)}
+                    text="Delete"
                   />
                 </Grid>
               );
@@ -67,7 +81,7 @@ export const UserMyPets = () => {
           )}
           <Grid container direction="column" alignItems="center" gap="1rem" item>
             <Link component={RouterLink} to={paths.addPet} style={{ textDecoration: 'none', justifyContent: 'center' }}>
-              <CustomButton text="Add pet" />
+              <CustomButton text="Add pet" size="small" />
             </Link>
           </Grid>
         </Grid>
