@@ -185,6 +185,7 @@ export const NavigationBar = () => {
                     <Typography textAlign="center">{'Log out'}</Typography>
                   </MenuItem>
                 )}
+                
               </Menu>
             </Box>
           </Toolbar>

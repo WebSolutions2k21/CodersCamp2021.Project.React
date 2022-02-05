@@ -1,9 +1,15 @@
 import { Typography, CardContent, Card, Grid } from '@mui/material';
 import { useStyles } from './MyPetCardStyle';
 import { ReactComponent as Dog } from '../../assets/dog.svg';
+import { db } from '../../config/firebase';
+import { CustomButton } from '../Button';
 
-export const MyPetCard = ({ name, type, breed, age }) => {
+export const MyPetCard = ({ name, type, breed, age, deleteAction }) => {
   const classes = useStyles();
+
+  const deletePet = (id) => {
+    db.collection('pets').doc(id).delete();
+  };
 
   return (
     <Card>
@@ -35,6 +41,14 @@ export const MyPetCard = ({ name, type, breed, age }) => {
           <Typography color="textSecondary" className={classes.small} display="inline">
             {age.toString()}
           </Typography>
+        </Grid>
+        <Grid marginTop="1rem">
+          <CustomButton
+            aria-label="delete"
+            color="textInfo"
+            clickAction={() => deletePet(deleteAction)}
+            text="Delete"
+          />
         </Grid>
       </CardContent>
     </Card>

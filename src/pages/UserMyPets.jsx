@@ -34,9 +34,9 @@ export const UserMyPets = () => {
     return ()=>setLoading(false);
   }, [loading, user.uid]);
 
-  const deletePet = (id) => {
-    db.collection('pets').doc(id).delete();
-  };
+  // const deletePet = (id) => {
+  //   db.collection('pets').doc(id).delete();
+  // };
 
   return (
     <Layout showSideBar>
@@ -65,13 +65,7 @@ export const UserMyPets = () => {
                       undefined,
                       options,
                     )}
-                  />
-                  <CustomButton
-                    edge="end"
-                    aria-label="delete"
-                    color="secondary"
-                    clickAction={() => deletePet(pet.key)}
-                    text="Delete"
+                    deleteAction ={pet.key}
                   />
                 </Grid>
               );
@@ -81,7 +75,7 @@ export const UserMyPets = () => {
           )}
           <Grid container direction="column" alignItems="center" gap="1rem" item>
             <Link component={RouterLink} to={paths.addPet} style={{ textDecoration: 'none', justifyContent: 'center' }}>
-              <CustomButton text="Add pet" size="small" />
+              <CustomButton text="Add pet" size="large" />
             </Link>
           </Grid>
         </Grid>
