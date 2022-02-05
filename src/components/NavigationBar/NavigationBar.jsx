@@ -22,7 +22,7 @@ export const NavigationBar = () => {
   const handleCloseNavMenu = () => setAnchorElNav(null);
 
   const logoutHandler = () => {
-    auth.signOut().reload();
+    auth.signOut();
   };
 
   const classes = useStyles();
