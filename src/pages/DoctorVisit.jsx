@@ -14,7 +14,7 @@ import {
   Button,
 } from '@mui/material';
 
-import { Layout, VisitDescription, CustomButton } from '../components';
+import { Layout, VisitDescription, CustomButton, DatePicker } from '../components';
 
 
 export const DoctorVisit = () => {
@@ -25,6 +25,7 @@ export const DoctorVisit = () => {
   const [updateDescription, setUpdateDescription] = useState('');
   const [toUpdateId, setToUpdateId] = useState('');
   const [owner, setOwner] = useState([]);
+
 
   useEffect(() => {
     db.collection('visits').onSnapshot((snapshot) => {
@@ -60,6 +61,37 @@ export const DoctorVisit = () => {
     });
   }, [loading]);
 
+
+  useEffect(() => {
+    const getVisitsFromFirebase = [];
+    db.collection('visits').onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        getVisitsFromFirebase.push({
+          ...doc.data(),
+
+          key: doc.id,
+        });
+      });
+      setVisits(getVisitsFromFirebase);
+      setLoading(false);
+    });
+  }, [loading]);
+
+
+  const visitsArray = [];
+
+  visits.forEach((visit) => {
+    if (visit.uid ) {
+      visitsArray.push(visit);
+    }
+  });
+
+  const visitsDates = [];
+
+  visitsArray.forEach((visit) => {
+    visitsDates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
+  });
+
   const openDescriptionDialog = (visit) => {
     setOpen(true);
     setToUpdateId(visit.id);
@@ -79,6 +111,9 @@ export const DoctorVisit = () => {
 
   return (
     <Layout showSideBar>
+        <Grid item>
+          <DatePicker visits={visitsDates} />
+        </Grid>
       <Typography paragraph>Doctor Visit</Typography>
       {visits.length > 0 ? (
         visits.map((visit) => {
