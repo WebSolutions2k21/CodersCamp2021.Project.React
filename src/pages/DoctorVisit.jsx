@@ -12,6 +12,7 @@ export const DoctorVisit = () => {
   const [open, setOpen] = useState(false);
   const [updateDescription, setUpdateDescription] = useState('');
   const [toUpdateId, setToUpdateId] = useState('');
+  const [owner, setOwner] = useState('');
 
   useEffect(() => {
     db.collection('visits').onSnapshot((snapshot) => {
@@ -33,16 +34,30 @@ export const DoctorVisit = () => {
       //     console.log(doc.id, ' => ', doc.data());
       // });
 
-    //   tableOne.on('value', function (snapshot) {
-    //     var userId = snapshot.val().userId; // line 1 (results like 1,2,3,4,5,6)
-    //     anotherTable.child('userdetails').child(userId).once('value', function(mediaSnap) {
-    //         console.log(userId + ":" + mediaSnap.val().name);
-    //     });
-    // });
+      //   tableOne.on('value', function (snapshot) {
+      //     var userId = snapshot.val().userId; // line 1 (results like 1,2,3,4,5,6)
+      //     anotherTable.child('userdetails').child(userId).once('value', function(mediaSnap) {
+      //         console.log(userId + ":" + mediaSnap.val().name);
+      //     });
+      // });
+      const some_uid = 'gJ4QKpCrAGf3ckMuXfcRHooRFlv2';
+      const userName = db
+        .collection('users')
+        .where('uid', '==', some_uid)
+        .onSnapshot((snapshot) => {
+          setOwner(
+            snapshot.docs.map((doc) => {
+              console.log('docName', doc.lastName);
+              return {
+             
+                name: doc.data().lastName,
+              };
+            }),
+          );
+          console.log("owner", owner);
+        });
 
-      // const userName = db.collection('users').where("uid", '==', some_uid).get();
- 
-      // console.log('userName', userName);
+      console.log('userName', userName);
 
       setLoading(false);
       console.log('visits 2', visits);
