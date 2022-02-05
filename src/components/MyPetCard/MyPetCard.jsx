@@ -1,4 +1,4 @@
-import { Typography, CardContent, Card, Grid } from '@mui/material';
+import { Typography, CardContent, Card, Grid, Box } from '@mui/material';
 import { useStyles } from './MyPetCardStyle';
 import { ReactComponent as Dog } from '../../assets/dog.svg';
 import { db } from '../../config/firebase';
@@ -12,8 +12,7 @@ export const MyPetCard = ({ name, type, breed, age, deleteAction }) => {
   };
 
   return (
-    <Card data-testid="my-pet-form">
-      <CardContent>
+    <Box data-testid="my-pet-form" sx={{ borderRadius: 3, boxShadow: '2px 2px 10px #33333333', padding: '15px', background: 'white' }}>
         <Typography className={classes.title} alignItems="center" color="#16bac6" variant="h5">
           <Dog className={classes.ico} />
           {name}
@@ -49,8 +48,7 @@ export const MyPetCard = ({ name, type, breed, age, deleteAction }) => {
             clickAction={() => deletePet(deleteAction)}
             text="Delete"
           />
-        </Grid>
-      </CardContent>
-    </Card>
+          </Grid>
+          </Box>
   );
 };
