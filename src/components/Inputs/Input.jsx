@@ -16,6 +16,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth, helper
 
   return (
     <TextField
+      data-testid="input-1"
       fullWidth
       required= {required}
       onSubmit={handleSubmit}
@@ -26,6 +27,7 @@ export const Input = ({ label, type = 'text', value, setValue, fullWidth, helper
       InputProps={{
         className: classes.lbl,
         disableUnderline: true,
+        'data-testid': 'nameInput',
       }}
       InputLabelProps={{
         className: classes.lbl,
