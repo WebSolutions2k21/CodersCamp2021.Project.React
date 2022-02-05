@@ -36,7 +36,6 @@ export const LoginPage = () => {
       await auth.signInWithEmailAndPassword(email, password).then((user) => {
         loginSucces();
         setDisable(true);
-
         db.collection('users')
           .where('uid', '==', user.user.uid)
           .get()
@@ -55,6 +54,7 @@ export const LoginPage = () => {
               }
             });
           });
+        localStorage.setItem('currentUser', user.user.uid);
       });
     } catch (error) {
       loginError();
