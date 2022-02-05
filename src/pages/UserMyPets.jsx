@@ -34,10 +34,6 @@ export const UserMyPets = () => {
     return ()=>setLoading(false);
   }, [loading, user.uid]);
 
-  // const deletePet = (id) => {
-  //   db.collection('pets').doc(id).delete();
-  // };
-
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">

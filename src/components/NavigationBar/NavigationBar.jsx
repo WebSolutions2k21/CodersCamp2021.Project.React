@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -8,12 +8,12 @@ import PawIcon from '@mui/icons-material/Pets';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
-  const user = auth.currentUser;
-  const isAuth = user;
+  const [admin, setAdmin] = useState(true);
+  const isAuth = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -181,11 +181,10 @@ export const NavigationBar = () => {
                   </MenuItem>
                 )}
                 {isAuth && (
-                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.login}>
+                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.myVisits}>
                     <Typography textAlign="center">{'Log out'}</Typography>
                   </MenuItem>
                 )}
-                
               </Menu>
             </Box>
           </Toolbar>
