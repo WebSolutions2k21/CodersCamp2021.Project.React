@@ -1,7 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
-
   topText: {
     color: '#16bac6',
     fontSize: '40px',

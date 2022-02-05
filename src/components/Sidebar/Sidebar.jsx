@@ -62,20 +62,18 @@ export const Sidebar = () => {
 
   return (
     <>
-      <>
-        <Box
-          component="aside"
-          value={iconColor}
-          className={classes.drawer}
-          sx={{ display: { xs: 'none', md: 'block' } }}
-        >
-          <List className={classes.list}>
-            {userMenuItems.map((item) => (
-              <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
-            ))}
-          </List>
-        </Box>
-      </>
+      <Box
+        component="aside"
+        value={iconColor}
+        className={classes.drawer}
+        sx={{ display: { xs: 'none', md: 'block' }, zIndex: 1000 }}
+      >
+        <List className={classes.list}>
+          {userMenuItems.map((item) => (
+            <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
+          ))}
+        </List>
+      </Box>
       <Paper
         component="aside"
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
