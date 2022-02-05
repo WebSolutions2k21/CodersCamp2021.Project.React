@@ -22,6 +22,7 @@ export const NavigationBar = () => {
   const handleCloseNavMenu = () => setAnchorElNav(null);
 
   const logoutHandler = () => {
+    localStorage.removeItem('currentUser');
     auth.signOut().reload();
   };
 
