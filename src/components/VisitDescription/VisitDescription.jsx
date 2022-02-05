@@ -31,7 +31,7 @@ export const VisitDescription = ({ time, owner, pet, description }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item alignItems="flex-start" nowrap mb={2}>
+            <Grid item alignItems="flex-start" nowrap='true' mb={2}>
               <span className={classes.bold}>DESCRIPTION: </span>
               {description}
             </Grid>
