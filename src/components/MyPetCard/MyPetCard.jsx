@@ -1,8 +1,8 @@
-import { Typography, CardContent, Card, Grid} from '@mui/material';
+import { Typography, CardContent, Card, Grid } from '@mui/material';
 import { useStyles } from './MyPetCardStyle';
 import { ReactComponent as Dog } from '../../assets/dog.svg';
 
-export const MyPetCard = ({ name, type, breed, age}) => {
+export const MyPetCard = ({ name, type, breed, age }) => {
   const classes = useStyles();
 
   return (
