@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
-
-import { Typography, Grid, Dialog, DialogContent, DialogActions, TextField } from '@mui/material';
-import { Layout, VisitDescription, CustomButton } from '../components';
 import { db } from '../config/firebase';
 import { collectionGroup, query, where, getDocs } from 'firebase/firestore';
+
+import {
+  Typography,
+  Grid,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  TextField,
+  DialogTitle,
+  Box,
+  Button,
+} from '@mui/material';
+
+import { Layout, VisitDescription, CustomButton } from '../components';
+
 
 export const DoctorVisit = () => {
   const [visits, setVisits] = useState([]);
@@ -13,48 +25,6 @@ export const DoctorVisit = () => {
   const [updateDescription, setUpdateDescription] = useState('');
   const [toUpdateId, setToUpdateId] = useState('');
   const [owner, setOwner] = useState([]);
-
-  //   useEffect(() => {
-  //     const usersCollection = db.collection('users');
-  //     const visitsCollection = db.collection('visits');
-
-  //     const usersData = {};
-  //     let visitsTable = [];
-
-  //     visitsCollection.onSnapshot((querySnapshot) => {
-  //       console.log('query', querySnapshot);
-  //       querySnapshot.forEach((doc) => {
-  //         console.log('doc', doc);
-  //         let uni = {
-  //           id: doc.id,
-  //           pet: doc.data().pet,
-  //           date: doc.data().date,
-  //           description: doc.data().description,
-  //           uid: doc.data().uid,
-  //         };
-  //         if (uni.uid) {
-  //           // console.log('uni uid', uni.uid);
-  //           // usersCollection.where('uid', '==', uni.uid).onSnapshot((uidDoc) => {
-  //           //   console.log("przed pętlą", uidDoc);
-  //           //   uidDoc.docs.forEach((doc2) => {
-  //           //     console.log('uid w users', doc2);
-  //           //     uni.uid = {
-  //           //       lastname: doc2.data().lastName,
-  //           //     };
-  //           //   });
-  //           // });
-  //           // visitsTable.push(uni);
-
-  //         }
-  //         visitsTable.push(uni);
-  //           console.log("visits table", visitsTable);
-  //         setVisits(visitsTable);
-  //       });
-  // console.log('tabela visits table', visits);
-  // });
-
-  //     return () => setLoading(false);
-  //   }, [loading]);
 
   useEffect(() => {
     db.collection('visits').onSnapshot((snapshot) => {
@@ -87,28 +57,6 @@ export const DoctorVisit = () => {
           };
         }),
       );
-
-      // const some_uid = 'gJ4QKpCrAGf3ckMuXfcRHooRFlv2';
-      // const userName = db
-      //   .collection('users')
-      //   .where('uid', '==', some_uid)
-      //   .onSnapshot((snapshot) => {
-      //     setOwner(
-      //       snapshot.docs.map((doc) => {
-      //         console.log('docName', doc.lastName);
-      //         return {
-
-      //           name: doc.data().lastName,
-      //         };
-      //       }),
-      //     );
-      //     console.log("owner", owner);
-      //   });
-
-      // console.log('userName', userName);
-
-      // setLoading(false);
-      // console.log('visits 2', visits);
     });
   }, [loading]);
 
@@ -135,34 +83,44 @@ export const DoctorVisit = () => {
       {visits.length > 0 ? (
         visits.map((visit) => {
           return (
-            <Grid item xs={12} sm={12} md={6} key={visit.id}>
-              <VisitDescription
-                time={new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString()}
-                pet={visit.pet}
-                owner={visit.uid}
-                description={visit.description}
-              />
-              <Grid item md={4} xs={12}>
-                <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-                  <Grid item p={2}>
-                    {/* <DescriptionModal  /> */}
-                    <CustomButton
-                      edge="end"
-                      text="Descripton"
-                      clickAction={() => {
-                        openDescriptionDialog(visit);
-                      }}
-                    ></CustomButton>
-                  </Grid>
-                  <Grid item p={2}>
-                    <CustomButton color="primary" size="small" text="CLOSE VISIT" />
-                  </Grid>
-                  <Grid item p={2}>
-                    <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
+            <Box key={visit.id}>
+              <Grid container direction="row">
+                <Grid item>
+                  <VisitDescription
+                    time={new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString()}
+                    pet={visit.pet}
+                    owner={visit.uid}
+                    description={visit.description}
+                  />
+                </Grid>
+                <Grid item>
+                  <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
+                    <Grid item p={2}>
+                      <Button
+                        style={{
+                          color: '#ffffff',
+                          width: '170px',
+                          backgroundColor: '#fdc161',
+                          padding: '4px 10px',
+                          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                        }}
+                        onClick={() => {
+                          openDescriptionDialog(visit);
+                        }}
+                      >
+                        ADD DESCRIPTION
+                      </Button>
+                    </Grid>
+                    <Grid item p={2}>
+                      <CustomButton color="primary" size="small" text="CLOSE VISIT" />
+                    </Grid>
+                    <Grid item p={2}>
+                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Box>
           );
         })
       ) : (
@@ -170,18 +128,29 @@ export const DoctorVisit = () => {
       )}
 
       <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ pt: '25px' }} id="alert-dialog-title">
+          {'The visit description'}
+        </DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="normal"
-            label="Description"
-            type="text"
-            fullWidth
-            value={updateDescription}
-            onChange={(event) => setUpdateDescription(event.target.value)}
-          />
+          <Box
+            sx={{
+              width: 500,
+              maxWidth: '100%',
+            }}
+          >
+            <TextField
+              autoFocus
+              margin="normal"
+              multiline
+              maxRows={4}
+              type="text"
+              fullWidth
+              value={updateDescription}
+              onChange={(event) => setUpdateDescription(event.target.value)}
+            />
+          </Box>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ p: '0 25px 25px' }}>
           <CustomButton clickAction={handleClose} color="secondary" text="CLOSE" />
           <CustomButton clickAction={editDescription} color="primary" text="SAVE" />
         </DialogActions>
