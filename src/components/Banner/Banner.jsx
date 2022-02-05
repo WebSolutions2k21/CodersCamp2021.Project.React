@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 import { Box, Container, Typography } from '@mui/material';
 import { useStyles } from './BannerStyle';
@@ -7,9 +7,9 @@ import { auth, db } from '../../config/firebase';
 export const Banner = () => {
   const classes = useStyles();
   const user = auth.currentUser;
-  const [name, setName] = useState();
+  const [name, setName] = useState([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     db.collection('users')
       .where('uid', '==', user.uid)
       .get()
