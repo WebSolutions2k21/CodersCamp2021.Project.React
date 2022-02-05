@@ -8,11 +8,11 @@ import PawIcon from '@mui/icons-material/Pets';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
-import { auth, db } from '../../config/firebase';
+import { auth } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
-  const [admin, setAdmin] = useState(true);
+ 
   const isAuth = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
@@ -135,6 +135,25 @@ export const NavigationBar = () => {
                   {'Log Out'}
                 </Button>
               )}
+                          {isAuth && (
+                <Button
+                  component={RouterLink}
+                  to={paths.myVisits}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'My account'}
+                </Button>
+              )}
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -181,8 +200,8 @@ export const NavigationBar = () => {
                   </MenuItem>
                 )}
                 {isAuth && (
-                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.myVisits}>
-                    <Typography textAlign="center">{'Log out'}</Typography>
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.myVisits}>
+                    <Typography textAlign="center">{'My visits'}</Typography>
                   </MenuItem>
                 )}
               </Menu>
