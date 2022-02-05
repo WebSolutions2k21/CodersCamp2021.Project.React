@@ -18,6 +18,24 @@ export const DoctorVisit = () => {
     db.collection('visits').onSnapshot((snapshot) => {
       setVisits(
         snapshot.docs.map((doc) => {
+          console.log("owner visit.iud", doc.data().uid);
+     
+          const userName = db
+          .collection('users')
+          .where('uid', '==',  doc.data().uid)
+          .onSnapshot((snapshot) => {
+            setOwner(
+              snapshot.docs.map((doc1) => {
+                console.log('docName', doc1.data().lastName);
+                return {
+               firstName: doc1.data().firstName,
+                  lastname: doc1.data().lastName,
+                };
+              }),
+            )
+            console.log("owner", owner.name);
+          });
+        
           return {
             id: doc.id,
             pet: doc.data().pet,
@@ -25,42 +43,37 @@ export const DoctorVisit = () => {
             description: doc.data().description,
             uid: doc.data().uid,
           };
+
+
         }),
       );
 
-      // const museums = query(collectionGroup(db, 'landmarks'), where('type', '==', 'museum'));
-      // const querySnapshot = await getDocs(museums);
-      // querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, ' => ', doc.data());
-      // });
+     
+       
+     
+    
 
-      //   tableOne.on('value', function (snapshot) {
-      //     var userId = snapshot.val().userId; // line 1 (results like 1,2,3,4,5,6)
-      //     anotherTable.child('userdetails').child(userId).once('value', function(mediaSnap) {
-      //         console.log(userId + ":" + mediaSnap.val().name);
-      //     });
-      // });
-      const some_uid = 'gJ4QKpCrAGf3ckMuXfcRHooRFlv2';
-      const userName = db
-        .collection('users')
-        .where('uid', '==', some_uid)
-        .onSnapshot((snapshot) => {
-          setOwner(
-            snapshot.docs.map((doc) => {
-              console.log('docName', doc.lastName);
-              return {
+      // const some_uid = 'gJ4QKpCrAGf3ckMuXfcRHooRFlv2';
+      // const userName = db
+      //   .collection('users')
+      //   .where('uid', '==', some_uid)
+      //   .onSnapshot((snapshot) => {
+      //     setOwner(
+      //       snapshot.docs.map((doc) => {
+      //         console.log('docName', doc.lastName);
+      //         return {
              
-                name: doc.data().lastName,
-              };
-            }),
-          );
-          console.log("owner", owner);
-        });
+      //           name: doc.data().lastName,
+      //         };
+      //       }),
+      //     );
+      //     console.log("owner", owner);
+      //   });
 
-      console.log('userName', userName);
+      // console.log('userName', userName);
 
-      setLoading(false);
-      console.log('visits 2', visits);
+      // setLoading(false);
+      // console.log('visits 2', visits);
     });
   }, [loading]);
 
@@ -102,7 +115,6 @@ export const DoctorVisit = () => {
                       edge="end"
                       text="Descripton"
                       clickAction={() => {
-                        console.log('visit', visit.id);
                         openDescriptionDialog(visit);
                       }}
                     ></CustomButton>
