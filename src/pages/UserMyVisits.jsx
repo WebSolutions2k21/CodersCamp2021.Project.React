@@ -3,15 +3,20 @@ import { Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import isSameDay from 'date-fns/isSameDay';
 
 import { Layout, DatePicker, CustomButton } from '../components';
 import { paths } from '../config/paths';
 import { db, auth } from '../config/firebase';
+import { doc, deleteDoc } from 'firebase/firestore';
 
 export const UserMyVisits = () => {
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
   const userId = auth.currentUser.auth.lastNotifiedUid;
+  const visitsArray = [];
+  const visitsDates = [];
+  let visitsRenderArray = [];
 
   useEffect(() => {
     const getVisitsFromFirebase = [];
@@ -28,23 +33,53 @@ export const UserMyVisits = () => {
     });
   }, [loading]);
 
-  const visitsArray = [];
-
   visits.forEach((visit) => {
     if (visit.uid === userId) {
       visitsArray.push(visit);
+      console.log('VISITSARRAY:', visitsArray);
     }
   });
 
-  const visitsDates = [];
-
   visitsArray.forEach((visit) => {
     visitsDates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
+    console.log('VISITSDATES:', visitsDates);
+  });
+
+  const [date, setDate] = useState(new Date());
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    const info = visitsDates.find((e) => isSameDay(date, e));
+    setSelected([info]);
+  }, [date]);
+
+  visitsArray.forEach((el) => {
+    selected.forEach((selection) => {
+      if (selection !== undefined) {
+        if (
+          selection.toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric' }) ===
+          new Date(el.date.seconds * 1000 + el.date.nanoseconds / 1000000).toLocaleDateString({
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        ) {
+          if (visitsRenderArray.includes(el) === false) visitsRenderArray.push(el);
+          console.log('VISITSRENDERARRAY:', visitsRenderArray);
+        }
+      }
+    });
   });
 
   if (loading) {
     return <h1>loading data...</h1>;
   }
+
+  const deleteVisit = (key) => {
+    deleteDoc(doc(db, 'visits', `${key}`));
+    visitsRenderArray = visitsRenderArray.filter((el) => el.key !== key);
+    console.log('DELETE', visitsRenderArray);
+  };
 
   return (
     <Layout showSideBar>
@@ -57,7 +92,7 @@ export const UserMyVisits = () => {
         style={{ margin: '1%' }}
       >
         <Grid item>
-          <DatePicker visits={visitsDates} />
+          <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
         </Grid>
         <Grid item>
           <Grid
@@ -66,8 +101,8 @@ export const UserMyVisits = () => {
             style={{ minHeight: '300px', width: '80%' }}
             justifyContent="space-between"
           >
-            {visitsArray.length > 0 ? (
-              visitsArray.map((visit) => {
+            {visitsRenderArray.length > 0 ? (
+              visitsRenderArray.map((visit) => {
                 return (
                   <Grid container key={visit.key}>
                     <Grid container spacing={2} alignItems="center">
@@ -97,7 +132,7 @@ export const UserMyVisits = () => {
                         </p>
                       </Grid>
                       <Grid item>
-                        <CustomButton text="CANCEL" color="secondary" />
+                        <CustomButton text="CANCEL" color="secondary" clickAction={() => deleteVisit(visit.key)} />
                       </Grid>
                     </Grid>
                   </Grid>
