@@ -12,7 +12,7 @@ export const MyPetCard = ({ name, type, breed, age, deleteAction }) => {
   };
 
   return (
-    <Card>
+    <Card data-testid="my-pet-form">
       <CardContent>
         <Typography className={classes.title} alignItems="center" color="#16bac6" variant="h5">
           <Dog className={classes.ico} />
