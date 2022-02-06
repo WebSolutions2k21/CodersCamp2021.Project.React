@@ -101,8 +101,7 @@ Ostatnią zakładką jest edycja profilu, gdzie specjalista może zmienić swoje
 Nasz zespół zrealizował także responsywność stron.
 
 ## API
-
-...
+Do tworzenia projektu został użyty Firebase. Jego funkcjonalność umożliwiła nam utworzenie bazy danych oraz uwierzytelnianie. Z kolei API platformy pozwoliło na przechowywanie danych w chmurze Firebase.
 
 ## Kod startowy projektu
 1. Nasza aplikacja została wdrożona na Netlify.
