@@ -17,14 +17,36 @@ import {
 import Theme from './styles/themes/Theme';
 import { paths } from './config/paths';
 import { PrivateRoute } from './config/PrivateRoute';
+import { PublicRoute } from './config/PublicRoute';
 
 export const App = () => {
   return (
     <Theme>
       <Routes>
-        <Route path={paths.home} element={<HomePage />} />
-        <Route path={paths.login} element={<LoginPage />} />
-        <Route path={paths.signUp} element={<SignupPage />} />
+        <Route
+          path={paths.home}
+          element={
+            <PublicRoute>
+              <HomePage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path={paths.login}
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path={paths.signUp}
+          element={
+            <PublicRoute>
+              <SignupPage />
+            </PublicRoute>
+          }
+        />
         <Route path={paths.aboutUs} element={<AboutUsPage />} />
         <Route path={paths.contact} element={<ContactPage />} />
 
