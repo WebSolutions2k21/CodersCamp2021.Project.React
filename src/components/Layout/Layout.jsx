@@ -15,7 +15,7 @@ export const Layout = ({ children, showSideBar }) => {
           <Container maxWidth="xl" style={{ display: 'grid' }}>
             <Grid container wrap="nowrap">
               <Sidebar />
-              <Box component="main" width={'100%'} sx={{ height: 'calc(100% - 54px)', zIndex: -1 }}>
+              <Box component="main" width={'100%'} sx={{ height: 'calc(100% - 54px)' }}>
                 {children}
               </Box>
             </Grid>
