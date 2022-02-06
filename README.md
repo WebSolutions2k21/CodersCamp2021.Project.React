@@ -1,48 +1,3 @@
-## Praca z projektem
-
-### Branch Name
-
-Używamy kebab-case do nazywania branchy
-
-```sh
-more-gray-shades
-support-dark-theme
-button-component
-itp.
-```
-
-### Commit Message
-
-Przyjmujemy poniższy format commit message
-
-```sh
-<type>: <commit_message>
-```
-
-#### Commit Message Type
-
-- **build**: Zmiana która afektuje budowanie projektu lub zależności zewnętrzne
-- **docs**: Zmiana w dokumentacji bądź dodatkowych materiałach
-- **feature**: Wprowadzenie nowej funkcjonalności
-- **bugfix**: Naprawienie błędu
-- **refactor**: Zmiana w projekcie, która nic nie naprawia, ani nie dodaje
-
-#### Zasady Commit Message
-
-- używaj imperatywnej formy czasu teraźniejszego: "change", nie "changed" lub "changes"
-- nie zaczynaj wielką literą
-- nie dodawaj kropki na końcu zdania
-- używaj języka angielskiego
-
-### Pull Request
-
-Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzyć małe PR. W opisie PR powinno być dokładnie opisane co on zmienia. Każdy PR musi być zaakceptowany przez przynajmniej jedną inną osobę.
-
-### .env
-
-Stwórz plik .env i wklej do niego dane z Trello.
-
-
 # CodersCamp2021 - Projekt React
 
 ## Zespół projektowy:
@@ -79,7 +34,7 @@ Zespół pracował w ramach kursu CodersCamp. Aplikację wykonali uczestnicy kur
 
 
 ## Cel projektu
-Celem projektu było dostarczenie aplikacji „Puppylog” pozwalającej użytkownikom na odnalezienie odpowiedniego weterynarza dla swojego pupila. Zalogowany użytkownik może dokonać rezerwacji terminu wizyty oraz samodzielnie dodawać swoje zwierzęta. 
+Celem projektu było dostarczenie aplikacji „Puppylog” pozwalającej użytkownikom na zapisanie do weterynarza swojego pupila. Zalogowany użytkownik może wybrać spośród trzech lekarzy kliniki. Po wyborze odpowiedniego weterynarza może dokonać rezerwacji terminu wizyty oraz samodzielnie dodawać swoje zwierzęta.
 
 Każde zwierzę posiada indywidualną kartę pacjenta. Widnieje w niej imię, gatunek, rasa, data urodzenia, historia chorób oraz inne ważne informacje dotyczące pupila. Wszyscy weterynarze mają dostęp do karty danego zwierzęcia oraz mogą ją edytować. Dodatkowo karta pacjenta jest uzupełniana przez weterynarza po każdej odbytej wizycie.
 
@@ -94,7 +49,7 @@ Aplikacja została wykonana według wymagań dostarczonych przez organizatorów 
 Na głównej stronie znajduje się autorskie logo (kliknięcie na nie powoduje przeniesienie na stronę główną) oraz nawigacja, z poziomu której można bezpośrednio przejść do sekcji: About, Contacts, Sign Up czy Login. Dodatkowo widnieje tu motto przewodnie strony - „We love Pets!”, a także przycisk „GET STARTED”, po kliknięciu na który, zostaniemy przeniesieni na stronę logowania. 
 
 ### Strona logowania oraz strona rejestracji
-Jeżeli użytkownik jest już zarejestrowany, wówczas może się zalogować na stronę podając swój e-mail oraz hasło oraz klikając na „I’M A PETLOVER”. Po pomyślnym zalogowaniu się, otrzymuje on dostęp do kolejnych zasobów strony. W nawigacji zamiast przycisku „Login” pojawi się przycisk „My Account”. 
+Jeżeli użytkownik jest już zarejestrowany, wówczas może się zalogować na stronę podając swój e-mail oraz hasło oraz klikając na „I’M A PETLOVER”. Po pomyślnym zalogowaniu się, otrzymuje on dostęp do kolejnych zasobów strony. W nawigacji zamiast przycisku „Login” pojawi się przycisk „My Account” oraz przycisk „Log out”.
 
 Na stronę mogą się również logować lekarze podając odpowiedni adres e-mail oraz hasło. Specjaliści otrzymują nieco inny zasób strony.
 
@@ -155,12 +110,11 @@ Nasz zespół zrealizował także responsywność stron.
 
 ## Technologie użyte w projekcie:
 
-1. JSX / TSX
+1. JSX
 2. React
-3. TypeScript
-4. Node.js
-5. Firebase
-6. Material UI
+3. Node.js
+4. Firebase
+5. Material UI
 
 ## Narzędzia pomocnicze
 
