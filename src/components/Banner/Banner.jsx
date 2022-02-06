@@ -18,7 +18,7 @@ export const Banner = () => {
           setName(() => doc.data().firstName);
         });
       });
-  });
+  }, [user.uid]);
 
   return (
     <Box className={classes.box}>
