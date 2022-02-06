@@ -92,14 +92,6 @@ export const App = () => {
         />
 
         <Route
-          path={paths.doctorCalender}
-          element={
-            <PrivateRoute>
-              <DoctorCalender />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path={paths.doctorVisit}
           element={
             <PrivateRoute>

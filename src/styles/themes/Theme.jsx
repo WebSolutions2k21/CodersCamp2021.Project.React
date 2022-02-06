@@ -39,7 +39,6 @@ const theme = createTheme({
         },
       },
     },
-
     MuiInputLabel: {
       styleOverrides: {
         root: {
