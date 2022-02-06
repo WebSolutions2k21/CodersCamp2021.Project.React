@@ -14,12 +14,14 @@ export const UserMyVisits = () => {
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
   const userId = auth.currentUser.auth.lastNotifiedUid;
-  const visitsArray = [];
-  const visitsDates = [];
-  let visitsRenderArray = [];
+  const [visitsDates, setVisitsDates] = useState([]);
+  const [arrayOfVisits, setArrayOfVisits] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     const getVisitsFromFirebase = [];
+    const visitsArray = [];
     db.collection('visits').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         getVisitsFromFirebase.push({
@@ -28,48 +30,51 @@ export const UserMyVisits = () => {
           key: doc.id,
         });
       });
-      setVisits(getVisitsFromFirebase);
+      getVisitsFromFirebase.forEach((visit) => {
+        if (visit.uid === userId) {
+          visitsArray.push(visit);
+        }
+      });
+      setVisits(visitsArray);
       setLoading(false);
     });
-  }, [loading]);
+  }, [loading, userId]);
 
-  visits.forEach((visit) => {
-    if (visit.uid === userId) {
-      visitsArray.push(visit);
-      console.log('VISITSARRAY:', visitsArray);
-    }
-  });
-
-  visitsArray.forEach((visit) => {
-    visitsDates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
-    console.log('VISITSDATES:', visitsDates);
-  });
-
-  const [date, setDate] = useState(new Date());
-  const [selected, setSelected] = useState([]);
+  useEffect(() => {
+    const dates = [];
+    visits.forEach((visit) => {
+      dates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
+      return dates;
+    });
+    setVisitsDates(dates);
+  }, [visits]);
 
   useEffect(() => {
     const info = visitsDates.find((e) => isSameDay(date, e));
     setSelected([info]);
-  }, [date]);
+  }, [date, visitsDates]);
 
-  visitsArray.forEach((el) => {
-    selected.forEach((selection) => {
-      if (selection !== undefined) {
-        if (
-          selection.toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric' }) ===
-          new Date(el.date.seconds * 1000 + el.date.nanoseconds / 1000000).toLocaleDateString({
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })
-        ) {
-          if (visitsRenderArray.includes(el) === false) visitsRenderArray.push(el);
-          console.log('VISITSRENDERARRAY:', visitsRenderArray);
+  useEffect(() => {
+    const visitsRenderArray = [];
+    visits.forEach((el) => {
+      selected.forEach((selection) => {
+        if (selection !== undefined) {
+          if (
+            selection.toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric' }) ===
+            new Date(el.date.seconds * 1000 + el.date.nanoseconds / 1000000).toLocaleDateString({
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })
+          ) {
+            if (visitsRenderArray.includes(el) === false) visitsRenderArray.push(el);
+            return visitsRenderArray;
+          }
         }
-      }
+      });
     });
-  });
+    setArrayOfVisits(visitsRenderArray);
+  }, [visits, selected]);
 
   if (loading) {
     return <h1>loading data...</h1>;
@@ -77,8 +82,7 @@ export const UserMyVisits = () => {
 
   const deleteVisit = (key) => {
     deleteDoc(doc(db, 'visits', `${key}`));
-    visitsRenderArray = visitsRenderArray.filter((el) => el.key !== key);
-    console.log('DELETE', visitsRenderArray);
+    setVisits([]);
   };
 
   return (
@@ -101,8 +105,8 @@ export const UserMyVisits = () => {
             style={{ minHeight: '300px', width: '80%' }}
             justifyContent="space-between"
           >
-            {visitsRenderArray.length > 0 ? (
-              visitsRenderArray.map((visit) => {
+            {arrayOfVisits.length > 0 ? (
+              arrayOfVisits.map((visit) => {
                 return (
                   <Grid container key={visit.key}>
                     <Grid container spacing={2} alignItems="center">
