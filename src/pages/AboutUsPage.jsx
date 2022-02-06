@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Layout } from '../components';
-import imgLogo from '../assets/logo.png';
+import imgLogo1 from '../assets/logo_big.png';
 
 // const useStyles = makeStyles({
 //   root: {
@@ -32,7 +32,7 @@ export const AboutUsPage = () => {
           },
         }}
       >
-        <img src={imgLogo} alt="logo" />
+        <img src={imgLogo1} alt="logo" />
         <Typography
           sx={{
             alignSelf: 'flex-start',

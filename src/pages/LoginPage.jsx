@@ -17,24 +17,24 @@ import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
 export const LoginPage = () => {
   let navigate = useNavigate();
 
-  const loginSucces = () => {
+  const loginSuccess = () => {
     toast.success('Successful Login!', {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: '1500',
+      autoClose: 1000,
     });
   };
 
   const loginError = () => {
     toast.error('Login failed! Check login or password!', {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: '1500',
+      autoClose: 1000,
     });
   };
 
   const signIn = async () => {
     try {
       await auth.signInWithEmailAndPassword(email, password).then((user) => {
-        loginSucces();
+        loginSuccess();
         setDisable(true);
         db.collection('users')
           .where('uid', '==', user.user.uid)
