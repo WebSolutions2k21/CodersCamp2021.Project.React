@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../config/firebase';
+import { Loading } from '../components';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (pending) {
-    return <>Loading ...</>;
+    return <Loading />;
   }
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
