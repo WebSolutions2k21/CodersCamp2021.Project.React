@@ -67,7 +67,7 @@ export const Sidebar = () => {
           component="aside"
           value={iconColor}
           className={classes.drawer}
-          sx={{ display: { xs: 'none', md: 'block' } }}
+          sx={{ display: { xs: 'none', md: 'block' }, zIndex: 1000 }}
         >
           <List className={classes.list}>
             {userMenuItems.map((item) => (
