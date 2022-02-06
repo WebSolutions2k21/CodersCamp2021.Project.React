@@ -18,7 +18,7 @@ export const CustomButton = ({ text, color, size, clickAction, disabled }) => {
         <Button type="submit" variant="contained" color={color} size={size} disabled={disabled}>
           {text}
         </Button>
-      )}
+      )}   
     </ThemeProvider>
   );
 };
