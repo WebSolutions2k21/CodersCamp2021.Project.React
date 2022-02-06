@@ -5,6 +5,6 @@ export * from './Button';
 export * from './DatePicker';
 export * from './Sidebar';
 export * from './MyVisitForm';
-export * from './MyPetForm'
-export * from './MyPetCard'
+export * from './MyPetForm';
+export * from './MyPetCard';
 export * from './VisitDescription';
