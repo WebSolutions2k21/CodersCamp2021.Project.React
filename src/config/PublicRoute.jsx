@@ -4,5 +4,5 @@ import { paths } from './paths';
 import { auth } from '../config/firebase';
 
 export const PublicRoute = ({ children }) => {
-  return !auth.currentUser ? children : <Navigate to={paths.login} />;
+  return !auth.currentUser ? children : <Navigate to={paths.myVisits} />;
 };
