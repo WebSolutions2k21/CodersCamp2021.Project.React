@@ -8,3 +8,4 @@ export * from './MyVisitForm';
 export * from './MyPetForm';
 export * from './MyPetCard';
 export * from './VisitDescription';
+export * from './Loading';
