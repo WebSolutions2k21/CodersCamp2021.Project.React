@@ -9,8 +9,12 @@ export const ButtonTheme = createTheme({
     },
     secondary: {
       main: '#eff0f4',
+      dark: '#fff',
       contrastText: '#000',
     },
+    textInfo:{
+      main: '#fff',
+    }
   },
   components: {
     MuiButton: {

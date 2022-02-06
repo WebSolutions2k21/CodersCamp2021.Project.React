@@ -10,17 +10,32 @@ import {
   Paper,
 } from '@mui/material';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
 import { paths } from '../../config/paths';
 import { BottomNavigationContext } from '../../context/BottomNavigationContext';
+import { auth, db } from '../../config/firebase';
 
 export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
+
+  const admin = auth.currentUser;
+  const [isAdmin, setIsAdmin] = useState([]);
+
+  useLayoutEffect(() => {
+    db.collection('users')
+      .where('uid', '==', admin.uid)
+      .get()
+      .then(function (q) {
+        q.forEach(function (doc) {
+          setIsAdmin(() => doc.data().isAdmin);
+        });
+      });
+  });
 
   const { iconColor, setIconColor } = useContext(BottomNavigationContext);
 
@@ -59,6 +74,18 @@ export const Sidebar = () => {
       path: paths.editProfile,
     },
   ];
+  const doctorMenuItems = [
+    {
+      text: 'My Visits',
+      icon: iconCalender(),
+      path: paths.doctorVisit,
+    },
+    {
+      text: 'Edit Profile',
+      icon: iconPen(),
+      path: paths.editProfile,
+    },
+  ];
 
   return (
     <>
@@ -67,12 +94,16 @@ export const Sidebar = () => {
           component="aside"
           value={iconColor}
           className={classes.drawer}
-          sx={{ display: { xs: 'none', md: 'block' } }}
+          sx={{ display: { xs: 'none', md: 'block' }, zIndex: 1000 }}
         >
           <List className={classes.list}>
-            {userMenuItems.map((item) => (
-              <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
-            ))}
+            {!isAdmin === true
+              ? userMenuItems.map((item) => (
+                  <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
+                ))
+              : doctorMenuItems.map((item) => (
+                  <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
+                ))}
           </List>
         </Box>
       </>
@@ -81,15 +112,25 @@ export const Sidebar = () => {
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
         <BottomNavigation showLabels value={iconColor} onChange={handleChange}>
-          {userMenuItems.map((item) => (
-            <BottomNavigationAction
-              component={RouterLink}
-              key={item.text}
-              to={item.path}
-              label={item.text}
-              icon={item.icon}
-            />
-          ))}
+          {!isAdmin === true
+            ? userMenuItems.map((item) => (
+                <BottomNavigationAction
+                  component={RouterLink}
+                  key={item.text}
+                  to={item.path}
+                  label={item.text}
+                  icon={item.icon}
+                />
+              ))
+            : doctorMenuItems.map((item) => (
+                <BottomNavigationAction
+                  component={RouterLink}
+                  key={item.text}
+                  to={item.path}
+                  label={item.text}
+                  icon={item.icon}
+                />
+              ))}
         </BottomNavigation>
       </Paper>
     </>
