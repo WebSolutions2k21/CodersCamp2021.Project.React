@@ -4,13 +4,12 @@ import Button from '@mui/material/Button';
 import { ButtonTheme } from '../../styles/themes/CustomButtonTheme';
 
 export const CustomButton = ({ text, color, size, clickAction, disabled }) => {
-  let handleClick = () => {
-    clickAction();
+  const handleClick = () => {
+    clickAction && clickAction();
   };
 
   return (
     <ThemeProvider theme={ButtonTheme}>
-
       {clickAction ? (
         <Button variant="contained" color={color} size={size} onClick={handleClick} disabled={disabled}>
           {text}
@@ -20,7 +19,6 @@ export const CustomButton = ({ text, color, size, clickAction, disabled }) => {
           {text}
         </Button>
       )}
-      
     </ThemeProvider>
   );
 };
