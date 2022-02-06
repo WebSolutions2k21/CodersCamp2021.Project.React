@@ -97,7 +97,7 @@ export const Sidebar = () => {
           sx={{ display: { xs: 'none', md: 'block' }, zIndex: 1000 }}
         >
           <List className={classes.list}>
-            {isAdmin === false
+            {!isAdmin === true
               ? userMenuItems.map((item) => (
                   <ListItemLink key={item.text} to={item.path} primary={item.text} icon={item.icon} />
                 ))
@@ -112,7 +112,7 @@ export const Sidebar = () => {
         sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
         <BottomNavigation showLabels value={iconColor} onChange={handleChange}>
-          {isAdmin === false
+          {!isAdmin === true
             ? userMenuItems.map((item) => (
                 <BottomNavigationAction
                   component={RouterLink}
