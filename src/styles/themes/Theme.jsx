@@ -1,4 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { flexbox } from '@mui/system';
 import '../fonts.scss';
 
 const theme = createTheme({
@@ -26,6 +27,23 @@ const theme = createTheme({
           textTransform: 'capitalize',
           color: '#112025',
           fontSize: '1rem',
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: '#16bac6',
+          },
+        },
+      },
+    },
+
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
         },
       },
     },
