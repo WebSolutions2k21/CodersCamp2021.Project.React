@@ -115,7 +115,7 @@ export const DoctorVisit = () => {
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="4%" marginTop="20px" variant="h4" color="#16bac6">
-        Doctor Visit
+        Doctor Visits
       </Typography>
       <Grid item>
         <Grid
@@ -124,7 +124,6 @@ export const DoctorVisit = () => {
           direction="row"
           justifyContent="space-around"
           alignItems="space-around"
-          style={{ margin: '1%' }}
         >
           <Grid item>
             <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
@@ -133,7 +132,7 @@ export const DoctorVisit = () => {
             <Grid
               container
               direction="column"
-              style={{ minHeight: '300px', width: '80%' }}
+              style={{ minHeight: '300px', width: '100%' }}
               justifyContent="space-between"
             >
               {arrayOfVisits.length > 0 ? (
@@ -153,16 +152,13 @@ export const DoctorVisit = () => {
                         </Grid>
                       </Grid>
                       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
-                        <Link onClick={() => showVisit(visit)}>
+                        <Link onClick={() => showVisit(visit)} style={{ textDecoration: 'none' }}>
                           <Grid item>
                             <p>
                               {new Date(
                                 visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000,
-                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} |  {visit.pet}
                             </p>
-                          </Grid>
-                          <Grid item>
-                            <p>{visit.pet}</p>
                           </Grid>
                         </Link>
                       </Grid>
@@ -175,7 +171,7 @@ export const DoctorVisit = () => {
             </Grid>
           </Grid>
           {clicked ? (
-            <Box key={visitId.id}>
+            <Box key={visitId.id} mt="-10px">
               <Grid container direction="row">
                 <Grid item>
                   <VisitDescription
@@ -189,7 +185,7 @@ export const DoctorVisit = () => {
                 </Grid>
                 <Grid item>
                   <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-                    <Grid item p={2}>
+                    <Grid item p={1}>
                       <Button
                         style={{
                           color: '#ffffff',
@@ -206,7 +202,7 @@ export const DoctorVisit = () => {
                       </Button>
                     </Grid>
 
-                    <Grid item p={2}>
+                    <Grid item p={1}>
                       <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
                     </Grid>
                   </Grid>
