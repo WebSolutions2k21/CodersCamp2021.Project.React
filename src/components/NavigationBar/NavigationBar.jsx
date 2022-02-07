@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -13,8 +13,8 @@ import { logout } from '../../config/authentication';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
-  const user = auth.currentUser;
-  const isAuth = user;
+ 
+  const isAuth = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -132,6 +132,25 @@ export const NavigationBar = () => {
                   {'Log Out'}
                 </Button>
               )}
+                          {isAuth && (
+                <Button
+                  component={RouterLink}
+                  to={paths.myVisits}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'My account'}
+                </Button>
+              )}
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -178,8 +197,8 @@ export const NavigationBar = () => {
                   </MenuItem>
                 )}
                 {isAuth && (
-                  <MenuItem onClick={logout} component={RouterLink} to={paths.login}>
-                    <Typography textAlign="center">{'Log out'}</Typography>
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.myVisits}>
+                    <Typography textAlign="center">{'My visits'}</Typography>
                   </MenuItem>
                 )}
               </Menu>

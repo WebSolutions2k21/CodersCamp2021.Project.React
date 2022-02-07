@@ -11,6 +11,5 @@ export const paths = {
   myPets: '/mypets',
   myVisits: '/myvisits',
 
-  doctorCalender: '/doctor-calender',
   doctorVisit: '/doctor-visit',
 };
