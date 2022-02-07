@@ -108,6 +108,7 @@ export const DoctorVisit = () => {
   };
   const handleClose = () => {
     setOpen(false);
+    setClicked(true);
   };
 
   const showVisit = (visit) => {
@@ -117,30 +118,25 @@ export const DoctorVisit = () => {
 
   const cancelVisit = (visit) => {
     db.collection('visits').doc(visit.id).delete();
-  }
+  };
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="4%" marginTop="20px" variant="h4" color="#16bac6">
         Doctor Visits
       </Typography>
       <Grid item>
-        <Grid
-          container
-          spacing={6}
-          direction="row"
-          justifyContent="space-around"
-          alignItems="space-around"
-        >
+        <Grid container direction="row" justifyContent="space-around" alignItems="space-around">
           <Grid item>
-            <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
+            <DatePicker
+              sx={{ height: '150px' }}
+              visits={visitsDates}
+              onChange={(newDate) => setDate(newDate)}
+              selected={selected}
+              date={date}
+            />
           </Grid>
           <Grid item>
-            <Grid
-              container
-              direction="column"
-              style={{ minHeight: '300px', width: '100%' }}
-              justifyContent="space-between"
-            >
+            <Grid container direction="column" style={{ width: '100%' }} justifyContent="space-between">
               {arrayOfVisits.length > 0 ? (
                 arrayOfVisits.map((visit) => {
                   return (
@@ -150,25 +146,28 @@ export const DoctorVisit = () => {
                           <EventAvailableIcon sx={{ color: ['#eff0f4'] }} />
                         </Grid>
                         <Grid item>
-                          <p>
+                          <Box>
                             {new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString(
                               undefined,
                             )}
-                          </p>
+                          </Box>
                         </Grid>
                       </Grid>
-                      <Grid container direction="row" alignItems="center">
+                      <Grid container direction="row" justifeContent="center">
                         <Link onClick={() => showVisit(visit)} style={{ textDecoration: 'none' }}>
                           <Grid item>
                             <Button
-                            sx={{
-                              ':hover': {
-                                color: "#16bac6",
-                              },
-                            }}>
+                              sx={{
+                                mb:"10px",
+                                ':hover': {
+                                  color: '#16bac6',
+                                },
+                              }}
+                            >
                               {new Date(
                                 visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000,
-                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} | {visit.userName} | {visit.pet} 
+                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}{' '}
+                              | {visit.userName} | {visit.pet}
                             </Button>
                           </Grid>
                         </Link>
@@ -177,14 +176,20 @@ export const DoctorVisit = () => {
                   );
                 })
               ) : (
-                <h1>no visits yet :(</h1>
+                <Grid container justifyContent="centre">
+                  <Grid item>
+                <Typography paragraph marginLeft="4%" variant="h4" color="#16bac6">
+                  Today you don't have any visits.
+                </Typography>
+                </Grid>
+                </Grid>
               )}
             </Grid>
           </Grid>
           {clicked ? (
-            <Box key={visitId.id} mt="-10px">
-              <Grid container direction="row">
-                <Grid item>
+            <Box key={visitId.id}>
+              <Grid container direction="row" sx={{ml: {xs:"4%", mb:"0%"}}}>
+                <Grid item pt={1} xs={12} md={8}>
                   <VisitDescription
                     time={new Date(
                       visitId.date.seconds * 1000 + visitId.date.nanoseconds / 1000000,
@@ -194,8 +199,14 @@ export const DoctorVisit = () => {
                     description={visitId.description}
                   />
                 </Grid>
-                <Grid item>
-                  <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
+                <Grid item xs={12} md={4}>
+                  <Grid
+                    container
+                    direction="column"
+                    sx={{ mb: { xs: '60px', md: '0px' } }}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
                     <Grid item p={1}>
                       <Button
                         style={{
@@ -212,9 +223,15 @@ export const DoctorVisit = () => {
                         ADD DESCRIPTION
                       </Button>
                     </Grid>
-
-                    <Grid item p={2}>
-                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" clickAction={()=> {cancelVisit(visitId)}}/>
+                    <Grid item p={1}>
+                      <CustomButton
+                        color="secondary"
+                        size="small"
+                        text="CANCEL VISIT"
+                        clickAction={() => {
+                          cancelVisit(visitId);
+                        }}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

@@ -7,7 +7,7 @@ export const VisitDescription = ({ time, owner, pet, description }) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' }}}>
+    <Box sx={{ width: { md: '700px', lg: '800px' }}}>
 
       <Grid container className={classes.all}>
         <Grid item md={8} xs={12}>
