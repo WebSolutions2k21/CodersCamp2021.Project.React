@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../config/firebase';
 
 import {
   Typography,
@@ -13,9 +12,12 @@ import {
   Button,
   Link,
 } from '@mui/material';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import isSameDay from 'date-fns/isSameDay';
+
+import { db } from '../config/firebase';
 
 import { Layout, VisitDescription, CustomButton, DatePicker } from '../components';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 export const DoctorVisit = () => {
   const [visits, setVisits] = useState([]);
@@ -24,6 +26,10 @@ export const DoctorVisit = () => {
   const [open, setOpen] = useState(false);
   const [updateDescription, setUpdateDescription] = useState('');
   const [toUpdateId, setToUpdateId] = useState('');
+  const [visitsDates, setVisitsDates] = useState([]);
+  const [arrayOfVisits, setArrayOfVisits] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     db.collection('visits').onSnapshot((snapshot) => {
@@ -43,17 +49,62 @@ export const DoctorVisit = () => {
     return () => setLoading(false);
   }, [loading]);
 
-  const visitsArray = [];
+  useEffect(() => {
+    db.collection('visits').onSnapshot((querySnapshot) => {
+      const getVisitsFromFirebase = [];
+      querySnapshot.forEach((doc) => {
+        getVisitsFromFirebase.push({
+          ...doc.data(),
 
-  visits.forEach((visit) => {
-    visitsArray.push(visit);
-  });
+          key: doc.id,
+        });
+      });
+      const visitsArray = [];
+      getVisitsFromFirebase.forEach((visit) => {
+      
+          visitsArray.push(visit);
+      
+      });
+      setVisits(visitsArray);
+      setLoading(false);
+    });
+  }, [loading]);
 
-  const visitsDates = [];
+  useEffect(() => {
+    const dates = [];
+    visits.forEach((visit) => {
+      dates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000));
+      return dates;
+    });
+    setVisitsDates(dates);
+  }, [visits]);
 
-  visitsArray.forEach((visit) => {
-    visitsDates.push(new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString());
-  });
+  useEffect(() => {
+    const info = visitsDates.find((e) => isSameDay(date, e));
+    setSelected([info]);
+  }, [date, visitsDates]);
+
+  useEffect(() => {
+    const visitsRenderArray = [];
+    visits.forEach((el) => {
+      selected.forEach((selection) => {
+        if (selection !== undefined) {
+          if (
+            selection.toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric' }) ===
+            new Date(el.date.seconds * 1000 + el.date.nanoseconds / 1000000).toLocaleDateString({
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })
+          ) {
+            if (visitsRenderArray.includes(el) === false) visitsRenderArray.push(el);
+            return visitsRenderArray;
+          }
+        }
+      });
+    });
+    setArrayOfVisits(visitsRenderArray);
+  }, [visits, selected]);
 
   const openDescriptionDialog = (visit) => {
     setOpen(true);
@@ -76,7 +127,7 @@ export const DoctorVisit = () => {
     console.log('show visit', visit.id);
     return (
       <Box key={visit.id}>
-       <h1>Visit {visit.id}</h1>
+        <h1>Visit {visit.id}</h1>
       </Box>
     );
   };
@@ -95,7 +146,7 @@ export const DoctorVisit = () => {
           style={{ margin: '1%' }}
         >
           <Grid item>
-            <DatePicker visits={visits} />
+          <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
           </Grid>
           <Grid item>
             <Grid
@@ -104,8 +155,8 @@ export const DoctorVisit = () => {
               style={{ minHeight: '300px', width: '80%' }}
               justifyContent="space-between"
             >
-              {visitsArray.length > 0 ? (
-                visitsArray.map((visit) => {
+              {arrayOfVisits.length > 0 ? (
+                arrayOfVisits.map((visit) => {
                   return (
                     <Grid container key={visit.id}>
                       <Grid container spacing={2} alignItems="center">
@@ -140,57 +191,56 @@ export const DoctorVisit = () => {
               ) : (
                 <h1>no visits yet :(</h1>
               )}
-            
-     
             </Grid>
-            
           </Grid>
           {visits.length > 0 ? (
-        visits.map((visit) => {
-          return (
-            <Box key={visit.id}>
-              <Grid container direction="row">
-                <Grid item>
-                  <VisitDescription
-                    time={new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString()}
-                    pet={visit.pet}
-                    owner={visit.userName}
-                    description={visit.description}
-                  />
-                </Grid>
-                <Grid item>
-                  <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-                    <Grid item p={2}>
-                      <Button
-                        style={{
-                          color: '#ffffff',
-                          width: '170px',
-                          backgroundColor: '#fdc161',
-                          padding: '4px 10px',
-                          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                        }}
-                        onClick={() => {
-                          openDescriptionDialog(visit);
-                        }}
-                      >
-                        ADD DESCRIPTION
-                      </Button>
+            visits.map((visit) => {
+              return (
+                <Box key={visit.id}>
+                  <Grid container direction="row">
+                    <Grid item>
+                      <VisitDescription
+                        time={new Date(
+                          visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000,
+                        ).toLocaleDateString()}
+                        pet={visit.pet}
+                        owner={visit.userName}
+                        description={visit.description}
+                      />
                     </Grid>
-                    <Grid item p={2}>
-                      <CustomButton color="primary" size="small" text="CLOSE VISIT" />
-                    </Grid>
-                    <Grid item p={2}>
-                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
+                    <Grid item>
+                      <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
+                        <Grid item p={2}>
+                          <Button
+                            style={{
+                              color: '#ffffff',
+                              width: '170px',
+                              backgroundColor: '#fdc161',
+                              padding: '4px 10px',
+                              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                            }}
+                            onClick={() => {
+                              openDescriptionDialog(visit);
+                            }}
+                          >
+                            ADD DESCRIPTION
+                          </Button>
+                        </Grid>
+                        <Grid item p={2}>
+                          <CustomButton color="primary" size="small" text="CLOSE VISIT" />
+                        </Grid>
+                        <Grid item p={2}>
+                          <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-              </Grid>
-            </Box>
-          );
-        })
-      ) : (
-        <h1>no visits yet :(</h1>
-      )}
+                </Box>
+              );
+            })
+          ) : (
+            <h1>no visits yet :(</h1>
+          )}
         </Grid>
       </Grid>
 
