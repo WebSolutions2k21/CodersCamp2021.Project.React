@@ -11,7 +11,6 @@ import {
   UserEditProfile,
   UserMyPets,
   UserMyVisits,
-  DoctorCalender,
   DoctorVisit,
   NotFound,
 } from './pages';
