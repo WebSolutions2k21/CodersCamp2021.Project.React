@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { InputFullDate, InputTime, InputSelect } from '../Inputs';
-import { CustomButton } from '../Button/CustomButton';
 import { useNavigate } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 
+import { InputFullDate, InputTime, InputSelect } from '../Inputs';
+import { CustomButton } from '../Button/CustomButton';
+import { Loading } from '../Loading/Loading';
 import { db, auth } from '../../config/firebase';
 import { paths } from '../../config/paths';
 
@@ -12,29 +13,36 @@ export const MyVisitForm = () => {
   const [loading, setLoading] = useState(true);
   const [pets, setPets] = useState([]);
   const [pet, setPet] = useState('');
-  const [doctors, setDoctors] = useState([]);
+  const [users, setUsers] = useState([]);
   const [doctor, setDoctor] = useState('');
   const [date, setDate] = useState(new Date());
   const [hour, setHour] = useState(new Date());
-
-  const user = auth.currentUser;
-  const userId = auth.currentUser.auth.lastNotifiedUid;
+  const [doctorId, setDoctorId] = useState('');
+  const [doctorsNames, setDoctorsNames] = useState([]);
+  const [userName, setUserName] = useState('');
+  const [user, setUser] = useState({});
+  const [userId, setUserId] = useState('');
+  const [petsNames, setPetsNames] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setUser(auth.currentUser);
+    setUserId(auth.currentUser.auth.lastNotifiedUid);
+  }, []);
+
+  useEffect(() => {
     const getPetsFromFirebase = [];
-    const getDoctorsFromFirebase = [];
+    const getUsersFromFirebase = [];
     db.collection('users').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        getDoctorsFromFirebase.push({
+        getUsersFromFirebase.push({
           ...doc.data(),
           key: doc.id,
         });
       });
-      setDoctors(getDoctorsFromFirebase);
+      setUsers(getUsersFromFirebase);
       setLoading(false);
     });
-
     db.collection('pets').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         getPetsFromFirebase.push({
@@ -47,46 +55,84 @@ export const MyVisitForm = () => {
     });
   }, [loading]);
 
-  if (loading) {
-    return <h1>loading data...</h1>;
-  }
+  useEffect(() => {
+    const petNamesArray = [];
+    pets.forEach((pet) => {
+      if (pet.user_id === userId) {
+        petNamesArray.push(pet.name);
+      }
+    });
+    setPetsNames(petNamesArray);
+  }, [pets, userId]);
 
-  const petsNames = [];
-  pets.forEach((pet) => {
-    if (pet.user_id === userId) {
-      petsNames.push(pet.name);
-    }
-  });
+  useEffect(() => {
+    let petOwner = '';
+    users.forEach((user) => {
+      if (user.uid === userId) {
+        petOwner = user;
+        return petOwner;
+      }
+    });
+    const petOwnerName = `${petOwner.firstName} ${petOwner.lastName}`;
+    setUserName(petOwnerName);
+  }, [userId, users]);
 
-  const doctorsNames = [];
-  doctors.forEach((doctor) => {
-    if (doctor.isAdmin) {
-      const doctorName = `${doctor.firstName} ${doctor.lastName}`;
-      doctorsNames.push(doctorName);
-    }
-  });
+  useEffect(() => {
+    const doctorsNames = [];
+    const doctorsArray = [];
+    let selectedDoctor = '';
+
+    users.forEach((doctor) => {
+      if (doctor.isAdmin) {
+        doctorsArray.push(doctor);
+        const doctorName = `${doctor.firstName} ${doctor.lastName}`;
+        doctorsNames.push(doctorName);
+        return doctorsNames;
+      }
+    });
+    setDoctorsNames(doctorsNames);
+
+    doctorsArray.forEach((el) => {
+      const name = `${el.firstName} ${el.lastName}`;
+      if (name === doctor) {
+        selectedDoctor = el.uid;
+        return selectedDoctor;
+      }
+    });
+    setDoctorId(selectedDoctor);
+  }, [doctor, users]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    db.collection('visits')
-      .add({
-        pet: pet,
-        doctor: doctor,
-        date: date,
-        hour: hour,
-        uid: user.uid,
-      })
-      .then(() => {
-        navigate(paths.myVisits, { replace: true });
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    if (pet && date && hour && doctor) {
+      db.collection('visits')
+        .add({
+          pet,
+          doctor,
+          date,
+          hour,
+          uid: user.uid,
+          doctorId,
+          userName,
+        })
+        .then(() => {
+          navigate(paths.myVisits, { replace: true });
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else {
+      alert('Please fill in the all fields before saving.');
+    }
     setPet(pet);
     setDoctor(doctor);
     setDate(new Date());
     setHour(new Date());
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

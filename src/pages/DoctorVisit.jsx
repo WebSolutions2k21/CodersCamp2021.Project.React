@@ -102,16 +102,22 @@ export const DoctorVisit = () => {
     setOpen(false);
   };
 
+  const updateDescriptionPopUp = (event) => {
+    setUpdateDescription(event.target.value);
+    setClicked(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
 
   const showVisit = (visit) => {
-    console.log('show visit', visit.id);
     setClicked(true);
     setVisitId(visit);
   };
 
+  const cancelVisit = (visit) => {
+    db.collection('visits').doc(visit.id).delete();
+  }
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="4%" marginTop="20px" variant="h4" color="#16bac6">
@@ -207,14 +213,14 @@ export const DoctorVisit = () => {
                     </Grid>
 
                     <Grid item p={2}>
-                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
+                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" clickAction={()=> {cancelVisit(visitId)}}/>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Box>
           ) : (
-            <h5>choose day to add description</h5>
+            ''
           )}
         </Grid>
       </Grid>
@@ -238,7 +244,7 @@ export const DoctorVisit = () => {
               type="text"
               fullWidth
               value={updateDescription}
-              onChange={(event) => setUpdateDescription(event.target.value)}
+              onChange={(event) => updateDescriptionPopUp(event)}
             />
           </Box>
         </DialogContent>
