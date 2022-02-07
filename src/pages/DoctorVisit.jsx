@@ -76,42 +76,7 @@ export const DoctorVisit = () => {
     console.log('show visit', visit.id);
     return (
       <Box key={visit.id}>
-        <Grid container direction="row">
-          <Grid item>
-            <VisitDescription
-              time={new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString()}
-              pet={visit.pet}
-              owner={visit.userName}
-              description={visit.description}
-            />
-          </Grid>
-          <Grid item>
-            <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-              <Grid item p={2}>
-                <Button
-                  style={{
-                    color: '#ffffff',
-                    width: '170px',
-                    backgroundColor: '#fdc161',
-                    padding: '4px 10px',
-                    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                  }}
-                  onClick={() => {
-                    openDescriptionDialog(visit);
-                  }}
-                >
-                  ADD DESCRIPTION
-                </Button>
-              </Grid>
-              <Grid item p={2}>
-                <CustomButton color="primary" size="small" text="CLOSE VISIT" />
-              </Grid>
-              <Grid item p={2}>
-                <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+       <h1>Visit {visit.id}</h1>
       </Box>
     );
   };
@@ -189,7 +154,7 @@ export const DoctorVisit = () => {
                   <VisitDescription
                     time={new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000).toLocaleDateString()}
                     pet={visit.pet}
-                    owner={visit.uid}
+                    owner={visit.userName}
                     description={visit.description}
                   />
                 </Grid>
