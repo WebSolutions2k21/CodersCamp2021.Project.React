@@ -46,29 +46,10 @@ export const DoctorVisit = () => {
         }),
       );
     });
+    
     return () => setLoading(false);
   }, [loading]);
 
-  useEffect(() => {
-    db.collection('visits').onSnapshot((querySnapshot) => {
-      const getVisitsFromFirebase = [];
-      querySnapshot.forEach((doc) => {
-        getVisitsFromFirebase.push({
-          ...doc.data(),
-
-          key: doc.id,
-        });
-      });
-      const visitsArray = [];
-      getVisitsFromFirebase.forEach((visit) => {
-      
-          visitsArray.push(visit);
-      
-      });
-      setVisits(visitsArray);
-      setLoading(false);
-    });
-  }, [loading]);
 
   useEffect(() => {
     const dates = [];
