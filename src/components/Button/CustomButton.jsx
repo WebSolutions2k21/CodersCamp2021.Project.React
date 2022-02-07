@@ -4,7 +4,9 @@ import Button from '@mui/material/Button';
 import { ButtonTheme } from '../../styles/themes/CustomButtonTheme';
 
 export const CustomButton = ({ text, color, size, clickAction, disabled }) => {
-  const handleClick = () => clickAction && clickAction();
+  const handleClick = () => {
+    clickAction && clickAction();
+  };
 
   return (
     <ThemeProvider theme={ButtonTheme}>

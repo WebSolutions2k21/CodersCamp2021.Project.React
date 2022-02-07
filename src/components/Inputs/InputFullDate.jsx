@@ -9,6 +9,8 @@ import { useStyles } from './InputStyle';
 export const InputFullDate = ({ label, value, setValue }) => {
   const classes = useStyles();
 
+  //   const handleChange = ({ target: { value } }) => setValue && setValue(value);
+
   return (
     <ThemeProvider theme={DatePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
