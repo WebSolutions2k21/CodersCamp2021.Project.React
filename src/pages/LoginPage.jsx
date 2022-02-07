@@ -54,6 +54,7 @@ export const LoginPage = () => {
               }
             });
           });
+        localStorage.setItem('currentUser', user.user.uid);
       });
     } catch (error) {
       loginError();

@@ -3,9 +3,11 @@ import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { Layout } from '../components';
 import imgLogo1 from '../assets/logo_big.png';
-import imgAtam from '../assets/atam.png';
-import imgKozak from '../assets/kozak.png';
-import imgKowalski from '../assets/kowalski.png';
+
+import imgAtam from '../assets/Atam.png';
+import imgKozak from '../assets/Kozak.png';
+import imgKowalski from '../assets/Kowalski.png';
+
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
