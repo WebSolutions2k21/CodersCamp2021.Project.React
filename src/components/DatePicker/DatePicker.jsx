@@ -5,7 +5,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import PickersDay from '@mui/lab/PickersDay';
 import isSameDay from 'date-fns/isSameDay';
 import { styled } from '@mui/material/styles';
-import { isToday } from 'date-fns';
 import TextField from '@mui/material/TextField';
 
 import { DatePickerTheme } from '../../styles/themes/DatePickerTheme';
@@ -23,8 +22,17 @@ export const DatePicker = ({ visits }) => {
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
-    const info = visits.find((e) => isSameDay(date, e));
-    console.log(info);
+    visits.filter((visit) => (visit.data = new Date(visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000)));
+    console.log('visits', visits);
+    const info = visits.find((e) => {
+      console.log('tablica', e);
+      console.log('value', date);
+      console.log('is the same', isSameDay(date, e));
+      isSameDay(date, e);
+    });
+
+    console.log('info', info);
+
     setSelected(info);
   }, [date]);
 
@@ -41,7 +49,7 @@ export const DatePicker = ({ visits }) => {
   return (
     <ThemeProvider theme={DatePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        {/* <h3>{date.toString()}</h3> */}
+        <h3>{date.toString()}</h3>
         <CalendarPicker
           visits={visits}
           date={date}

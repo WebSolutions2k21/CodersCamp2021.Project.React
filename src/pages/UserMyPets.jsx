@@ -70,7 +70,7 @@ export const UserMyPets = () => {
         ) : (
           <h1>no pets yet :(</h1>
         )}
-        <Grid container direction="column" alignItems="center" gap="1rem" item  zIndex="1">
+        <Grid container direction="column" alignItems="center" gap="1rem" item zIndex="1">
           <Link component={RouterLink} to={paths.addPet} style={{ textDecoration: 'none', justifyContent: 'center' }}>
             <CustomButton text="Add pet" size="large" />
           </Link>
