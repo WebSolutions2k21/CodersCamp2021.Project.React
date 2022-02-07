@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -12,7 +12,7 @@ import { auth } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
- 
+
   const isAuth = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
@@ -135,7 +135,7 @@ export const NavigationBar = () => {
                   {'Log Out'}
                 </Button>
               )}
-                          {isAuth && (
+              {isAuth && (
                 <Button
                   component={RouterLink}
                   to={paths.myVisits}
