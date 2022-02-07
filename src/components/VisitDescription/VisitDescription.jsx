@@ -7,12 +7,12 @@ export const VisitDescription = ({ time, owner, pet, description }) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' } }}>
+    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' }}}>
 
       <Grid container className={classes.all}>
         <Grid item md={8} xs={12}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item className={classes.title} mb={1}>
+          <Grid container direction="column">
+            <Grid item className={classes.title} mb={2}>
               Visit at {time.toString()}
             </Grid>
             <Grid item>
