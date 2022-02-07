@@ -14,6 +14,9 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
 import { paths } from '../config/paths';
 
+import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
+import { StaticRourt } from 'react-router-dom/server';
+
 export const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -64,13 +67,13 @@ export const SignupPage = () => {
             <Input label="first name" type="text" value={firstName} setValue={setFirstName} />
             <Input label="last name" type="text" value={lastName} setValue={setLastName} />
           </Grid>
-          <Input label="email" type="email" value={email} setValue={setEmail} fullWidth />
-          <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} fullWidth />
-          <Input label="password" type="password" value={password} setValue={setPassword} fullWidth />
-          <Input label="confirm password" type="password" value={passwordconfirm} setValue={setPasswordConfirm} fullWidth />
+          <Input label="email" type="email" value={email} setValue={setEmail} />
+          <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} />
+          <Input label="password" type="password" value={password} setValue={setPassword} />
+          <Input label="confirm password" type="password" value={passwordconfirm} setValue={setPasswordConfirm} />
           <Typography theme={SignUpTheme}>
             Already have an account?
-            <Link underline="none" color="#16BAC6">
+            <Link component={RouterLink} to={paths.login} underline="none" color="#16BAC6">
               {' '}
               Log In!
             </Link>
