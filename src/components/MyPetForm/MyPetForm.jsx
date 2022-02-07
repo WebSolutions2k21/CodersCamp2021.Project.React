@@ -58,10 +58,10 @@ export const MyPetForm = () => {
           error={nameInputIsInvalid}
           helperText={nameInputIsInvalid ? 'Name is required' : ''}
         />
-        <InputSelect label="Type" myNames={['dog', 'cat']} value={species} setValue={setSpecies} />
+        <InputSelect label="Type" myNames={['dog', 'cat', 'other']} value={species} setValue={setSpecies} />
         <Input label="Breed" type="text" value={breed} setValue={setBreed} />
         <InputMonthAndYear label="Date of Birth" value={petAge} setValue={setPetAge} required={true} />
-        <CustomButton type="submit" text="Save" />
+        <CustomButton type="submit" text="Save" size="large"/>
       </Grid>
     </form>
   );
