@@ -153,7 +153,7 @@ export const DoctorVisit = () => {
                           </Box>
                         </Grid>
                       </Grid>
-                      <Grid container direction="row" justifeContent="center">
+                      <Grid container direction="row">
                         <Link onClick={() => showVisit(visit)} style={{ textDecoration: 'none' }}>
                           <Grid item>
                             <Button
