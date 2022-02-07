@@ -36,7 +36,8 @@ export const NavigationBar = () => {
   const handleCloseNavMenu = () => setAnchorElNav(null);
 
   const logoutHandler = () => {
-    auth.signOut();
+    localStorage.removeItem('currentUser');
+    auth.signOut().reload();
   };
 
   const classes = useStyles();
