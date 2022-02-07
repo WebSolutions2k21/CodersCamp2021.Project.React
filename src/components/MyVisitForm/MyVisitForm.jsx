@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { InputFullDate, InputTime, InputSelect } from '../Inputs';
-import { CustomButton } from '../Button/CustomButton';
 import { useNavigate } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 
+import { InputFullDate, InputTime, InputSelect } from '../Inputs';
+import { CustomButton } from '../Button/CustomButton';
+import { Loading } from '../Loading/Loading';
 import { db, auth } from '../../config/firebase';
 import { paths } from '../../config/paths';
 
@@ -19,9 +20,15 @@ export const MyVisitForm = () => {
   const [doctorId, setDoctorId] = useState('');
   const [doctorsNames, setDoctorsNames] = useState([]);
   const [userName, setUserName] = useState('');
-  const user = auth.currentUser;
-  const userId = auth.currentUser.auth.lastNotifiedUid;
+  const [user, setUser] = useState({});
+  const [userId, setUserId] = useState('');
+  const [petsNames, setPetsNames] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUser(auth.currentUser);
+    setUserId(auth.currentUser.auth.lastNotifiedUid);
+  }, []);
 
   useEffect(() => {
     const getPetsFromFirebase = [];
@@ -48,12 +55,15 @@ export const MyVisitForm = () => {
     });
   }, [loading]);
 
-  const petsNames = [];
-  pets.forEach((pet) => {
-    if (pet.user_id === userId) {
-      petsNames.push(pet.name);
-    }
-  });
+  useEffect(() => {
+    const petNamesArray = [];
+    pets.forEach((pet) => {
+      if (pet.user_id === userId) {
+        petNamesArray.push(pet.name);
+      }
+    });
+    setPetsNames(petNamesArray);
+  }, [pets, userId]);
 
   useEffect(() => {
     let petOwner = '';
@@ -92,22 +102,18 @@ export const MyVisitForm = () => {
     setDoctorId(selectedDoctor);
   }, [doctor, users]);
 
-  if (loading) {
-    return <h1>loading data...</h1>;
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pet && date && hour && doctor) {
       db.collection('visits')
         .add({
-          pet: pet,
-          doctor: doctor,
-          date: date,
-          hour: hour,
+          pet,
+          doctor,
+          date,
+          hour,
           uid: user.uid,
-          doctorId: doctorId,
-          userName: userName,
+          doctorId,
+          userName,
         })
         .then(() => {
           navigate(paths.myVisits, { replace: true });
@@ -123,6 +129,10 @@ export const MyVisitForm = () => {
     setDate(new Date());
     setHour(new Date());
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

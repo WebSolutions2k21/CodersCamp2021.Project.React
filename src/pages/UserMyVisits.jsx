@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import isSameDay from 'date-fns/isSameDay';
 
-import { Layout, DatePicker, CustomButton } from '../components';
+import { Layout, DatePicker, CustomButton, Loading } from '../components';
 import { paths } from '../config/paths';
 import { db, auth } from '../config/firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
@@ -13,16 +13,19 @@ import { doc, deleteDoc } from 'firebase/firestore';
 export const UserMyVisits = () => {
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState([]);
-  const userId = auth.currentUser.auth.lastNotifiedUid;
   const [visitsDates, setVisitsDates] = useState([]);
   const [arrayOfVisits, setArrayOfVisits] = useState([]);
   const [date, setDate] = useState(new Date());
   const [selected, setSelected] = useState([]);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    const getVisitsFromFirebase = [];
-    const visitsArray = [];
+    setUserId(auth.currentUser.auth.lastNotifiedUid);
+  }, []);
+
+  useEffect(() => {
     db.collection('visits').onSnapshot((querySnapshot) => {
+      const getVisitsFromFirebase = [];
       querySnapshot.forEach((doc) => {
         getVisitsFromFirebase.push({
           ...doc.data(),
@@ -30,6 +33,7 @@ export const UserMyVisits = () => {
           key: doc.id,
         });
       });
+      const visitsArray = [];
       getVisitsFromFirebase.forEach((visit) => {
         if (visit.uid === userId) {
           visitsArray.push(visit);
@@ -76,14 +80,13 @@ export const UserMyVisits = () => {
     setArrayOfVisits(visitsRenderArray);
   }, [visits, selected]);
 
-  if (loading) {
-    return <h1>loading data...</h1>;
-  }
-
   const deleteVisit = (key) => {
     deleteDoc(doc(db, 'visits', `${key}`));
-    setVisits([]);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Layout showSideBar>

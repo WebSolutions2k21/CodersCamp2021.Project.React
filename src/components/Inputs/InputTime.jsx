@@ -16,8 +16,6 @@ const theme = createTheme({
 export const InputTime = ({ label, value, setValue }) => {
   const classes = useStyles();
 
-  //   const handleChange = ({ target: { value } }) => setValue && setValue(value);
-
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
