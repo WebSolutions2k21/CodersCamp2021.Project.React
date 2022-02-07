@@ -79,11 +79,11 @@ export const DoctorVisit = () => {
 
   return (
     <Layout showSideBar>
-      <Typography paragraph>Doctor Visit</Typography>
+      <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">Doctor Visit</Typography>
       {visits.length > 0 ? (
         visits.map((visit) => {
           return (
-            <Box key={visit.id}>
+            <Box sx={{ml:"20px"}} key={visit.id}>
               <Grid container direction="row">
                 <Grid item>
                   <VisitDescription
