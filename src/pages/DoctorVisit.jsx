@@ -30,6 +30,8 @@ export const DoctorVisit = () => {
   const [arrayOfVisits, setArrayOfVisits] = useState([]);
   const [date, setDate] = useState(new Date());
   const [selected, setSelected] = useState([]);
+  const [clicked, setClicked] = useState(false);
+  const [visitId, setVisitId] = useState([]);
 
   useEffect(() => {
     db.collection('visits').onSnapshot((snapshot) => {
@@ -46,10 +48,9 @@ export const DoctorVisit = () => {
         }),
       );
     });
-    
+
     return () => setLoading(false);
   }, [loading]);
-
 
   useEffect(() => {
     const dates = [];
@@ -62,6 +63,7 @@ export const DoctorVisit = () => {
 
   useEffect(() => {
     const info = visitsDates.find((e) => isSameDay(date, e));
+    setClicked(false);
     setSelected([info]);
   }, [date, visitsDates]);
 
@@ -106,12 +108,10 @@ export const DoctorVisit = () => {
 
   const showVisit = (visit) => {
     console.log('show visit', visit.id);
-    return (
-      <Box key={visit.id}>
-        <h1>Visit {visit.id}</h1>
-      </Box>
-    );
+    setClicked(true);
+    setVisitId(visit);
   };
+
   return (
     <Layout showSideBar>
       <Typography paragraph marginLeft="4%" marginTop="20px" variant="h4" color="#16bac6">
@@ -127,7 +127,7 @@ export const DoctorVisit = () => {
           style={{ margin: '1%' }}
         >
           <Grid item>
-          <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
+            <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
           </Grid>
           <Grid item>
             <Grid
@@ -153,7 +153,7 @@ export const DoctorVisit = () => {
                         </Grid>
                       </Grid>
                       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
-                        <Button onClick={() => showVisit(visit)}>
+                        <Link onClick={() => showVisit(visit)}>
                           <Grid item>
                             <p>
                               {new Date(
@@ -164,7 +164,7 @@ export const DoctorVisit = () => {
                           <Grid item>
                             <p>{visit.pet}</p>
                           </Grid>
-                        </Button>
+                        </Link>
                       </Grid>
                     </Grid>
                   );
@@ -174,53 +174,47 @@ export const DoctorVisit = () => {
               )}
             </Grid>
           </Grid>
-          {visits.length > 0 ? (
-            visits.map((visit) => {
-              return (
-                <Box key={visit.id}>
-                  <Grid container direction="row">
-                    <Grid item>
-                      <VisitDescription
-                        time={new Date(
-                          visit.date.seconds * 1000 + visit.date.nanoseconds / 1000000,
-                        ).toLocaleDateString()}
-                        pet={visit.pet}
-                        owner={visit.userName}
-                        description={visit.description}
-                      />
+          {clicked ? (
+            <Box key={visitId.id}>
+              <Grid container direction="row">
+                <Grid item>
+                  <VisitDescription
+                    time={new Date(
+                      visitId.date.seconds * 1000 + visitId.date.nanoseconds / 1000000,
+                    ).toLocaleDateString()}
+                    pet={visitId.pet}
+                    owner={visitId.userName}
+                    description={visitId.description}
+                  />
+                </Grid>
+                <Grid item>
+                  <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
+                    <Grid item p={2}>
+                      <Button
+                        style={{
+                          color: '#ffffff',
+                          width: '170px',
+                          backgroundColor: '#fdc161',
+                          padding: '4px 10px',
+                          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                        }}
+                        onClick={() => {
+                          openDescriptionDialog(visitId);
+                        }}
+                      >
+                        ADD DESCRIPTION
+                      </Button>
                     </Grid>
-                    <Grid item>
-                      <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-                        <Grid item p={2}>
-                          <Button
-                            style={{
-                              color: '#ffffff',
-                              width: '170px',
-                              backgroundColor: '#fdc161',
-                              padding: '4px 10px',
-                              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                            }}
-                            onClick={() => {
-                              openDescriptionDialog(visit);
-                            }}
-                          >
-                            ADD DESCRIPTION
-                          </Button>
-                        </Grid>
-                        <Grid item p={2}>
-                          <CustomButton color="primary" size="small" text="CLOSE VISIT" />
-                        </Grid>
-                        <Grid item p={2}>
-                          <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
-                        </Grid>
-                      </Grid>
+
+                    <Grid item p={2}>
+                      <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
                     </Grid>
                   </Grid>
-                </Box>
-              );
-            })
+                </Grid>
+              </Grid>
+            </Box>
           ) : (
-            <h1>no visits yet :(</h1>
+            <h5>choose day to add description</h5>
           )}
         </Grid>
       </Grid>
