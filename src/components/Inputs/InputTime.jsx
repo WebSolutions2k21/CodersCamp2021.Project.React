@@ -16,15 +16,14 @@ const theme = createTheme({
 export const InputTime = ({ label, value, setValue }) => {
   const classes = useStyles();
 
-  const handleChange = ({ target: { value } }) => setValue && setValue(value);
-
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopTimePicker
           label={<div className={classes.lbl2}>{label}</div>}
           value={value}
-          onChange={handleChange}
+          mask="__:__ _M"
+          onChange={(value) => setValue && setValue(value)}
           renderInput={(params) => (
             <TextField
               className={classes.int}
