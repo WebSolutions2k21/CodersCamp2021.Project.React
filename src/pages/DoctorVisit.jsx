@@ -151,14 +151,19 @@ export const DoctorVisit = () => {
                           </p>
                         </Grid>
                       </Grid>
-                      <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+                      <Grid container direction="row" alignItems="center">
                         <Link onClick={() => showVisit(visit)} style={{ textDecoration: 'none' }}>
                           <Grid item>
-                            <p>
+                            <Button
+                            sx={{
+                              ':hover': {
+                                color: "#16bac6",
+                              },
+                            }}>
                               {new Date(
                                 visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000,
-                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} |  {visit.pet}
-                            </p>
+                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} | {visit.userName} | {visit.pet} 
+                            </Button>
                           </Grid>
                         </Link>
                       </Grid>
