@@ -9,8 +9,12 @@ export const ButtonTheme = createTheme({
     },
     secondary: {
       main: '#eff0f4',
+      dark: '#fff',
       contrastText: '#000',
     },
+    textInfo:{
+      main: '#fff',
+    }
   },
   components: {
     MuiButton: {
@@ -37,19 +41,5 @@ export const ButtonTheme = createTheme({
         },
       ],
     },
-    variants: [
-      {
-        props: { size: 'small' },
-        style: {
-          fontSize: '16px',
-        },
-      },
-      {
-        props: { size: 'large' },
-        style: {
-          fontSize: '24px',
-        },
-      },
-    ],
   },
 });
