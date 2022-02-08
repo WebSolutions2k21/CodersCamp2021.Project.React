@@ -30,7 +30,7 @@ export const ButtonTheme = createTheme({
           props: { size: 'small' },
           style: {
             fontSize: '16px',
-            width: '150px'
+            width: '170px'
           },
         },
         {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -8,12 +8,26 @@ import PawIcon from '@mui/icons-material/Pets';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
 
   const isAuth = auth.currentUser;
+  const [isAdmin, setIsAdmin] = useState([]);
+
+  useLayoutEffect(() => {
+    if (isAuth) {
+      db.collection('users')
+        .where('uid', '==', isAuth.uid)
+        .get()
+        .then(function (q) {
+          q.forEach(function (doc) {
+            setIsAdmin(() => doc.data().isAdmin);
+          });
+        });
+    }
+  });
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -136,10 +150,29 @@ export const NavigationBar = () => {
                   {'Log Out'}
                 </Button>
               )}
-              {isAuth && (
+              {isAuth && !isAdmin && (
                 <Button
                   component={RouterLink}
                   to={paths.myVisits}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'My account'}
+                </Button>
+              )}
+              {isAuth && isAdmin && (
+                <Button
+                  component={RouterLink}
+                  to={paths.doctorVisit}
                   size="large"
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -200,9 +233,19 @@ export const NavigationBar = () => {
                     <Typography textAlign="center">{'Log in'}</Typography>
                   </MenuItem>
                 )}
-                {isAuth && (
+                {isAuth && !isAdmin && (
                   <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.myVisits}>
                     <Typography textAlign="center">{'My visits'}</Typography>
+                  </MenuItem>
+                )}
+                {isAuth && isAdmin && (
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.doctorVisit}>
+                    <Typography textAlign="center">{'Doctor visits'}</Typography>
+                  </MenuItem>
+                )}
+                {isAuth && (
+                  <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.login}>
+                    <Typography textAlign="center">{'Logout'}</Typography>
                   </MenuItem>
                 )}
               </Menu>

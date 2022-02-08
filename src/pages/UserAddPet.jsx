@@ -10,14 +10,17 @@ export const UserAddPet = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'absolute',
-          left: '50%',
-          right: '50%'
+          gap: '15%',
+          flexWrap: 'wrap',
         }}
       >
-        <Typography sx={{whiteSpace:"nowrap"}} paragraph marginTop="5vh" variant="h4" color="#16bac6">
+        <Typography
+          sx={{ whiteSpace: 'nowrap', margin: '2% auto' }}
+          width={'min-content'}
+          paragraph
+          variant="h4"
+          color="#16bac6"
+        >
           Add new Pet
         </Typography>
         <MyPetForm />
