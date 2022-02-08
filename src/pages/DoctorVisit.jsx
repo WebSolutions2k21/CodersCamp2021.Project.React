@@ -45,6 +45,7 @@ export const DoctorVisit = () => {
           return {
             id: doc.id,
             pet: doc.data().pet,
+            breed: doc.data().breed,
             date: doc.data().date,
             hour: doc.data().hour,
             description: doc.data().description,
@@ -163,7 +164,7 @@ export const DoctorVisit = () => {
                           <Grid item>
                             <Button
                               sx={{
-                                mb:"10px",
+                                mb: '10px',
                                 ':hover': {
                                   color: '#16bac6',
                                 },
@@ -181,19 +182,25 @@ export const DoctorVisit = () => {
                   );
                 })
               ) : (
-                <Grid container justifyContent="centre">
-                  <Grid item>
-                <Typography paragraph marginLeft="4%" variant="h4" color="#16bac6">
-                  Today you don't have any visits.
-                </Typography>
-                </Grid>
+                <Grid container justifyContent="center">
+                  <Grid item xs={12} md={8}>
+                    <Typography
+                      marginLeft="4%"
+                      variant="h4"
+                      color="#16bac6"
+                      sx={{ mb: { xs: '70px', md: '0' } }}
+                      justifyContent="centre"
+                    >
+                      Today you don't have any visits.
+                    </Typography>
+                  </Grid>
                 </Grid>
               )}
             </Grid>
           </Grid>
           {clicked ? (
             <Box key={visitId.id}>
-              <Grid container direction="row" sx={{ml: {xs:"4%", mb:"0%"}}}>
+              <Grid container direction="row">
                 <Grid item pt={1} xs={12} md={8}>
                   <VisitDescription
                     time={new Date(
@@ -201,6 +208,7 @@ export const DoctorVisit = () => {
                     ).toLocaleDateString()}
                     pet={visitId.pet}
                     owner={visitId.userName}
+                    breed={visitId.breed}
                     description={visitId.description}
                   />
                 </Grid>
@@ -208,7 +216,7 @@ export const DoctorVisit = () => {
                   <Grid
                     container
                     direction="column"
-                    sx={{ mb: { xs: '60px', md: '0px' } }}
+                    sx={{ mb: { xs: '70px', md: '0px' } }}
                     alignItems="center"
                     justifyContent="center"
                   >
