@@ -10,34 +10,19 @@ import {
   Paper,
 } from '@mui/material';
 
-import React, { useContext, useState, useLayoutEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { useStyles } from './SidebarStyle';
 import { iconCat, iconCalender, iconPen } from '../../assets/icons';
 import { paths } from '../../config/paths';
-import { BottomNavigationContext } from '../../context/BottomNavigationContext';
-import { auth, db } from '../../config/firebase';
+import { AppContext } from '../../context/AppContext';
 
 export const Sidebar = () => {
   const classes = useStyles();
   const location = useLocation();
 
-  const admin = auth.currentUser;
-  const [isAdmin, setIsAdmin] = useState([]);
-
-  useLayoutEffect(() => {
-    db.collection('users')
-      .where('uid', '==', admin.uid)
-      .get()
-      .then(function (q) {
-        q.forEach(function (doc) {
-          setIsAdmin(() => doc.data().isAdmin);
-        });
-      });
-  });
-
-  const { iconColor, setIconColor } = useContext(BottomNavigationContext);
+  const { iconColor, setIconColor, isAdmin } = useContext(AppContext);
 
   const handleChange = (event, newValue) => {
     setIconColor(newValue);
