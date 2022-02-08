@@ -213,12 +213,12 @@ export const NavigationBar = () => {
                 </MenuItem>
                 {!isAuth && (
                   <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.signUp}>
-                    <Typography textAlign="center">{'Sign in'}</Typography>
+                    <Typography textAlign="center">{'Sign up'}</Typography>
                   </MenuItem>
                 )}
                 {!isAuth && (
                   <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.login}>
-                    <Typography textAlign="center">{'Log in'}</Typography>
+                    <Typography textAlign="center">{'Login'}</Typography>
                   </MenuItem>
                 )}
                 {isAuth && !isAdmin && (
