@@ -11,6 +11,7 @@ import {
   Box,
   Button,
   Link,
+  Slide,
 } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import isSameDay from 'date-fns/isSameDay';
@@ -18,6 +19,10 @@ import isSameDay from 'date-fns/isSameDay';
 import { db } from '../config/firebase';
 
 import { Layout, VisitDescription, CustomButton, DatePicker } from '../components';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export const DoctorVisit = () => {
   const [visits, setVisits] = useState([]);
@@ -243,7 +248,7 @@ export const DoctorVisit = () => {
         </Grid>
       </Grid>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
         <DialogTitle sx={{ pt: '25px' }} id="alert-dialog-title">
           {'The visit description'}
         </DialogTitle>
