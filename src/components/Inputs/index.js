@@ -1,4 +1,4 @@
-export * from './Input';
+export * from './InputText';
 export * from './InputSelect';
 export * from './InputMonthAndYear';
 export * from './InputFullDate';
