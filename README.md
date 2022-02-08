@@ -64,7 +64,7 @@ Tu użytkownik może przejrzeć swoje zwierzęta (znajdują się tam następuj�
 
 - #### Moje wizyty
 
-Po kliknięciu w zakładkę „My Visits” użytkownik zobaczy kalendarz. Klikając na dzień zaznaczony zielonym kolorem, pojawią się szczegóły zaplanowanej wizyty. 
+Po kliknięciu w zakładkę „My Visits” użytkownik zobaczy kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Klikając na ten dzień, pojawią się szczegółowe informacje dotyczące zaplanowanej wizyty. 
 
 Użytkownik może również zarezerwować wizytę u wybranego przez siebie weterynarza po kliknięciu przycisku „ADD NEW VISIT”. Zostanie on przeniesiony do formularza, w którym będzie mógł wybrać zwierzę, lekarza, datę oraz godzinę nowej wizyty. Dane te również zostaną zapisane w bazie. 
 
@@ -78,7 +78,7 @@ Zalogowany specjalista jest witany na stronie – pojawia się napis Welcome ora
 
 - #### Moje wizyty
 
-Po kliknięciu w zakładkę „My Visits” specjaliście ukaże się kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Z kolei klikając na dzień zaznaczony zielonym kolorem, pojawią się szczegółowe informacje dotyczące wizyt mających się odbyć danego dnia. Specjalista może uzupełnić historię choroby danego zwierzęcia, klikając na konkretną wizytę. Pojawi się wówczas okienko, w którym może wpisać bądź edytować niezbędne informacje na temat choroby danego zwierzęcia. 
+Po kliknięciu w zakładkę „My Visits” specjaliście ukaże się kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Klikając na ten dzień, pojawią się szczegółowe informacje dotyczące wizyt. Specjalista może uzupełnić historię choroby danego zwierzęcia, klikając na konkretną wizytę. Pojawi się wówczas okienko, w którym może wpisać bądź edytować niezbędne informacje na temat choroby danego zwierzęcia. 
 
 - #### Edycja profilu
 
