@@ -1,18 +1,19 @@
 import { Box, Grid } from '@mui/material/';
 
-import { CustomButton } from '../Button/CustomButton';
 import { useStyles } from './Style';
 
-export const VisitDescription = ({ time, owner, type, breed, description }) => {
+
+export const VisitDescription = ({ time, owner, pet, breed, description }) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ width: { xs: '250px', sm: '400px', md: '700px', lg: '800px' } }}>
+    <Box sx={{ width: { md: '700px', lg: '800px' }, ml: {xs:"6%", mb:"0%"}}}>
+
       <Grid container className={classes.all}>
         <Grid item md={8} xs={12}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item className={classes.title} mb={1}>
-              Visit at {time}
+          <Grid container direction="column">
+            <Grid item className={classes.title} mb={2}>
+              Visit at {time.toString()}
             </Grid>
             <Grid item>
               <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
@@ -21,8 +22,8 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
                   {owner}
                 </Grid>
                 <Grid item md={4} xs={12}>
-                  <span className={classes.bold}>TYPE: </span>
-                  {type}
+                  <span className={classes.bold}>PET: </span>
+                  {pet}
                 </Grid>
                 <Grid item md={3} xs={12}>
                   <span className={classes.bold}>BREED: </span>
@@ -30,23 +31,9 @@ export const VisitDescription = ({ time, owner, type, breed, description }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item alignItems="flex-start" nowrap mb={2}>
+            <Grid item alignItems="flex-start" nowrap='true' mb={2}>
               <span className={classes.bold}>DESCRIPTION: </span>
               {description}
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid item md={4} xs={12}>
-          <Grid container direction="column" sx={{ minWidth: '160px' }} alignItems="center">
-            <Grid item p={2}>
-              <CustomButton color="primary" size="small" text="DESCRIPTION" />
-            </Grid>
-            <Grid item p={2}>
-              <CustomButton color="primary" size="small" text="CLOSE VISIT" />
-            </Grid>
-            <Grid item p={2}>
-              <CustomButton color="secondary" size="small" text="CANCEL VISIT" />
             </Grid>
           </Grid>
         </Grid>

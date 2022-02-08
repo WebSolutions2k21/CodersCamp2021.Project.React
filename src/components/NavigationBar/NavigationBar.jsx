@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -9,11 +9,13 @@ import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
 import { auth } from '../../config/firebase';
+import { AppContext } from '../../context/AppContext';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
-  const user = auth.currentUser;
-  const isAuth = user;
+  const { isAdmin } = useContext(AppContext);
+
+  const isAuth = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -22,6 +24,7 @@ export const NavigationBar = () => {
   const handleCloseNavMenu = () => setAnchorElNav(null);
 
   const logoutHandler = () => {
+    localStorage.removeItem('currentUser');
     auth.signOut().reload();
   };
 
@@ -59,7 +62,7 @@ export const NavigationBar = () => {
                 }}
               >
                 <PawIcon className={classes.imgIcon} />
-                {'About'}
+                {'About Us'}
               </Button>
               <Button
                 component={RouterLink}
@@ -135,6 +138,44 @@ export const NavigationBar = () => {
                   {'Log Out'}
                 </Button>
               )}
+              {isAuth && !isAdmin && (
+                <Button
+                  component={RouterLink}
+                  to={paths.myVisits}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'My account'}
+                </Button>
+              )}
+              {isAuth && isAdmin && (
+                <Button
+                  component={RouterLink}
+                  to={paths.doctorVisit}
+                  size="large"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    p: 1,
+                    display: 'flex',
+                    alignContent: 'center',
+                    textDecoration: 'none',
+                    '&:hover': { color: '#16bac6' },
+                  }}
+                >
+                  <PawIcon className={classes.imgIcon} />
+                  {'My account'}
+                </Button>
+              )}
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -180,9 +221,19 @@ export const NavigationBar = () => {
                     <Typography textAlign="center">{'Log in'}</Typography>
                   </MenuItem>
                 )}
+                {isAuth && !isAdmin && (
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.myVisits}>
+                    <Typography textAlign="center">{'My visits'}</Typography>
+                  </MenuItem>
+                )}
+                {isAuth && isAdmin && (
+                  <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.doctorVisit}>
+                    <Typography textAlign="center">{'Doctor visits'}</Typography>
+                  </MenuItem>
+                )}
                 {isAuth && (
                   <MenuItem onClick={logoutHandler} component={RouterLink} to={paths.login}>
-                    <Typography textAlign="center">{'Log out'}</Typography>
+                    <Typography textAlign="center">{'Logout'}</Typography>
                   </MenuItem>
                 )}
               </Menu>

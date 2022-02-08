@@ -29,6 +29,22 @@ const theme = createTheme({
         },
       },
     },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: '#16bac6',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
+        },
+      },
+    },
   },
 });
 

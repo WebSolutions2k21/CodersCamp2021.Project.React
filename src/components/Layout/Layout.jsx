@@ -13,9 +13,11 @@ export const Layout = ({ children, showSideBar }) => {
         <>
           <Banner />
           <Container maxWidth="xl" style={{ display: 'grid' }}>
-            <Grid container>
+            <Grid container wrap="nowrap">
               <Sidebar />
-              <Box component="main">{children}</Box>
+              <Box component="main" width={'100%'} sx={{ height: 'calc(100% - 54px)' }}>
+                {children}
+              </Box>
             </Grid>
           </Container>
         </>
