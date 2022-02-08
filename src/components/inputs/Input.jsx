@@ -3,37 +3,42 @@ import TextField from '@mui/material/TextField';
 
 import { useStyles } from './InputStyle';
 
+export const Input = ({ label, type = 'text', value, setValue, fullWidth, helperText, error, required}) => {
+  const classes = useStyles();
+  const [dataError, setDataError] = useState(false);
 
-export const Input = ({label, type='text'}) => {
-    const classes = useStyles();
-    const [data, setData] = useState('');
-    const [dataError, setDataError] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDataError(!value);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setDataError(false);
+  const handleChange = ({ target: { value } }) => setValue && setValue(value);
 
-        if (data === '') {
-            setDataError(true);
-        }
-    }
+  return (
+    <TextField
+      data-testid="input-1"
+      fullWidth
+      required= {required}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      value={value}
+      className={classes.int}
+      variant="standard"
+      InputProps={{
+        className: classes.lbl,
+        disableUnderline: true,
+        'data-testid': 'nameInput',
+      }}
+      InputLabelProps={{
+        className: classes.lbl,
+      }}
+      label={label}
+      error={error}
+      helperText={helperText}
+      // error={dataError}
 
-    return(
-            <TextField 
-                onSubmit={handleSubmit}
-                onChange={(e) => setData(e.target.value)}
-                className={classes.int}
-                variant="standard"
-                InputProps={{
-                    className: classes.lbl,
-                    disableUnderline: true
-                  }}
-                InputLabelProps={{
-                    className: classes.lbl
-                }}
-                label={label}
-                error={dataError}
-                type={type}
-            />  
-    )
-}
+      type={type}
+      sx={{ width: { xs: '250px', md: `${fullWidth && '100%'}` } }}
+    />
+  );
+};
