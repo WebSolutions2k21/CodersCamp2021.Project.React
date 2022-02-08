@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { Layout } from '../components';
-import { Input } from '../components/Inputs';
-import { CustomButton } from '../components/Button/CustomButton';
-import { SignUpTheme, SingUpTeme } from '../styles/themes/CustomSingUpPage';
+import { useNavigate, Link as RouterLink  } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
 import { collection, addDoc } from 'firebase/firestore';
+
+import { Layout, Input, CustomButton } from '../components';
+import { SignUpTheme } from '../styles/themes/CustomSingUpPage';
+
 import { db, auth } from '../config/firebase';
 import { paths } from '../config/paths';
 
 export const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [passwordconfirm, setPasswordConfirm] = useState('');
 
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const navigate = useNavigate();
@@ -39,6 +37,7 @@ export const SignupPage = () => {
           uid: user.uid,
           lastName: lastName,
           firstName: firstName,
+          phone: phoneNumber,
           email: user.email,
           isAdmin: false,
         });
@@ -52,29 +51,28 @@ export const SignupPage = () => {
 
   return (
     <Layout>
-      {' '}
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
-          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
+          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem" textAlign="center">
             Create your account
-          </Typography>{' '}
-          <Grid container justifyContent="center" gap="3rem">
+          </Typography>
+          <Grid container justifyContent="center" gap="3rem" >
             <Input label="first name" type="text" value={firstName} setValue={setFirstName} />
             <Input label="last name" type="text" value={lastName} setValue={setLastName} />
           </Grid>
-          <Input label="email" type="email" setValue={setEmail} value={email} />
-          <Input label="phone number" type="tel" />
-          <Input label="password" type="password" setValue={setPassword} value={password} />
-          <Input label="confirm password" type="password" setValue={setPasswordConfirm} value={passwordconfirm} />
+          <Input label="email" type="email" setValue={setEmail} value={email} fullWidth />
+          <Input label="phone number" type="tel" setValue={setPhoneNumber} value={phoneNumber} fullWidth />
+          <Input label="password" type="password" setValue={setPassword} value={password} fullWidth />
+          <Input label="confirm password" type="password" setValue={setPasswordConfirm} value={passwordconfirm} fullWidth />
           <Typography theme={SignUpTheme}>
             Already have an account?
-            <Link underline="none" color="#16BAC6">
+            <Link underline="none" color="#16BAC6" component={RouterLink} to={paths.login}>
               {' '}
               Log In!
             </Link>
           </Typography>
           <CustomButton color="primary" size="large" text="Sign Up !" type="submit" />
-        </Grid>{' '}
+        </Grid>
       </form>
     </Layout>
   );
