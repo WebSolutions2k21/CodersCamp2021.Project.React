@@ -3,10 +3,9 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
   root: {
     background: '#ffffff',
-    color: '#16bac6',
+    color: '#16bac6'   
   },
   img: {
-    paddingTop: '1rem',
     width: '4rem',
   },
 
