@@ -1,5 +1,6 @@
 import { Typography, Grid, Box } from '@mui/material';
 import { useStyles } from './MyPetCardStyle';
+
 import { ReactComponent as Dog } from '../../assets/dog.svg';
 import { db } from '../../config/firebase';
 import { CustomButton } from '../Button';
