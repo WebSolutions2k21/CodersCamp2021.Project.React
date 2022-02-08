@@ -188,7 +188,7 @@ export const NavigationBar = () => {
                 </MenuItem>
                 {!isAuth && (
                   <MenuItem onClick={handleCloseNavMenu} component={RouterLink} to={paths.signUp}>
-                    <Typography textAlign="center">{'Sign in'}</Typography>
+                    <Typography textAlign="center">{'Sign up'}</Typography>
                   </MenuItem>
                 )}
                 {!isAuth && (

@@ -60,17 +60,17 @@ export const SignupPage = () => {
       {' '}
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
-          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem">
+          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem" textAlign= "center">
             Create your account
           </Typography>{' '}
           <Grid container justifyContent="center" gap="3rem">
             <Input label="first name" type="text" value={firstName} setValue={setFirstName} />
             <Input label="last name" type="text" value={lastName} setValue={setLastName} />
           </Grid>
-          <Input label="email" type="email" value={email} setValue={setEmail} />
-          <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} />
-          <Input label="password" type="password" value={password} setValue={setPassword} />
-          <Input label="confirm password" type="password" value={passwordconfirm} setValue={setPasswordConfirm} />
+          <Input label="email" type="email" value={email} setValue={setEmail} fullWidth />
+          <Input label="phone number" type="tel" value={phoneNumber} setValue={setPhoneNumber} fullWidth />
+          <Input label="password" type="password" value={password} setValue={setPassword} fullWidth />
+          <Input label="confirm password" type="password" value={passwordconfirm} setValue={setPasswordConfirm} fullWidth />
           <Typography theme={SignUpTheme}>
             Already have an account?
             <Link component={RouterLink} to={paths.login} underline="none" color="#16BAC6">
