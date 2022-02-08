@@ -3,7 +3,7 @@ import { Box, Grid } from '@mui/material/';
 import { useStyles } from './Style';
 
 
-export const VisitDescription = ({ time, owner, pet, description }) => {
+export const VisitDescription = ({ time, owner, pet, breed, description }) => {
   const classes = useStyles();
 
   return (
@@ -27,7 +27,7 @@ export const VisitDescription = ({ time, owner, pet, description }) => {
                 </Grid>
                 <Grid item md={3} xs={12}>
                   <span className={classes.bold}>BREED: </span>
-                  breed
+                  {breed}
                 </Grid>
               </Grid>
             </Grid>
