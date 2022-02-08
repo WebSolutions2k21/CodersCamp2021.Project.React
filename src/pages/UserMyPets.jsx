@@ -13,8 +13,7 @@ export const UserMyPets = () => {
   const [loading, setLoading] = useState(true);
   const [pets, setPets] = useState([]);
 
-  var user = auth.currentUser;
-  const getPetsFromFirebase = [];
+  const user = auth.currentUser;
 
   useEffect(() => {
     db.collection('pets')

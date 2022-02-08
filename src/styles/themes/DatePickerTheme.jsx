@@ -1,5 +1,3 @@
-import { NoEncryption } from '@material-ui/icons';
-import { MicNoneTwoTone } from '@mui/icons-material';
 import { createTheme } from '@mui/material/styles';
 
 export const DatePickerTheme = createTheme({

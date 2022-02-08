@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
@@ -8,26 +8,14 @@ import PawIcon from '@mui/icons-material/Pets';
 import imgLogo from '../../assets/logo.png';
 import { useStyles } from './NavigationBarStyle';
 import { paths } from '../../config/paths';
-import { auth, db } from '../../config/firebase';
+import { auth } from '../../config/firebase';
+import { AppContext } from '../../context/AppContext';
 
 export const NavigationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState();
+  const { isAdmin } = useContext(AppContext);
 
   const isAuth = auth.currentUser;
-  const [isAdmin, setIsAdmin] = useState([]);
-
-  useLayoutEffect(() => {
-    if (isAuth) {
-      db.collection('users')
-        .where('uid', '==', isAuth.uid)
-        .get()
-        .then(function (q) {
-          q.forEach(function (doc) {
-            setIsAdmin(() => doc.data().isAdmin);
-          });
-        });
-    }
-  });
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -74,7 +62,7 @@ export const NavigationBar = () => {
                 }}
               >
                 <PawIcon className={classes.imgIcon} />
-                {'About'}
+                {'About Us'}
               </Button>
               <Button
                 component={RouterLink}
