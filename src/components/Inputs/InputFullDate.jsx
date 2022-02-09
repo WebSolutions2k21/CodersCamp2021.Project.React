@@ -13,7 +13,7 @@ export const InputFullDate = ({ label, value, setValue }) => {
     <ThemeProvider theme={DatePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
-          views={['day', 'month', 'year']}
+          views={['day', 'month']}
           mask="__/__/____"
           label={<div className={classes.lbl2}>{label}</div>}
           minDate={Date.now()}

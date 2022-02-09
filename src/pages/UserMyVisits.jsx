@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Grid from '@mui/material/Grid';
+import { Grid, Typography } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import isSameDay from 'date-fns/isSameDay';
 
@@ -86,31 +86,42 @@ export const UserMyVisits = () => {
 
   return (
     <Layout showSideBar>
+      <Typography paragraph marginLeft="4%" marginTop="20px" variant="h4" color="#16bac6">
+        My Visits
+      </Typography>
       {loading ? (
         <Loading />
       ) : (
         <Grid
           container
-          spacing={6}
+          spacing={12}
           direction="row"
-          justifyContent="space-around"
+          justifyContent="center"
           alignItems="space-around"
-          style={{ margin: '1%' }}
+          paddingTop="32px"
         >
           <Grid item>
-            <DatePicker visits={visitsDates} onChange={(newDate) => setDate(newDate)} selected={selected} date={date} />
+            <DatePicker
+              sx={{ height: '150px' }}
+              visits={visitsDates}
+              onChange={(newDate) => setDate(newDate)}
+              selected={selected}
+              date={date}
+            />
           </Grid>
           <Grid item>
             <Grid
               container
               direction="column"
-              style={{ minHeight: '300px', width: '80%' }}
-              justifyContent="space-between"
+              style={{ minWidth: '100%', minHeight: '100%' }}
+              justifyContent="space-evenly"
+              paddingBottom="80px"
+              alignItems="center"
             >
               {arrayOfVisits.length > 0 ? (
                 arrayOfVisits.map((visit) => {
                   return (
-                    <Grid container key={visit.key}>
+                    <Grid container key={visit.key} style={{ minWidth: '100%' }}>
                       <Grid container spacing={2} alignItems="center">
                         <Grid item>
                           <EventAvailableIcon sx={{ color: ['#eff0f4'] }} />
@@ -123,7 +134,14 @@ export const UserMyVisits = () => {
                           </p>
                         </Grid>
                       </Grid>
-                      <Grid container direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                      <Grid
+                        container
+                        direction="row"
+                        spacing={2}
+                        justifyContent="space-between"
+                        alignItems="center"
+                        wrap="nowrap"
+                      >
                         <Grid item>
                           <p>
                             {new Date(visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000).toLocaleTimeString(
@@ -138,18 +156,35 @@ export const UserMyVisits = () => {
                           </p>
                         </Grid>
                         <Grid item>
-                          <CustomButton text="CANCEL" color="secondary" clickAction={() => deleteVisit(visit.key)} />
+                          <CustomButton
+                            text="CANCEL"
+                            color="secondary"
+                            size="small"
+                            clickAction={() => deleteVisit(visit.key)}
+                          />
                         </Grid>
                       </Grid>
                     </Grid>
                   );
                 })
               ) : (
-                <h1>no visits yet :(</h1>
+                <Grid container justifyContent="center" style={{ minWidth: '100%' }}>
+                  <Grid item xs={12} md={8} style={{ minWidth: '100%' }}>
+                    <Typography
+                      variant="h4"
+                      color="#16bac6"
+                      sx={{ mb: { xs: '70px', md: '0' } }}
+                      justifyContent="centre"
+                      align="center"
+                    >
+                      Today you don't have any visits.
+                    </Typography>
+                  </Grid>
+                </Grid>
               )}
-              <Grid container justifyContent="center">
+              <Grid container justifyContent="center" style={{ minWidth: '100%' }} paddingTop="30px">
                 <Link to={paths.addVisit} style={{ textDecoration: 'none' }}>
-                  <CustomButton text="ADD NEW VISIT" />
+                  <CustomButton text="ADD NEW VISIT" size="medium" />
                 </Link>
               </Grid>
             </Grid>
