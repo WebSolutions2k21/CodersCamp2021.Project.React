@@ -73,6 +73,7 @@ Tu użytkownik może przejrzeć swoje zwierzęta (znajdują się tam następuj�
 
 ![Zrzut ekranu 2022-02-09 o 22 54 10](https://user-images.githubusercontent.com/75137091/153296860-e5bdd5b0-23cb-4268-8af6-3e739d1f8c3c.jpg)
 
+
 ![Zrzut ekranu 2022-02-09 o 22 41 51](https://user-images.githubusercontent.com/75137091/153296784-e13ded7b-9a0c-4c34-88f2-20acc0b56b08.jpg)
 
 
@@ -101,8 +102,8 @@ Po kliknięciu w zakładkę „My Visits” specjaliście ukaże się kalendarz.
 
 ![Zrzut ekranu 2022-02-09 o 22 49 05](https://user-images.githubusercontent.com/75137091/153297333-ec68abf4-79e6-4962-a684-cbc9e73d0721.jpg)
 
-![Zrzut ekranu 2022-02-09 o 22 48 55](https://user-images.githubusercontent.com/75137091/153297358-1ecc5b9a-b312-4d2a-b558-6ad83560a464.jpg)
 
+![Zrzut ekranu 2022-02-09 o 22 48 55](https://user-images.githubusercontent.com/75137091/153297358-1ecc5b9a-b312-4d2a-b558-6ad83560a464.jpg)
 
 
 - #### Mój profil
