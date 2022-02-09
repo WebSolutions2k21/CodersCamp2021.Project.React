@@ -36,7 +36,7 @@ Zespół pracował w ramach kursu CodersCamp. Aplikację wykonali uczestnicy kur
 ## Cel projektu
 Celem projektu było dostarczenie aplikacji „Puppylog” pozwalającej użytkownikom na zapisanie do weterynarza swojego pupila. Zalogowany użytkownik może wybrać spośród trzech lekarzy kliniki. Po wyborze odpowiedniego weterynarza może dokonać rezerwacji terminu wizyty oraz samodzielnie dodawać swoje zwierzęta.
 
-Każde zwierzę posiada indywidualną kartę pacjenta. Widnieje w niej imię, gatunek, rasa, data urodzenia, historia chorób oraz inne ważne informacje dotyczące pupila. Wszyscy weterynarze mają dostęp do karty danego zwierzęcia oraz mogą ją edytować. Dodatkowo karta pacjenta jest uzupełniana przez weterynarza po każdej odbytej wizycie.
+Każde zwierzę posiada indywidualną kartę pacjenta. Widnieje w niej imię, rasa, dane właściciela, historia chorób oraz inne ważne informacje dotyczące pupila. Wszyscy weterynarze mają dostęp do karty danego zwierzęcia oraz mogą ją edytować. Dodatkowo karta pacjenta jest uzupełniana przez weterynarza po każdej odbytej wizycie.
 
 
 Aplikacja została wykonana według wymagań dostarczonych przez organizatorów CodersCamp.
@@ -71,15 +71,25 @@ Zalogowany użytkownik jest witany na stronie – pojawia się napis Welcome ora
 
 Tu użytkownik może przejrzeć swoje zwierzęta (znajdują się tam następujące dane: imię, gatunek, rasa oraz data urodzenia) bądź dodać nowe. Po kliknięciu przycisku „ADD PET”, użytkownik zostaje przeniesiony do formularza, do którego może wpisać wyżej wspomniane dane dotyczące swojego pupila, a następnie, klikając przycisk „SAVE”, zostanie założona karta zwierzęcia. Dane te zostają zapisane w bazie. 
 
+![Zrzut ekranu 2022-02-09 o 22 54 10](https://user-images.githubusercontent.com/75137091/153296860-e5bdd5b0-23cb-4268-8af6-3e739d1f8c3c.jpg)
+
+![Zrzut ekranu 2022-02-09 o 22 41 51](https://user-images.githubusercontent.com/75137091/153296784-e13ded7b-9a0c-4c34-88f2-20acc0b56b08.jpg)
+
+
 - #### Moje wizyty
 
 Po kliknięciu w zakładkę „My Visits” użytkownik zobaczy kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Klikając na ten dzień, pojawią się szczegółowe informacje dotyczące zaplanowanej wizyty. 
 
 Użytkownik może również zarezerwować wizytę u wybranego przez siebie weterynarza po kliknięciu przycisku „ADD NEW VISIT”. Zostanie on przeniesiony do formularza, w którym będzie mógł wybrać zwierzę, lekarza, datę oraz godzinę nowej wizyty. Dane te również zostaną zapisane w bazie. 
 
+![Zrzut ekranu 2022-02-09 o 22 43 11](https://user-images.githubusercontent.com/75137091/153297136-e05384ed-830f-4e1a-80e5-7dbf1451deec.jpg)
+
+
 - #### Mój profil
 
 Ostatnia zakładka to mój profil, gdzie użytkownik może przejrzeć dane, wprowadzone przez niego podczas rejestracji. 
+
+![Zrzut ekranu 2022-02-09 o 22 43 22](https://user-images.githubusercontent.com/75137091/153297230-33ccbe95-dcd3-48a2-bfa7-f757204ffadc.jpg)
 
 
 ### Panel lekarza
@@ -88,6 +98,11 @@ Zalogowany specjalista jest witany na stronie – pojawia się napis Welcome ora
 - #### Moje wizyty
 
 Po kliknięciu w zakładkę „My Visits” specjaliście ukaże się kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Klikając na ten dzień, pojawią się szczegółowe informacje dotyczące wizyt. Specjalista może uzupełnić historię choroby danego zwierzęcia, klikając na konkretną wizytę. Pojawi się wówczas okienko, w którym może wpisać bądź edytować niezbędne informacje na temat choroby danego zwierzęcia. 
+
+![Zrzut ekranu 2022-02-09 o 22 49 05](https://user-images.githubusercontent.com/75137091/153297333-ec68abf4-79e6-4962-a684-cbc9e73d0721.jpg)
+
+![Zrzut ekranu 2022-02-09 o 22 48 55](https://user-images.githubusercontent.com/75137091/153297358-1ecc5b9a-b312-4d2a-b558-6ad83560a464.jpg)
+
 
 
 - #### Mój profil
