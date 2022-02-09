@@ -18,7 +18,7 @@ import { AppContext } from '../context/AppContext';
 export const LoginPage = () => {
   let navigate = useNavigate();
   const { setIsAdmin } = useContext(AppContext);
-  
+
   const loginSuccess = () => {
     toast.success('Successful Login!', {
       position: toast.POSITION.BOTTOM_RIGHT,
