@@ -8,7 +8,7 @@ import {
   ContactPage,
   UserAddPet,
   UserAddVisit,
-  UserEditProfile,
+  UserMyProfile,
   UserMyPets,
   UserMyVisits,
   DoctorVisit,
@@ -67,10 +67,10 @@ export const App = () => {
           }
         />
         <Route
-          path={paths.editProfile}
+          path={paths.myProfile}
           element={
             <PrivateRoute>
-              <UserEditProfile />
+              <UserMyProfile />
             </PrivateRoute>
           }
         />

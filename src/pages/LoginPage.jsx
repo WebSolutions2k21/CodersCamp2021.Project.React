@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
 
 import { Grid, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
@@ -13,9 +13,11 @@ import { Layout } from '../components';
 import { Input } from '../components/Inputs';
 import { CustomButton } from '../components/Button/CustomButton';
 import { LoginPageTheme } from '../styles/themes/CustomLogInPage';
+import { AppContext } from '../context/AppContext';
 
 export const LoginPage = () => {
   let navigate = useNavigate();
+  const { setIsAdmin } = useContext(AppContext);
 
   const loginSuccess = () => {
     toast.success('Successful Login!', {
@@ -42,7 +44,7 @@ export const LoginPage = () => {
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               const isAdmin = doc.data().isAdmin;
-
+              setIsAdmin(isAdmin);
               if (isAdmin) {
                 setTimeout(() => {
                   navigate(paths.doctorVisit, { replace: true });

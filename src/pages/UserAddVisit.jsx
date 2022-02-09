@@ -3,27 +3,30 @@ import React from 'react';
 import { Layout, MyVisitForm } from '../components';
 
 import { Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { Box } from '@mui/system';
 
 export const UserAddVisit = () => {
   return (
     <Layout showSideBar>
-      <Grid
-        container
-        spacing={6}
-        direction="row"
-        justifyContent="space-around"
-        alignItems="space-around"
-        style={{ margin: '1%' }}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15%',
+          flexWrap: 'wrap',
+        }}
       >
-        <Typography paragraph marginLeft="20px" marginTop="20px" variant="h4" color="#16bac6">
-          Add new visit
+        <Typography
+          sx={{ whiteSpace: 'nowrap', margin: '4% auto' }}
+          width={'min-content'}
+          paragraph
+          variant="h4"
+          color="#16bac6"
+        >
+          Add new Visit
         </Typography>
-        <Box alignContent="center" width="100%">
-          <MyVisitForm></MyVisitForm>
-        </Box>
-      </Grid>
+        <MyVisitForm />
+      </Box>
     </Layout>
   );
 };
