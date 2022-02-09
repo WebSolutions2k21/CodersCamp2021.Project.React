@@ -35,8 +35,7 @@ export const SignupPage = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         const user = res.user;
-        const isAdmin = res.data().isAdmin;
-        setIsAdmin(isAdmin);
+        setIsAdmin(false);
         addDoc(collection(db, 'users'), {
           uid: user.uid,
           lastName: lastName,
