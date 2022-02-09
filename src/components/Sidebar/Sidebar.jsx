@@ -54,9 +54,9 @@ export const Sidebar = () => {
       path: paths.myPets,
     },
     {
-      text: 'Edit Profile',
+      text: 'My Profile',
       icon: iconPen(),
-      path: paths.editProfile,
+      path: paths.myProfile,
     },
   ];
   const doctorMenuItems = [
@@ -66,9 +66,9 @@ export const Sidebar = () => {
       path: paths.doctorVisit,
     },
     {
-      text: 'Edit Profile',
+      text: 'My Profile',
       icon: iconPen(),
-      path: paths.editProfile,
+      path: paths.myProfile,
     },
   ];
 

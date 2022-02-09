@@ -7,7 +7,7 @@ export const paths = {
 
   addPet: '/add-pet',
   addVisit: '/add-visit',
-  editProfile: '/edit-profile',
+  myProfile: '/my-profile',
   myPets: '/mypets',
   myVisits: '/myvisits',
 
