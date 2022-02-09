@@ -1,7 +1,7 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import renderer from 'react-test-renderer';
-import { Input } from './Input';
+import { Input } from './InputText';
 
 afterEach(() => {
   cleanup();

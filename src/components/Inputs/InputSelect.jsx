@@ -14,7 +14,7 @@ export const InputSelect = ({ label, myNames = [], value, setValue }) => {
   const handleChange = ({ target: { value } }) => setValue && setValue(value);
 
   return (
-    <FormControl variant="standard" className={classes.int} sx={{ width: '250px' }}>
+    <FormControl variant="standard" className={classes.int} data-testid="input-2" sx={{ width: '250px' }}>
       <InputLabel sx={{ ml: '17px', mr: '17px' }}>{label}</InputLabel>
 
       <Select

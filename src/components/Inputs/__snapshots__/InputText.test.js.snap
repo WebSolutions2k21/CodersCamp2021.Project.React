@@ -4,7 +4,6 @@ exports[`matches snapshot 1`] = `
 <div
   className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root makeStyles-int-7 css-1874cco-MuiFormControl-root-MuiTextField-root"
   data-testid="input-1"
-  onSubmit={[Function]}
 >
   <label
     className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary makeStyles-lbl-8 css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
