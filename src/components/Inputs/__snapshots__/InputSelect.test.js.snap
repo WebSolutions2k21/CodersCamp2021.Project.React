@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  className="MuiFormControl-root makeStyles-int-4 css-1nrlq1o-MuiFormControl-root"
+  className="MuiFormControl-root makeStyles-int-4 css-puhdgc-MuiFormControl-root"
   data-testid="input-2"
 >
   <label
