@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link as RouterLink  } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -12,6 +12,8 @@ import { SignUpTheme } from '../styles/themes/CustomSingUpPage';
 import { db, auth } from '../config/firebase';
 import { paths } from '../config/paths';
 
+import { AppContext } from '../context/AppContext';
+
 export const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ export const SignupPage = () => {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const navigate = useNavigate();
-
+  const { setIsAdmin } = useContext(AppContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,6 +35,8 @@ export const SignupPage = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         const user = res.user;
+        const isAdmin = res.data().isAdmin;
+        setIsAdmin(isAdmin);
         addDoc(collection(db, 'users'), {
           uid: user.uid,
           lastName: lastName,
@@ -53,17 +57,30 @@ export const SignupPage = () => {
     <Layout>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center" style={{ marginTop: '10vmin' }} gap="2rem">
-          <Typography theme={SignUpTheme} variant="h2" component="h2" color="#16BAC6" fontSize="2.8rem" textAlign="center">
+          <Typography
+            theme={SignUpTheme}
+            variant="h2"
+            component="h2"
+            color="#16BAC6"
+            fontSize="2.8rem"
+            textAlign="center"
+          >
             Create your account
           </Typography>
-          <Grid container justifyContent="center" gap="3rem" >
+          <Grid container justifyContent="center" gap="3rem">
             <Input label="first name" type="text" value={firstName} setValue={setFirstName} />
             <Input label="last name" type="text" value={lastName} setValue={setLastName} />
           </Grid>
           <Input label="email" type="email" setValue={setEmail} value={email} fullWidth />
           <Input label="phone number" type="tel" setValue={setPhoneNumber} value={phoneNumber} fullWidth />
           <Input label="password" type="password" setValue={setPassword} value={password} fullWidth />
-          <Input label="confirm password" type="password" setValue={setPasswordConfirm} value={passwordconfirm} fullWidth />
+          <Input
+            label="confirm password"
+            type="password"
+            setValue={setPasswordConfirm}
+            value={passwordconfirm}
+            fullWidth
+          />
           <Typography theme={SignUpTheme}>
             Already have an account?
             <Link underline="none" color="#16BAC6" component={RouterLink} to={paths.login}>
