@@ -28,7 +28,11 @@ export const AppProvider = ({ children }) => {
           });
         });
     }
-  }, [user,  isAdmin]);
+  }, [user, isAdmin]);
 
-  return <AppContext.Provider value={{ userName, isAdmin, iconColor, setIconColor, setIsAdmin }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ userName, isAdmin, iconColor, setIconColor, setIsAdmin }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
