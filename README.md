@@ -47,13 +47,19 @@ Aplikacja została wykonana według wymagań dostarczonych przez organizatorów 
 ### Menu Główne
 
 Na głównej stronie znajduje się autorskie logo (kliknięcie na nie powoduje przeniesienie na stronę główną) oraz nawigacja, z poziomu której można bezpośrednio przejść do sekcji: About, Contacts, Sign Up czy Login. Dodatkowo widnieje tu motto przewodnie strony - „We love Pets!”, a także przycisk „GET STARTED”, po kliknięciu na który, zostaniemy przeniesieni na stronę logowania. 
+![Zrzut ekranu 2022-02-09 o 15 12 52](https://user-images.githubusercontent.com/75137091/153219257-bd6c179e-f55a-4601-9440-d5a21488045d.jpg)
+
 
 ### Strona logowania oraz strona rejestracji
 Jeżeli użytkownik jest już zarejestrowany, wówczas może się zalogować na stronę podając swój e-mail oraz hasło oraz klikając na „I’M A PETLOVER”. Po pomyślnym zalogowaniu się, otrzymuje on dostęp do kolejnych zasobów strony. W nawigacji zamiast przycisku „Login” pojawi się przycisk „My Account” oraz przycisk „Log out”.
+![Zrzut ekranu 2022-02-09 o 15 13 29](https://user-images.githubusercontent.com/75137091/153219337-92f41172-ea67-440c-85c3-e2cbfe92f18e.jpg)
+
 
 Na stronę mogą się również logować lekarze podając odpowiedni adres e-mail oraz hasło. Specjaliści otrzymują nieco inny zasób strony.
 
 W przypadku, gdy użytkownik jeszcze nie posiada konta na stronie, może się zarejestrować, podając następujące dane: imię, nazwisko, e-mail, numer telefonu oraz hasło. Dane wprowadzone przez użytkownika zostaną zapisane w bazie danych. 
+![Zrzut ekranu 2022-02-09 o 15 13 20](https://user-images.githubusercontent.com/75137091/153219441-286b7f31-7814-48d3-835c-c817e0eed1bb.jpg)
+
 
 ### Panel użytkownika
 Zalogowany użytkownik jest witany na stronie – pojawia się napis Welcome oraz imię użytkownika. Otrzymuje on dostęp do takich zasobów, jak: 
@@ -79,6 +85,8 @@ Zalogowany specjalista jest witany na stronie – pojawia się napis Welcome ora
 - #### Moje wizyty
 
 Po kliknięciu w zakładkę „My Visits” specjaliście ukaże się kalendarz. Dni, w które ma zaplanowane wizyty, zastały wzięte w kółko. Klikając na ten dzień, pojawią się szczegółowe informacje dotyczące wizyt. Specjalista może uzupełnić historię choroby danego zwierzęcia, klikając na konkretną wizytę. Pojawi się wówczas okienko, w którym może wpisać bądź edytować niezbędne informacje na temat choroby danego zwierzęcia. 
+![Zrzut ekranu 2022-02-09 o 15 14 03](https://user-images.githubusercontent.com/75137091/153219507-98d12e54-2730-4a60-a16a-c3c7f41f1fae.jpg)
+
 
 - #### Edycja profilu
 
