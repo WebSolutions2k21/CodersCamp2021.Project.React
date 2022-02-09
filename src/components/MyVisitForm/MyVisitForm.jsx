@@ -25,6 +25,12 @@ export const MyVisitForm = () => {
   const [petsNames, setPetsNames] = useState([]);
   const [usersPets, setUsersPets] = useState([]);
   const [breed, setBreed] = useState([]);
+  const [petTouched, setPetTouched] = useState(false);
+  const [petInvalid, setPetInvalid] = useState();
+  const [petValid, setPetValid] = useState();
+  const [doctorTouched, setDoctorTouched] = useState(false);
+  const [doctorInvalid, setDoctorInvalid] = useState();
+  const [doctorValid, setDoctorValid] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -117,24 +123,27 @@ export const MyVisitForm = () => {
     setBreed(breedName);
   }, [pet, usersPets]);
 
-  const [enteredPetTouched, setEnteredPetTouched] = useState(false);
-  const [enteredDoctorTouched, setEnteredDoctorTouched] = useState(false);
-  const enteredPetIsValid = pet !== '';
-  const enteredDoctorIsValid = doctor !== '';
-  const petInputIsInvalid = !enteredPetIsValid && enteredPetTouched;
-  const doctorInputIsInvalid = !enteredDoctorIsValid && enteredDoctorTouched;
+  useEffect(() => {
+    setPetValid(pet !== '');
+    setPetInvalid(!petValid && petTouched);
+  }, [pet, petTouched, petValid]);
+
+  useEffect(() => {
+    setDoctorValid(doctor !== '');
+    setDoctorInvalid(!doctorValid && doctorTouched);
+  }, [doctor, doctorTouched, doctorValid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEnteredPetTouched(true);
-    setEnteredDoctorTouched(true);
+    setPetTouched(true);
+    setDoctorTouched(true);
 
-    if (!enteredPetIsValid || !enteredDoctorIsValid) {
+    if (!petValid || !doctorValid) {
       return;
     }
 
-    setEnteredPetTouched(false);
-    setEnteredDoctorTouched(false);
+    setPetTouched(false);
+    setDoctorTouched(false);
 
     db.collection('visits')
       .add({
@@ -165,14 +174,8 @@ export const MyVisitForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
-        <InputSelect label="Pet" myNames={petsNames} value={pet} setValue={setPet} error={petInputIsInvalid} />
-        <InputSelect
-          label="Doctor"
-          myNames={doctorsNames}
-          value={doctor}
-          setValue={setDoctor}
-          error={doctorInputIsInvalid}
-        />
+        <InputSelect label="Pet" myNames={petsNames} value={pet} setValue={setPet} error={petInvalid} />
+        <InputSelect label="Doctor" myNames={doctorsNames} value={doctor} setValue={setDoctor} error={doctorInvalid} />
         <InputFullDate label="Date" value={date} setValue={setDate} />
         <InputTime label="Hour" value={hour} setValue={setHour} />
         <CustomButton type="submit" text="Save" size="medium" />
