@@ -23,6 +23,8 @@ export const MyVisitForm = () => {
   const [user, setUser] = useState({});
   const [userId, setUserId] = useState('');
   const [petsNames, setPetsNames] = useState([]);
+  const [usersPets, setUsersPets] = useState([]);
+  const [breed, setBreed] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,11 +59,14 @@ export const MyVisitForm = () => {
 
   useEffect(() => {
     const petNamesArray = [];
+    const filteredPets = [];
     pets.forEach((pet) => {
       if (pet.user_id === userId) {
         petNamesArray.push(pet.name);
+        filteredPets.push({ name: pet.name, breed: pet.breed });
       }
     });
+    setUsersPets(filteredPets);
     setPetsNames(petNamesArray);
   }, [pets, userId]);
 
@@ -102,34 +107,57 @@ export const MyVisitForm = () => {
     setDoctorId(selectedDoctor);
   }, [doctor, users]);
 
+  useEffect(() => {
+    let breedName = '';
+    usersPets.forEach((el) => {
+      if (pet === el.name) {
+        breedName = el.breed;
+      }
+    });
+    setBreed(breedName);
+  }, [pet, usersPets]);
+
+  const [enteredPetTouched, setEnteredPetTouched] = useState(false);
+  const [enteredDoctorTouched, setEnteredDoctorTouched] = useState(false);
+  const enteredPetIsValid = pet !== '';
+  const enteredDoctorIsValid = doctor !== '';
+  const petInputIsInvalid = !enteredPetIsValid && enteredPetTouched;
+  const doctorInputIsInvalid = !enteredDoctorIsValid && enteredDoctorTouched;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (pet && date && hour && doctor) {
-      db.collection('visits')
-        .add({
-          pet,
-          doctor,
-          date,
-          hour,
-          uid: user.uid,
-          doctorId,
-          userName,
-        })
-        .then(() => {
-          navigate(paths.myVisits, { replace: true });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    } else {
-      alert('Please fill in the all fields before saving.');
+    setEnteredPetTouched(true);
+    setEnteredDoctorTouched(true);
+
+    if (!enteredPetIsValid || !enteredDoctorIsValid) {
+      return;
     }
+
+    setEnteredPetTouched(false);
+    setEnteredDoctorTouched(false);
+
+    db.collection('visits')
+      .add({
+        pet,
+        doctor,
+        date,
+        hour,
+        uid: user.uid,
+        doctorId,
+        userName,
+        breed,
+      })
+      .then(() => {
+        navigate(paths.myVisits, { replace: true });
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
     setPet(pet);
     setDoctor(doctor);
     setDate(new Date());
     setHour(new Date());
   };
-
   if (loading) {
     return <Loading />;
   }
@@ -137,11 +165,17 @@ export const MyVisitForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container direction="column" alignItems="center" gap="1rem">
-        <InputSelect label="Pet" myNames={petsNames} value={pet} setValue={setPet} />
-        <InputSelect label="Doctor" myNames={doctorsNames} value={doctor} setValue={setDoctor} />
+        <InputSelect label="Pet" myNames={petsNames} value={pet} setValue={setPet} error={petInputIsInvalid} />
+        <InputSelect
+          label="Doctor"
+          myNames={doctorsNames}
+          value={doctor}
+          setValue={setDoctor}
+          error={doctorInputIsInvalid}
+        />
         <InputFullDate label="Date" value={date} setValue={setDate} />
         <InputTime label="Hour" value={hour} setValue={setHour} />
-        <CustomButton type="submit" text="Save" />
+        <CustomButton type="submit" text="Save" size="medium" />
       </Grid>
     </form>
   );
