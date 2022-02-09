@@ -9,3 +9,4 @@ export * from './MyPetForm';
 export * from './MyPetCard';
 export * from './VisitDescription';
 export * from './Loading';
+export * from './UserProfileCard';
