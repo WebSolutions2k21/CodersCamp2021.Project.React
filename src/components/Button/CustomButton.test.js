@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import renderer from 'react-test-renderer';
 import { CustomButton } from './CustomButton';
@@ -32,13 +32,15 @@ test('3. should render disabled CustomButton', () => {
     expect(inputComponent).toBeDisabled();
 });
 
-test('4. should render disabled CustomButton', () => {
-    render(<CustomButton text="Add Pet" color="primary" size="small" disabled/>);
+test('4. should fire CustomButton function when clicked', () => {
+    const handleClick = jest.fn()
+    render(<CustomButton text="Add Pet" color="primary" size="small" clickAction={() => handleClick()}/>);
     const inputComponent = screen.getByRole('button', {name: /Add Pet/i})
-    expect(inputComponent).toBeDisabled();
+    fireEvent.click(inputComponent);
+    expect(handleClick).toHaveBeenCalledTimes(1)
 });
 
 test('matches snapshot', () => {
-  const tree = renderer.create(<CustomButton />).toJSON();
+  const tree = renderer.create(<CustomButton text="Add Pet" color="primary" size="small" />).toJSON();
   expect(tree).toMatchSnapshot();
 });

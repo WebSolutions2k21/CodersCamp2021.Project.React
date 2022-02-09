@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <button
-  className="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-5j76r5-MuiButtonBase-root-MuiButton-root"
+  className="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButtonBase-root  css-1arvnqi-MuiButtonBase-root-MuiButton-root"
   disabled={false}
   onBlur={[Function]}
   onContextMenu={[Function]}
@@ -18,5 +18,7 @@ exports[`matches snapshot 1`] = `
   onTouchStart={[Function]}
   tabIndex={0}
   type="submit"
-/>
+>
+  Add Pet
+</button>
 `;
