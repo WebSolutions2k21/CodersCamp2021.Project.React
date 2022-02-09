@@ -1,28 +1,23 @@
-import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { LocalizationProvider, DesktopTimePicker } from '@mui/lab/';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LocalizationProvider, DatePicker } from '@mui/lab/';
+import { TextField } from '@mui/material/';
+import { ThemeProvider } from '@mui/material/styles';
 
+import { DatePickerTheme } from '../../styles/themes/DatePickerTheme';
 import { useStyles } from './InputStyle';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#16BAC6',
-    },
-  },
-});
-
-export const InputTime = ({ label, value, setValue }) => {
+export const InputFullDate = ({ label, value, setValue }) => {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={DatePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DesktopTimePicker
+        <DatePicker
+          views={['day', 'month', 'year']}
+          mask="__/__/____"
           label={<div className={classes.lbl2}>{label}</div>}
+          minDate={Date.now()}
           value={value}
-          mask="__:__ _M"
           onChange={(value) => setValue && setValue(value)}
           renderInput={(params) => (
             <TextField
@@ -33,7 +28,7 @@ export const InputTime = ({ label, value, setValue }) => {
                 width: '250px',
                 svg: {
                   color: '#16BAC6',
-                  mb: '9px',
+                  mb: '7px',
                   mr: '3px',
                 },
               }}
