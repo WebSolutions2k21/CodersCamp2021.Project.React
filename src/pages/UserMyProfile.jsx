@@ -3,7 +3,7 @@ import { Layout, UserProfileCard } from '../components';
 import { Grid, Typography } from '@mui/material';
 import { auth, db } from '../config/firebase';
 
-export const UserEditProfile = () => {
+export const UserMyProfile = () => {
   const [loading, setLoading] = useState(true);
   const [userProfile, setUserProfile] = useState([]);
 
@@ -20,6 +20,7 @@ export const UserEditProfile = () => {
               firstName: doc.data().firstName,
               lastName: doc.data().lastName,
               email: doc.data().email,
+              phone: doc.data().phone,
             };
           }),
         );
@@ -37,7 +38,12 @@ export const UserEditProfile = () => {
           userProfile.map((user) => {
             return (
               <Grid item xs={12} sm={12} md={6} key={user.key}>
-                <UserProfileCard firstName={user.firstName} lastName={user.lastName} email={user.email} />
+                <UserProfileCard
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  email={user.email}
+                  phone={user.phone}
+                />
               </Grid>
             );
           })

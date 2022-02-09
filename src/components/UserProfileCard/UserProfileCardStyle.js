@@ -11,6 +11,7 @@ export const useStyles = makeStyles({
     padding: '15px',
     background: 'white',
     width: '60%',
+    height: '20px',
     marginBottom: '3em',
   },
 });

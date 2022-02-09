@@ -3,7 +3,7 @@ import React from 'react';
 
 import { useStyles } from './UserProfileCardStyle';
 
-export const UserProfileCard = ({ firstName, lastName, email }) => {
+export const UserProfileCard = ({ firstName, lastName, email, phone }) => {
   const classes = useStyles();
   return (
     <>
@@ -39,6 +39,18 @@ export const UserProfileCard = ({ firstName, lastName, email }) => {
           <Grid>
             <Typography color="textSecondary" display="inline">
               {email}
+            </Typography>
+          </Grid>
+        </Box>
+      </Grid>
+      <Grid>
+        <Typography className={classes.pos} display="inline">
+          phone:
+        </Typography>
+        <Box className={classes.box}>
+          <Grid>
+            <Typography color="textSecondary" display="inline">
+              {phone}
             </Typography>
           </Grid>
         </Box>
