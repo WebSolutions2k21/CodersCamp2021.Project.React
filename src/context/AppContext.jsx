@@ -6,6 +6,7 @@ export const AppContext = createContext({
   userName: '',
   iconColor: 0,
   setIconColor: () => {},
+  setIsAdmin: () => {},
 });
 
 export const AppProvider = ({ children }) => {
@@ -27,7 +28,7 @@ export const AppProvider = ({ children }) => {
           });
         });
     }
-  }, [user]);
+  }, [user,  isAdmin]);
 
-  return <AppContext.Provider value={{ userName, isAdmin, iconColor, setIconColor }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ userName, isAdmin, iconColor, setIconColor, setIsAdmin }}>{children}</AppContext.Provider>;
 };

@@ -30,6 +30,7 @@ export const InputTime = ({ label, value, setValue }) => {
               variant="standard"
               {...params}
               sx={{
+                width:"250px",
                 svg: {
                   color: '#16BAC6',
                   mb: '9px',
