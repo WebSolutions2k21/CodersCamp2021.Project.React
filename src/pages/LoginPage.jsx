@@ -73,10 +73,12 @@ export const LoginPage = () => {
   const handlerSubmit = (e) => {
     e.preventDefault();
 
+
     if (email === '') {
       setErrorEmail(true);
     }
     if (password === '') {
+
       setErrorPassword(true);
     }
     signIn();

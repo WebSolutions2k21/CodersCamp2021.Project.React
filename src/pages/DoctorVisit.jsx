@@ -280,8 +280,14 @@ export const DoctorVisit = () => {
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: '0 25px 25px' }}>
-          <CustomButton clickAction={handleClose} color="secondary" text="CLOSE" />
-          <CustomButton clickAction={editDescription} color="primary" text="SAVE" />
+          <Grid container justifyContent="center" spacing={2}>
+            <Grid item>
+              <CustomButton size="small" clickAction={handleClose} color="secondary" text="CLOSE" />
+            </Grid>
+            <Grid item>
+              <CustomButton size="small" clickAction={editDescription} color="primary" text="SAVE" />
+            </Grid>
+          </Grid>
         </DialogActions>
       </Dialog>
     </Layout>
