@@ -141,7 +141,7 @@ export const DoctorVisit = () => {
               date={date}
             />
           </Grid>
-          <Grid item>
+          <Grid item sx={{ pb: { xs: '75px', mb: '0' } }}>
             <Grid container direction="column" style={{ width: '100%' }} justifyContent="space-between">
               {arrayOfVisits.length > 0 ? (
                 arrayOfVisits.map((visit) => {
@@ -170,10 +170,16 @@ export const DoctorVisit = () => {
                                 },
                               }}
                             >
-                              {new Date(
-                                visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000,
-                              ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}{' '}
-                              | {visit.userName} | {visit.pet}
+                              <Grid container>
+                                <Grid item sx={{ pr: '70px' }}>
+                                  {new Date(
+                                    visit.hour.seconds * 1000 + visit.hour.nanoseconds / 1000000,
+                                  ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}{' '}
+                                </Grid>
+                                <Grid item>
+                                  {visit.userName} | {visit.pet}
+                                </Grid>
+                              </Grid>
                             </Button>
                           </Grid>
                         </Link>
@@ -184,13 +190,7 @@ export const DoctorVisit = () => {
               ) : (
                 <Grid container justifyContent="center">
                   <Grid item xs={12} md={8}>
-                    <Typography
-                      marginLeft="4%"
-                      variant="h4"
-                      color="#16bac6"
-                      sx={{ mb: { xs: '70px', md: '0' } }}
-                      justifyContent="centre"
-                    >
+                    <Typography marginLeft="4%" variant="h4" color="#16bac6" justifyContent="centre">
                       Today you don't have any visits.
                     </Typography>
                   </Grid>
@@ -280,8 +280,14 @@ export const DoctorVisit = () => {
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: '0 25px 25px' }}>
-          <CustomButton clickAction={handleClose} color="secondary" text="CLOSE" />
-          <CustomButton clickAction={editDescription} color="primary" text="SAVE" />
+          <Grid container justifyContent="center" spacing={2}>
+            <Grid item>
+              <CustomButton size="small" clickAction={handleClose} color="secondary" text="CLOSE" />
+            </Grid>
+            <Grid item>
+              <CustomButton size="small" clickAction={editDescription} color="primary" text="SAVE" />
+            </Grid>
+          </Grid>
         </DialogActions>
       </Dialog>
     </Layout>

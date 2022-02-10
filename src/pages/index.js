@@ -5,7 +5,7 @@ export * from './AboutUsPage';
 export * from './ContactPage';
 export * from './UserMyPets';
 export * from './UserMyVisits';
-export * from './UserEditProfile';
+export * from './UserMyProfile';
 export * from './UserAddPet';
 export * from './UserAddVisit';
 export * from './DoctorVisit';
