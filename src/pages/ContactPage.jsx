@@ -97,7 +97,7 @@ export const ContactPage = () => {
               },
             }}
           >
-            ul. Bohaterów Warszawy12/2
+            ul. Bohaterów Warszawy 12/2
           </Typography>
           <Typography
             sx={{

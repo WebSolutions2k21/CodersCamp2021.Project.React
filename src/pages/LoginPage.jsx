@@ -48,11 +48,11 @@ export const LoginPage = () => {
               if (isAdmin) {
                 setTimeout(() => {
                   navigate(paths.doctorVisit, { replace: true });
-                }, 1000);
+                }, 1500);
               } else {
                 setTimeout(() => {
                   navigate(paths.myVisits, { replace: true });
-                }, 1000);
+                }, 1500);
               }
             });
           });
@@ -67,26 +67,44 @@ export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disable, setDisable] = useState(false);
+  const [erroremail, setErrorEmail] = useState(false);
+  const [errorpassword, setErrorPassword] = useState(false);
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+
+
+    if (email === '') {
+      setErrorEmail(true);
+    }
+    if (password === '') {
+
+      setErrorPassword(true);
+    }
+    signIn();
+  };
   return (
     <Layout>
-      <Grid container direction="column" alignItems="center" style={{ marginTop: '20vmin' }} gap="2rem">
-        <Typography theme={LoginPageTheme} variant="h1" component="h1" color="#16BAC6" fontSize="3.8rem">
-          Log In
-        </Typography>
-        <Input label="email" type="email" setValue={setEmail} />
-        <Input label="password" type="password" setValue={setPassword} />
-        <Grid container justifyContent="center" gap="2rem">
-          <CustomButton text="I'm a Petlover" size="large" disabled={disable} clickAction={() => signIn()} />
+      <form onSubmit={handlerSubmit}>
+        <Grid container direction="column" alignItems="center" style={{ marginTop: '20vmin' }} gap="2rem">
+          <Typography theme={LoginPageTheme} variant="h1" component="h1" color="#16BAC6" fontSize="3.8rem">
+            Log In
+          </Typography>
+          <Input label="email" type="email" setValue={setEmail} error={erroremail} required />
+          <Input label="password" type="password" setValue={setPassword} error={errorpassword} required />
+          <Grid container justifyContent="center" gap="2rem">
+            <CustomButton type="submit" text="I'm a Petlover" size="large" disabled={disable} />
+          </Grid>
+          <ToastContainer />
+          <Typography theme={LoginPageTheme}>
+            You don't have account?
+            <Link component={RouterLink} to={paths.signUp} underline="none" color="#16BAC6">
+              {' '}
+              Sign Up!
+            </Link>
+          </Typography>
         </Grid>
-        <ToastContainer />
-        <Typography theme={LoginPageTheme}>
-          You don't have account?
-          <Link component={RouterLink} to={paths.signUp} underline="none" color="#16BAC6">
-            {' '}
-            Sign Up!
-          </Link>
-        </Typography>
-      </Grid>
+      </form>
     </Layout>
   );
 };
