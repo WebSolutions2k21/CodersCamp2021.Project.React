@@ -45,7 +45,7 @@ export const AboutUsPage = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '55px',
+            gap: '30px',
             placeItems: 'center',
             [theme.breakpoints.down('md')]: {
               flexDirection: 'column',
@@ -119,7 +119,6 @@ export const AboutUsPage = () => {
               justifyContent: 'space-around',
               alignItems: 'flex-start',
               gap: '100px',
-              height: '350px',
               [theme.breakpoints.down('md')]: {
                 flexDirection: 'column',
                 height: 'auto',
