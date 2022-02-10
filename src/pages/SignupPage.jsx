@@ -1,18 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { collection, addDoc } from 'firebase/firestore';
 
 import { Layout, Input, CustomButton } from '../components';
 import { SignUpTheme } from '../styles/themes/CustomSingUpPage';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { db, auth } from '../config/firebase';
 import { paths } from '../config/paths';
 
-import { AppContext } from '../context/AppContext';
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 export const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +25,7 @@ export const SignupPage = () => {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const navigate = useNavigate();
-  const { setIsAdmin } = useContext(AppContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,7 +37,6 @@ export const SignupPage = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         const user = res.user;
-        setIsAdmin(false);
         addDoc(collection(db, 'users'), {
           uid: user.uid,
           lastName: lastName,
@@ -87,7 +88,14 @@ export const SignupPage = () => {
               Log In!
             </Link>
           </Typography>
-          <CustomButton color="primary" size="large" text="Sign Up !" type="submit" />
+          <Box
+          sx={{
+            [theme.breakpoints.down('md')]:{
+              marginBottom: '40px',
+            },
+          }} >
+            <CustomButton color="primary" size="large" text="Sign Up !" type="submit" />
+          </Box>
         </Grid>
       </form>
     </Layout>
